@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+{% load template_filters %}
+<div>
+	<h2> Welcome to the College decision page </h2>
+	<p> To start we are going to try to narrow down some of your options by location. </p>
+	<p> How would you like to narrow your results down? </p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			{{ locationFilterForm.location_filter }} {{locationFilterForm.errors}} <br>
+		</div>
+		<input type="submit" value="Submit">
+	</form>
+</div>
+
+{% endblock %}

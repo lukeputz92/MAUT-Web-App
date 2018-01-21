@@ -1,0 +1,13 @@
+# Add files that need to be ignored 
+#   Active list
+
+# Ignore compiled Python file
+*.pyc
+
+#Ignore PPT, TXT, PDF, DOCX
+*.txt
+*.pptx
+*.docx
+*.doc
+*.xlsx
+\Documents

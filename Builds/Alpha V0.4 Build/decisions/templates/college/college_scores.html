@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+{% load template_filters %}
+<div>
+<div>
+	<h2> Scores for {{criteria_name}} </h2>
+	<p> Below are different options for the given criteria. </p>
+	<p> For each option select how you feel about it based on the given criteria. </p>
+	<br>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			{% for form in collegeScoreForm %}
+			 <b> How do you feel about {{ form.label }}? </b>
+				<br> {{ form }} {{form.errors}} 
+				<br>
+			{% endfor %}
+		</div>
+		<input type="submit" value="Submit">
+	</form>
+</div>
+</div>
+
+{% endblock %}
