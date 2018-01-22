@@ -8,13 +8,13 @@ Project Owner:
 
 Team Members -- Team Positions: 
 
-                                 Mark Brown  -- Team Leader 
+                                 Mark May  -- Team Leader 
 
-                                 Mark May    -- Documentation & Training
+                                 Mark Brown    -- Documentation & Training
 
-                                 Caleb Myers -- Deployment Manager
+                                 Luke Putz -- Deployment Manager
 
-                                 Luke Putz   -- Quality Assurance
+                                 Caleb Myers   -- Quality Assurance
 
 Project Description: 
 
