@@ -501,14 +501,14 @@ def college_scores(request):
 			#to any item that fits that score.
 			weighted_scores = []
 			for i in range(len(request.session['option_list'])):
-				weighted_scores.append((collegeScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]))
+				weighted_scores.append(((collegeScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]),request.session['option_list'][i][1]))
 
 			colleges = request.session['colleges']
 
 			for key, value in colleges.items():
 				for i in range(len(weighted_scores)):
-					if value[1] == i:
-						new_score = value[2] + weighted_scores[i]
+					if value[1] == weighted_scores[i][1]:
+						new_score = value[2] + weighted_scores[i][0]
 						colleges[key] = (colleges[key][0], colleges[key][1], new_score)
 
 			request.session['colleges'] = colleges
@@ -525,7 +525,16 @@ def college_scores(request):
 						option_list.append(value[0][criteria_name])
 						colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
 
-				collegeScoreForm = CollegeScoreForm(the_option_list=option_list)
+				for i in range(0,len(option_list)):
+					option_list[i] = (option_list[i], i)
+
+				option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
+
+				option_list_names = []
+				for option in option_list:
+					option_list_names.append(option[0])
+
+				collegeScoreForm = CollegeScoreForm(the_option_list=option_list_names)
 
 				request.session['colleges'] = colleges
 				request.session['option_list'] = option_list
@@ -554,6 +563,10 @@ def college_scores(request):
 		criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
 		real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
 
+		'''
+			Option list stores all the possible values for every criteria.
+			Each college in colleges stores the index of its criteria option in the option list.
+		'''
 		for key, value in colleges.items():
 			if value[0][criteria_name] in option_list:
 				colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
@@ -561,7 +574,16 @@ def college_scores(request):
 				option_list.append(value[0][criteria_name])
 				colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
 
-		collegeScoreForm = CollegeScoreForm(the_option_list=option_list)
+		for i in range(0,len(option_list)):
+			option_list[i] = (option_list[i], i)
+
+		option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
+
+		option_list_names = []
+		for option in option_list:
+			option_list_names.append(option[0])
+
+		collegeScoreForm = CollegeScoreForm(the_option_list=option_list_names)
 
 		request.session['colleges'] = colleges
 		request.session['option_list'] = option_list
