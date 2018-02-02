@@ -7,46 +7,50 @@
 <div class="row">
 	<div class="col-3">
 		<div id="accordion">
-		  <div class="card bg-white">
-		    <div class="card-header bg-dark text-muted" id="headingOne">
+		  <div class="card">
+		    <div class="card-header bg-faded" id="headingOne">
 		      <h5 class="mb-0">
-		        <button class="btn btn-link collapsed text-white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-		          Collapsible Group Item #1
+		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+		          Colleges
 		        </button>
 		      </h5>
 		    </div>
 
 		    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 		      <div class="card-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+		        Find colleges by filtering with categories such as tuition cost, location and retention rate.
+    				<a class="btn btn-link" href="{% url 'college' %}">Get Started</a>
 		      </div>
 		    </div>
 		  </div>
 		  <div class="card">
-		    <div class="card-header" id="headingTwo">
+		    <div class="card-header bg-faded" id="headingTwo">
 		      <h5 class="mb-0">
 		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-		          Collapsible Group Item #2
+		          Books
 		        </button>
 		      </h5>
 		    </div>
 		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 		      <div class="card-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-		      </div>
+		        Find books by filtering with categories such as author, publication date and genre.
+						<br>
+    				<a class="btn btn-link" href="#">Get Started</a>
+					</div>
 		    </div>
 		  </div>
 		  <div class="card">
-		    <div class="card-header" id="headingThree">
+		    <div class="card-header bg-faded" id="headingThree">
 		      <h5 class="mb-0">
 		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-		          Collapsible Group Item #3
+		         Custom Decision
 		        </button>
 		      </h5>
 		    </div>
 		    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 		      <div class="card-body">
-		        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+						Create your own decision by filling out the criteria, weight and score for any set of items you choose then let MAUT do the math for you.
+		      	<a class="btn btn-link" href="{% url 'custom' %}">Get Started</a>
 		      </div>
 		    </div>
 		  </div>
