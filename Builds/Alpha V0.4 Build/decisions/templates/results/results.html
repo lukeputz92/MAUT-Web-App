@@ -76,22 +76,19 @@ td {
   </table>
 </div>
 {% endif %}
-<div>
+<div class="col-12">
+<div class="userForms">
   <form action="/calculation/" method="post">
     {% csrf_token %}
-    <button type="button" onclick="window.history.back()">Back</button>
-    <input type="submit" value="View Calculation">
+    <button class="btn btn-lg btn-primary" type="submit" value="View Calculation">View Calculation </button>
   </form>
-</div>
-
-<div>
   {% if request.user.is_authenticated %}
   {% if request.session.saved %}
       <b> Decision saved successfully! </b>
   {% else %}
       <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="Save">
+        <button class="btn btn-lg btn-primary" type="submit">Save</button>
       </form>
   {% endif %}
   {% endif %}

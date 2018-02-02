@@ -17,6 +17,13 @@
   float: right;
 }
 
+.critForm{
+  margin: auto;
+  width: 50%;
+
+
+}
+
 body{
 background: #fff;
 }

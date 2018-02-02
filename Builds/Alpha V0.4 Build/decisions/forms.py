@@ -43,11 +43,10 @@ class EditProfileForm(UserChangeForm):
 
 
 class ItemForm(forms.Form):
+	
 	item_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder': 'Item Name'
-								}))
+							widget=forms.TextInput())
 
 class BaseItemFormSet(BaseFormSet):
 	def __init__(self, *args, **kwargs):
@@ -69,11 +68,8 @@ class BaseItemFormSet(BaseFormSet):
 class CriteriaForm(forms.Form):
 	criteria_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder':'Criteria Name'
-								}))
+							widget=forms.TextInput())
 	criteria_weight = forms.IntegerField(widget=forms.TextInput(attrs={
-										'placeholder':'Weight',
 										'onblur' : 'calculate()',
 										}))
 

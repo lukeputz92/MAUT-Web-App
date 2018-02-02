@@ -2,7 +2,8 @@
 
 {% block content %}
 
-        <div>
+        <div class="userForms">
+          <div class="col-12">
             <form action="" method="post">
                 {% csrf_token %}
                     <div>
@@ -13,23 +14,22 @@
                     {% if criteriaFormSet.non_form_errors %}
                     <b> Error: {{criteriaFormSet.non_form_errors}} </b>
                     {% endif %}
-
+                          <div class="col-10">
                           {% for form in criteriaFormSet %}
                           <div class="criteria-formset">
-                              {{form}} {{form.errors}}
+                              {{form}}  {{form.errors}}
                           </div>
                           {% endfor %}
                           {{ criteriaFormSet.management_form }}
                           <br>
+                         <p>Remaining Weight: <input type="text" value = "100" id="remaining" onblur="calculate()" readonly> </p>
+                         <button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
+                         <button class="btn btn-lg btn-primary" style="margin: auto;" type="submit">Submit</button>
                       </div>
-                       <p>Remaining Weight: <input type="text" value = "100" id="remaining" onblur="calculate()" readonly> </p>
-                      <button type="button" onclick="window.history.back()">Back</button>
-                      <input type="submit" value="Next">
                   </form>
               </div>
           </div>
       </div>
-    </div>
 
             <!-- including jquery plugin -->
             <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
