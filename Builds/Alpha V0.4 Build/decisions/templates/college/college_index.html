@@ -3,7 +3,7 @@
 {% block content %}
 
 {% load template_filters %}
-<div>
+<div class="userForms" style="margin: auto;">
 	<h2> Welcome to the College decision page </h2>
 	<p> To start we are going to try to narrow down some of your options by location. </p>
 	<p> How would you like to narrow your results down? </p>
@@ -12,7 +12,7 @@
 		<div>
 			{{ locationFilterForm.location_filter }} {{locationFilterForm.errors}} <br>
 		</div>
-		<input type="submit" value="Submit">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div>
 
