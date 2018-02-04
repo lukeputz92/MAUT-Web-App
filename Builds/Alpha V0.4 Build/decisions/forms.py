@@ -231,6 +231,19 @@ class CollegeCriteriaWeightForm(forms.Form):
 				self.fields[key] = field
 				iter+=1
 
+AUTO_CHOICES = [(0, "Higher Values = Better Scores"),(1, "Lower Values = Better Scores"),(2,"Manually Assign Scores")]
+
+class CollegeAutoScoreForm(forms.Form):
+	def __init__(self, *args, **vargs):
+		criteria_list = vargs.pop('criteria_list')
+		super(CollegeAutoScoreForm,self).__init__(*args,**vargs)
+		iter = 0
+		for item in criteria_list:
+				field = forms.IntegerField(label=item[1],
+										widget=forms.RadioSelect(choices=AUTO_CHOICES))
+				self.fields[item[0]] = field
+				iter+=1
+
 OPTION_CHOICES = [(100, "Highly Like"), (75, "Like"), (50, "Neutral"), (25, "Dislike"), (0, "Highly Dislike")]
 
 class CollegeScoreForm(forms.Form):
