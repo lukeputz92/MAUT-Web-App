@@ -449,21 +449,28 @@ def college_criteria(request):
 		collegeCriteriaForm = CollegeCriteriaForm(request.POST)
 
 		if collegeCriteriaForm.is_valid():
+			'''
+			criteria_options is a dictionary that stores key value pairs such that keys
+			are the 'variable name' of a criteria option and the valeus are tuples such that
+			value[0] = a boolean value, true means the user wants to use that option, false means they don't
+			value[1] = the user friendly string of the criteria name
+			value[2] = the units of the criteria options
+			'''
 			criteria_options = {}
-			criteria_options['institution_level'] = (collegeCriteriaForm.cleaned_data['institution_level'], "Institution Level")
-			criteria_options['out_of_state_tuition'] = (collegeCriteriaForm.cleaned_data['out_of_state_tuition'], "Out of State Tuition")
-			criteria_options['in_state_tuition'] = (collegeCriteriaForm.cleaned_data['in_state_tuition'], "In State Tuition")
-			criteria_options['retention_rate'] = (collegeCriteriaForm.cleaned_data['retention_rate'], "Retention Rate")
-			criteria_options['avg_age'] = (collegeCriteriaForm.cleaned_data['avg_age'], "Average Age")
-			criteria_options['num_students'] = (collegeCriteriaForm.cleaned_data['num_students'], "Number of Students")
-			criteria_options['admission_rate'] = (collegeCriteriaForm.cleaned_data['admission_rate'], "Admission Rate")
+			criteria_options['institution_level'] = (collegeCriteriaForm.cleaned_data['institution_level'], "Institution Level", "year(s)")
+			criteria_options['out_of_state_tuition'] = (collegeCriteriaForm.cleaned_data['out_of_state_tuition'], "Out of State Tuition", "dollar(s)")
+			criteria_options['in_state_tuition'] = (collegeCriteriaForm.cleaned_data['in_state_tuition'], "In State Tuition", "dollar(s)")
+			criteria_options['retention_rate'] = (collegeCriteriaForm.cleaned_data['retention_rate'], "Retention Rate", "")
+			criteria_options['avg_age'] = (collegeCriteriaForm.cleaned_data['avg_age'], "Average Age", "year(s) old")
+			criteria_options['num_students'] = (collegeCriteriaForm.cleaned_data['num_students'], "Number of Students", "student(s)")
+			criteria_options['admission_rate'] = (collegeCriteriaForm.cleaned_data['admission_rate'], "Admission Rate", "")
 
 			request.session['decision'].criteriaFilter(criteria_options)
 
 			criteria_list = {}
 			for key,value in criteria_options.items():
 				if value[0]:
-					criteria_list[key] = (0, value[1])
+					criteria_list[key] = (0, value[1], value[2])
 
 			request.session['criteria_list'] = criteria_list
 
@@ -481,7 +488,7 @@ def college_criteria_weight(request):
 			criteria_dict = request.session['criteria_list']
 			criteria_list = []
 			for key, value in criteria_dict.items():
-				criteria_list.append((key, collegeCriteriaWeightForm.cleaned_data[key], value[1]))
+				criteria_list.append((key, collegeCriteriaWeightForm.cleaned_data[key], value[1], value[2]))
 
 			request.session['criteria_list'] = criteria_list
 
@@ -518,6 +525,8 @@ def college_scores(request):
 				colleges = request.session['colleges']
 				criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
 				real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
+				criteria_units = request.session['criteria_list'][request.session['remaining']-1][3]
+
 				for key,value in colleges.items():
 					if value[0][criteria_name] in option_list:
 						colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
@@ -525,6 +534,12 @@ def college_scores(request):
 						option_list.append(value[0][criteria_name])
 						colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
 
+				'''
+					All the options available are stored in option_list
+					Each option is saved in a tuple.
+					option[0] = the option name/value
+					option[1] = the key that matches it with the college that has that value
+				'''
 				for i in range(0,len(option_list)):
 					option_list[i] = (option_list[i], i)
 
@@ -562,6 +577,7 @@ def college_scores(request):
 
 		criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
 		real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
+		criteria_units = request.session['criteria_list'][request.session['remaining']-1][3]
 
 		'''
 			Option list stores all the possible values for every criteria.
@@ -589,7 +605,7 @@ def college_scores(request):
 		request.session['option_list'] = option_list
 		request.session['remaining'] = request.session['remaining'] -1
 
-	return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : real_criteria_name})
+	return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : real_criteria_name, "criteria_units" : criteria_units})
 
 
 def college_results(request):
