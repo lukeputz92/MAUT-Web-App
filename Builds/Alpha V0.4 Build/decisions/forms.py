@@ -25,6 +25,7 @@ class RegistrationForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+		
 class UserForm(forms.ModelForm):
 	class Meta:
 		model = User
@@ -43,11 +44,10 @@ class EditProfileForm(UserChangeForm):
 
 
 class ItemForm(forms.Form):
+
 	item_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder': 'Item Name'
-								}))
+							widget=forms.TextInput())
 
 class BaseItemFormSet(BaseFormSet):
 	def __init__(self, *args, **kwargs):
@@ -69,11 +69,8 @@ class BaseItemFormSet(BaseFormSet):
 class CriteriaForm(forms.Form):
 	criteria_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder':'Criteria Name'
-								}))
+							widget=forms.TextInput())
 	criteria_weight = forms.IntegerField(widget=forms.TextInput(attrs={
-										'placeholder':'Weight',
 										'onblur' : 'calculate()',
 										}))
 
@@ -176,8 +173,8 @@ class LocationFilterForm(forms.Form):
     location_filter = forms.CharField(label='How would you like to filter your choices?', widget=forms.RadioSelect(choices=LOCATION_CHOICES))
 
 class ZipFilterForm(forms.Form):
-	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput(attrs={'placeholder': 'Zip Code'}))
-	distance = forms.IntegerField(label = 'How many miles from the zip code would you like to search from?',widget = forms.TextInput(attrs={'placeholder': 'Distance'}))
+	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput())
+	distance = forms.IntegerField(label = 'How many miles from the zip code would you like to search from?',widget = forms.TextInput())
 
 
 STATES = [("AL", "Alabama"), ("AK", "Alaska"), ("AZ","Arizona"), ("AR","Arkansas"), ("CA","California"),
@@ -251,5 +248,5 @@ class CollegeScoreForm(forms.Form):
 		option_list = vargs.pop('the_option_list')
 		super(CollegeScoreForm,self).__init__(*args,**vargs)
 		for i in range(len(option_list)):
-			field = forms.IntegerField(label=str(option_list[i]), widget=forms.RadioSelect(choices=OPTION_CHOICES))
+			field = forms.IntegerField(label=str(option_list[i]), widget=forms.Select(attrs={'class': 'form-control'}, choices=OPTION_CHOICES))
 			self.fields[str(i)] = field

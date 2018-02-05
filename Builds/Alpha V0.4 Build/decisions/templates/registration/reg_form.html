@@ -4,7 +4,7 @@
 {% if message != "" %}
     <b style="color: green"> {{message}} </b>
 {% endif %}
-<!-- Forms for Django based registration --> 
+<!-- Forms for Django based registration -->
  <form class= "form-signin" method= "post">
   <h2 class="form-signin-heading">Create an account</h2>
     {% csrf_token %}
@@ -12,9 +12,7 @@
       <p>
         {{ field.label_tag }}<br>
         {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
+
         {% for error in field.errors %}
           <p style="color: red">{{ error }}</p>
         {% endfor %}
@@ -22,5 +20,5 @@
     {% endfor %}
    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
   </form>
-  
+
 {% endblock %}
