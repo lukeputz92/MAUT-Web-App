@@ -25,7 +25,7 @@ class RegistrationForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
-		
+
 class UserForm(forms.ModelForm):
 	class Meta:
 		model = User
@@ -189,7 +189,7 @@ STATES = [("AL", "Alabama"), ("AK", "Alaska"), ("AZ","Arizona"), ("AR","Arkansas
           ("WV","West Virginia"), ("WI","Wisconsin"), ("WY","Wyoming")]
 
 class StateFilterForm(forms.Form):
-	state = forms.CharField(label='Which state would you like to search from?', widget=forms.RadioSelect(choices=STATES))
+	state = forms.CharField(label='Which state would you like to search from?', widget=forms.Select(attrs={'class': 'form-control'}, choices=STATES))
 
 REGIONS = [(0,"Zero - US Service Schools"),(1,"One - New England (CT,ME,MA,NH,RI,VT)"),(2,"Two - Mid East (DE, DC, MD, NJ, NY, PA)"),
 			(3,"Three - Great Lakes (IL, IN, MI, OH, WI)"),(4,"Four - Plains (IA, KS, MN, MO, NE, ND, SD)"),
@@ -198,7 +198,7 @@ REGIONS = [(0,"Zero - US Service Schools"),(1,"One - New England (CT,ME,MA,NH,RI
 			(9,"Nine - Outlying Areas (AS, FM, GU, MH, MP, PR, PW, VI)"),]
 
 class RegionFilterForm(forms.Form):
-	region = forms.CharField(label='Which region would you like to search from?', widget=forms.RadioSelect(choices=REGIONS))
+	region = forms.CharField(label='Which region would you like to search from?', widget=forms.Select(attrs={'class': 'form-control'}, choices=REGIONS))
 
 DECISION_CHOICES = [("car","Cars"),("college","Colleges"),("custom","Custom Decision")]
 class IndexForm(forms.Form):
