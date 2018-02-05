@@ -25,6 +25,7 @@ class RegistrationForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+		
 class UserForm(forms.ModelForm):
 	class Meta:
 		model = User
@@ -43,7 +44,7 @@ class EditProfileForm(UserChangeForm):
 
 
 class ItemForm(forms.Form):
-	
+
 	item_name = forms.CharField(
 							max_length=100,
 							widget=forms.TextInput())
