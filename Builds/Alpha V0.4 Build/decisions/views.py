@@ -449,21 +449,28 @@ def college_criteria(request):
 		collegeCriteriaForm = CollegeCriteriaForm(request.POST)
 
 		if collegeCriteriaForm.is_valid():
+			'''
+			criteria_options is a dictionary that stores key value pairs such that keys
+			are the 'variable name' of a criteria option and the valeus are tuples such that
+			value[0] = a boolean value, true means the user wants to use that option, false means they don't
+			value[1] = the user friendly string of the criteria name
+			value[2] = the units of the criteria options
+			'''
 			criteria_options = {}
-			criteria_options['institution_level'] = (collegeCriteriaForm.cleaned_data['institution_level'], "Institution Level")
-			criteria_options['out_of_state_tuition'] = (collegeCriteriaForm.cleaned_data['out_of_state_tuition'], "Out of State Tuition")
-			criteria_options['in_state_tuition'] = (collegeCriteriaForm.cleaned_data['in_state_tuition'], "In State Tuition")
-			criteria_options['retention_rate'] = (collegeCriteriaForm.cleaned_data['retention_rate'], "Retention Rate")
-			criteria_options['avg_age'] = (collegeCriteriaForm.cleaned_data['avg_age'], "Average Age")
-			criteria_options['num_students'] = (collegeCriteriaForm.cleaned_data['num_students'], "Number of Students")
-			criteria_options['admission_rate'] = (collegeCriteriaForm.cleaned_data['admission_rate'], "Admission Rate")
+			criteria_options['institution_level'] = (collegeCriteriaForm.cleaned_data['institution_level'], "Institution Level", "year(s)")
+			criteria_options['out_of_state_tuition'] = (collegeCriteriaForm.cleaned_data['out_of_state_tuition'], "Out of State Tuition", "dollar(s)")
+			criteria_options['in_state_tuition'] = (collegeCriteriaForm.cleaned_data['in_state_tuition'], "In State Tuition", "dollar(s)")
+			criteria_options['retention_rate'] = (collegeCriteriaForm.cleaned_data['retention_rate'], "Retention Rate", "")
+			criteria_options['avg_age'] = (collegeCriteriaForm.cleaned_data['avg_age'], "Average Age", "year(s) old")
+			criteria_options['num_students'] = (collegeCriteriaForm.cleaned_data['num_students'], "Number of Students", "student(s)")
+			criteria_options['admission_rate'] = (collegeCriteriaForm.cleaned_data['admission_rate'], "Admission Rate", "")
 
 			request.session['decision'].criteriaFilter(criteria_options)
 
 			criteria_list = {}
 			for key,value in criteria_options.items():
 				if value[0]:
-					criteria_list[key] = (0, value[1])
+					criteria_list[key] = (0, value[1], value[2])
 
 			request.session['criteria_list'] = criteria_list
 
@@ -481,16 +488,55 @@ def college_criteria_weight(request):
 			criteria_dict = request.session['criteria_list']
 			criteria_list = []
 			for key, value in criteria_dict.items():
-				criteria_list.append((key, collegeCriteriaWeightForm.cleaned_data[key], value[1]))
+				'''
+				Criteria list holds 4-tuples representing each criteria options.
+				[0] = string holding 'variable' name of criteria options
+				[1] = integer representing weight of criteria
+				[2] = string holding 'english' name of variable
+				[3] = units of the criteria options
+				'''
+				criteria_list.append((key, collegeCriteriaWeightForm.cleaned_data[key], value[1], value[2]))
 
 			request.session['criteria_list'] = criteria_list
 
-			return HttpResponseRedirect('/college_scores/')
+			return HttpResponseRedirect('/college_auto_scores/')
 	else:
 		collegeCriteriaWeightForm = CollegeCriteriaWeightForm(criteria_list = request.session['criteria_list'])
 
 	return render(request, 'college/college_criteria_weight.html', {"collegeCriteriaWeightForm" : collegeCriteriaWeightForm})
 
+def college_auto_scores(request):
+	if request.method=='POST':
+		collegeAutoScoreForm = CollegeAutoScoreForm(request.POST, criteria_list = [(i[0],i[2]) for i in request.session['criteria_list']])
+
+		if collegeAutoScoreForm.is_valid():
+			criteria_list = []
+			for item in request.session['criteria_list']:
+				'''
+				Criteria list now holds 5-tuples representing each criteria option.
+				[0] = string holding 'variable' name of criteria options
+				[1] = integer representing weight of criteria
+				[2] = string holding 'english' name of variables
+				[3] = units of the criteria options
+				[4] = auto sorting option. 0 = higher values get higher scores, 1 = higher values get lower scores, 2 = user manually assign values
+				'''
+				criteria_list.append((item[0],item[1],item[2],item[3],collegeAutoScoreForm.cleaned_data[item[0]]))
+
+
+			request.session['criteria_list'] = criteria_list
+
+			return HttpResponseRedirect('/college_scores/')
+
+	else:
+		collegeAutoScoreForm = CollegeAutoScoreForm(criteria_list = [(i[0],i[2]) for i in request.session['criteria_list']])
+
+	return render(request, 'college/college_auto_scores.html', {"collegeAutoScoreForm" : collegeAutoScoreForm})
+
+def auto_scorer(num,max,min,asc):
+	if asc:
+		return ((100*(num-min))/(max-min))
+	else:
+		return((100*(max-num))/(max-min))
 
 def college_scores(request):
 	if request.method == 'POST':
@@ -501,35 +547,84 @@ def college_scores(request):
 			#to any item that fits that score.
 			weighted_scores = []
 			for i in range(len(request.session['option_list'])):
-				weighted_scores.append((collegeScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]))
+				weighted_scores.append(((collegeScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]),request.session['option_list'][i][1]))
 
 			colleges = request.session['colleges']
 
 			for key, value in colleges.items():
 				for i in range(len(weighted_scores)):
-					if value[1] == i:
-						new_score = value[2] + weighted_scores[i]
+					if value[1] == weighted_scores[i][1]:
+						new_score = value[2] + weighted_scores[i][0]
 						colleges[key] = (colleges[key][0], colleges[key][1], new_score)
 
 			request.session['colleges'] = colleges
 
 			if request.session['remaining'] > 0:
-				option_list = []
-				colleges = request.session['colleges']
-				criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
-				real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
-				for key,value in colleges.items():
-					if value[0][criteria_name] in option_list:
-						colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
-					else:
-						option_list.append(value[0][criteria_name])
-						colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+				cont = True
+				while cont and request.session['remaining'] > 0:
+					option_list = []
 
-				collegeScoreForm = CollegeScoreForm(the_option_list=option_list)
+					criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
+					real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
+					criteria_units = request.session['criteria_list'][request.session['remaining']-1][3]
+					auto_option = request.session['criteria_list'][request.session['remaining']-1][4]
+
+
+					'''
+						Option list stores all the possible values for every criteria.
+						Each college in colleges stores the index of its criteria option in the option list.
+					'''
+					for key, value in colleges.items():
+						if value[0][criteria_name] in option_list:
+							colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
+						else:
+							option_list.append(value[0][criteria_name])
+							colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+
+					for i in range(0,len(option_list)):
+						option_list[i] = (option_list[i], i)
+
+					option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
+
+					if auto_option != 2:
+						min = option_list[0][0]
+						if option_list[-1][0] == None:
+							max = option_list[-2][0]
+						else:
+							max = option_list[-1][0]
+
+						for i in range(len(option_list)):
+							if option_list[i][0] == None:
+								option_list[i] = (0,option_list[i][1])
+							else:
+								option_list[i] = (auto_scorer(option_list[i][0],max,min,auto_option==0),option_list[i][1])
+
+						for key, value in colleges.items():
+							for i in range(len(option_list)):
+								if value[1] == option_list[i][1]:
+									new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
+									colleges[key] = (colleges[key][0], colleges[key][1], new_score)
+
+						request.session['remaining'] = request.session['remaining'] - 1
+						request.session['colleges'] = colleges
+
+					else:
+						cont = False
+						request.session['colleges'] = colleges
+
+						option_list_names = []
+						for option in option_list:
+							option_list_names.append(option[0])
+
+						collegeScoreForm = CollegeScoreForm(the_option_list=option_list_names)
+
+				if request.session['remaining'] <= 0:
+					return HttpResponseRedirect('/college_results/')
+
 
 				request.session['colleges'] = colleges
 				request.session['option_list'] = option_list
-				request.session['remaining'] = request.session['remaining'] -1
+				request.session['remaining'] = request.session['remaining'] - 1
 
 			else:
 				return HttpResponseRedirect('/college_results/')
@@ -549,25 +644,72 @@ def college_scores(request):
 		for college in college_info_list:
 			colleges[college['school.name']] = (college, 0, 0)
 
-		option_list = []
+		cont = True
 
-		criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
-		real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
+		while cont and request.session['remaining'] > 0:
+			option_list = []
 
-		for key, value in colleges.items():
-			if value[0][criteria_name] in option_list:
-				colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
+			criteria_name = APIT[request.session['criteria_list'][request.session['remaining']-1][0]]
+			real_criteria_name = request.session['criteria_list'][request.session['remaining']-1][2]
+			criteria_units = request.session['criteria_list'][request.session['remaining']-1][3]
+			auto_option = request.session['criteria_list'][request.session['remaining']-1][4]
+
+
+			'''
+				Option list stores all the possible values for every criteria.
+				Each college in colleges stores the index of its criteria option in the option list.
+			'''
+			for key, value in colleges.items():
+				if value[0][criteria_name] in option_list:
+					colleges[key] = (colleges[key][0],option_list.index(value[0][criteria_name]),colleges[key][2])
+				else:
+					option_list.append(value[0][criteria_name])
+					colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+
+			for i in range(0,len(option_list)):
+				option_list[i] = (option_list[i], i)
+
+			option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
+
+			if auto_option != 2:
+				min = option_list[0][0]
+				if option_list[-1][0] == None:
+					max = option_list[-2][0]
+				else:
+					max = option_list[-1][0]
+
+				for i in range(len(option_list)):
+					if option_list[i][0] == None:
+						option_list[i] = (0,option_list[i][1])
+					else:
+						option_list[i] = (auto_scorer(option_list[i][0],max,min,auto_option==0),option_list[i][1])
+
+				for key, value in colleges.items():
+					for i in range(len(option_list)):
+						if value[1] == option_list[i][1]:
+							new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
+							colleges[key] = (colleges[key][0], colleges[key][1], new_score)
+
+				request.session['remaining'] = request.session['remaining'] - 1
+				request.session['colleges'] = colleges
 			else:
-				option_list.append(value[0][criteria_name])
-				colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+				cont = False
+				request.session['colleges'] = colleges
 
-		collegeScoreForm = CollegeScoreForm(the_option_list=option_list)
+				option_list_names = []
+				for option in option_list:
+					option_list_names.append(option[0])
+
+				collegeScoreForm = CollegeScoreForm(the_option_list=option_list_names)
+
+		if request.session['remaining'] <= 0:
+			return HttpResponseRedirect('/college_results/')
 
 		request.session['colleges'] = colleges
 		request.session['option_list'] = option_list
-		request.session['remaining'] = request.session['remaining'] -1
+		request.session['remaining'] = request.session['remaining'] - 1
 
-	return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : real_criteria_name})
+	return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : real_criteria_name, "criteria_units" : criteria_units})
 
 
 def college_results(request):

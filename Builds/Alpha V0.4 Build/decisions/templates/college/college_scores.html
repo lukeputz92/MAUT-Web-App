@@ -13,7 +13,7 @@
 		{% csrf_token %}
 		<div>
 			{% for form in collegeScoreForm %}
-			 <b> How do you feel about {{ form.label }}? </b>
+			 <b> How do you feel about {{ form.label }} {{ criteria_units }}? </b>
 				<br> {{ form }} {{form.errors}} 
 				<br>
 			{% endfor %}
