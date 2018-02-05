@@ -107,15 +107,19 @@
             <div class="card-header">
              <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter0}}">
               {{decision|title}}
-             </a>
+            </a>
+              <div style="float: right;">
+              <a href=" {% url 'updateDecision' pk=decision.pk %}" class="btn btn-success btn-sm">Edit</a>
+            </div>
+              <div style="float: right;">
+              <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
             </div>
             <div id="collapse{{forloop.counter0}}" class="collapse collapse">
             <div class="card-body">
             {% for item in decision.item.all %}
               {{forloop.counter}}) {{ item.itemName }} | Score: {{item.itemScore}}<br>
             {% endfor %}
-             <a href=" {% url 'updateDecision' pk=decision.pk %}" class="btn btn-success btn-sm">Edit</a>
-             <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
             </div>
            </div>
           </div>
