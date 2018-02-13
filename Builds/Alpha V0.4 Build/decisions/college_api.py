@@ -18,47 +18,47 @@ STATE_CODES = {
 }
 #API Variable name translation. Go from our variable names to the API's
 APIT = {'institution_level' : 'school.institutional_characteristics.level', 'out_of_state_tuition' : '2013.cost.tuition.out_of_state',
-					'in_state_tuition' : '2013.cost.tuition.in_state', 'retention_rate' : '2013.student.retention_rate.four_year.full_time',
-					'avg_age' : '2013.student.demographics.age_entry', 'num_students' : '2013.student.size', 
-					'admission_rate' : '2013.admissions.admission_rate.overall'}
+                    'in_state_tuition' : '2013.cost.tuition.in_state', 'retention_rate' : '2013.student.retention_rate.four_year.full_time',
+                    'avg_age' : '2013.student.demographics.age_entry', 'num_students' : '2013.student.size',
+                    'admission_rate' : '2013.admissions.admission_rate.overall'}
 
 class CollegeAPI:
-	def __init__(self):
-		self.request_filter = "&_fields=id,school.name"
-		self.location_filter = ""
+    def __init__(self):
+        self.request_filter = "&_fields=id,school.name"
+        self.location_filter = ""
 
-	def criteriaFilter(self,criteria):
-		for key, value in criteria.items():
-			if value[0]:
-				self.request_filter += "," + APIT[key]
+    def criteriaFilter(self,criteria):
+        for key, value in criteria.items():
+            if value[0]:
+                self.request_filter += "," + APIT[key]
 
 
-	'''
-	Returns schools from/near a certain location.
+    '''
+    Returns schools from/near a certain location.
 
-	Depending on the filter used a different location variable type will be given.
+    Depending on the filter used a different location variable type will be given.
 
-	If filter is "ZIP" then results within 'distance' miles of the zip code 'location' will be returned
-	If filter is "STATE" then results within state 'location' will be returned
-	If filter is "REGION then results within state 'location' will be returned
-	If filter is "NONE" then all results will be returned 
-	'''
-	def locationFilter(self,location="NONE",distance=0,filter="NONE"):
-		if filter == "ZIP":
-			self.location_filter = "&_zip=" + str(location) + "&_distance=" + str(distance)
-		elif filter == "STATE":
-			self.location_filter = "&school.state_fips=" + STATE_CODES[location]
-		elif filter == "REGION":
-			self.location_filter = "&school.region_id=" + str(location)
-		else:
-			self.location_filter = ""
+    If filter is "ZIP" then results within 'distance' miles of the zip code 'location' will be returned
+    If filter is "STATE" then results within state 'location' will be returned
+    If filter is "REGION then results within state 'location' will be returned
+    If filter is "NONE" then all results will be returned
+    '''
+    def locationFilter(self,location="NONE",distance=0,filter="NONE"):
+        if filter == "ZIP":
+            self.location_filter = "&_zip=" + str(location) + "&_distance=" + str(distance)
+        elif filter == "STATE":
+            self.location_filter = "&school.state_fips=" + STATE_CODES[location]
+        elif filter == "REGION":
+            self.location_filter = "&school.region_id=" + str(location)
+        else:
+            self.location_filter = ""
 
-	'''
-	Pulls all the schools that match the current search query
-	'''
-	def pull(self):
-		url = REQUEST_URL + self.location_filter + self.request_filter
-		request = Request(url)
-		response = urlopen(request)
-		json_obj = json.loads(response.read().decode('utf-8'))
-		return json_obj['results']
+    '''
+    Pulls all the schools that match the current search query
+    '''
+    def pull(self):
+        url = REQUEST_URL + self.location_filter + self.request_filter
+        request = Request(url)
+        response = urlopen(request)
+        json_obj = json.loads(response.read().decode('utf-8'))
+        return json_obj['results']
