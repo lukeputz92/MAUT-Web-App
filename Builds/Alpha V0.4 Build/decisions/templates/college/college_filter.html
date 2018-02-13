@@ -10,9 +10,10 @@
 		{% csrf_token %}
 		{% for form in locationFilter %}
 		<div class="" style="margin: auto;" >
-			{{ form.label }} {{ form }} {{form.errors}} <br>
+			{{ form.label }} {{ form }} {{form.errors}}
 			{% endfor %}
 		</div>
+		<br>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div>
