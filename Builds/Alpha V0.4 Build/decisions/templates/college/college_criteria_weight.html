@@ -16,8 +16,8 @@
     <p> All the weights <b> must </b> add up to 100. </p>
 	<form action="" method="post">
 		{% csrf_token %}
-		<div class="col-9">
-			<table>
+		<div class="col-12">
+			<table class="table">
 				{% for form in collegeCriteriaWeightForm %}
 				<tr>
 					<td> {{form.label}} </td>
