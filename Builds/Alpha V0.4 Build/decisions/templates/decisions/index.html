@@ -4,16 +4,81 @@
 
 {% load template_filters %}
 
-<div>
-	<h2> What are you deciding on? </h2>
-	<form action="" method="post">
-		{% csrf_token %}
-		<div>
-			{{indexForm.decision_choice}} {{indexForm.errors}}
-		</div>
-		<input type="submit" value="Submit">
-	</form>
-</div>
+<div class="row">
+	<div class="col-3">
+		<div id="accordion">
+		  <div class="card">
+		    <div class="card-header bg-faded" id="headingOne">
+		      <h5 class="mb-0">
+		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+		          Colleges
+		        </button>
+		      </h5>
+		    </div>
 
+		    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+		      <div class="card-body">
+		        Find colleges by filtering with categories such as tuition cost, location and retention rate.
+    				<a class="btn btn-link" href="{% url 'college' %}">Get Started</a>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header bg-faded" id="headingTwo">
+		      <h5 class="mb-0">
+		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		          Books
+		        </button>
+		      </h5>
+		    </div>
+		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+		      <div class="card-body">
+		        Find books by filtering with categories such as author, publication date and genre.
+						<br>
+    				<a class="btn btn-link" href="#">Get Started</a>
+					</div>
+		    </div>
+		  </div>
+		  <div class="card">
+		    <div class="card-header bg-faded" id="headingThree">
+		      <h5 class="mb-0">
+		        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+		         Custom Decision
+		        </button>
+		      </h5>
+		    </div>
+		    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+		      <div class="card-body">
+						Create your own decision by filling out the criteria, weight and score for any set of items you choose then let MAUT do the math for you.
+		      	<a class="btn btn-link" href="{% url 'custom' %}">Get Started</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+		<div class="col-9" style="padding-right: 30px;">
+			<link href="../../static/css/decision.css" rel="stylesheet">
+				<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				      <img class="d-block w-100" src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/west-green-ohio-university-robert-powell.jpg" class="img-fluid" alt="First slide">
+				    </div>
+				    <div class="carousel-item">
+				      <img class="d-block w-100" src="http://kb4images.com/images/library-wallpaper/36444494-library-wallpaper.jpg" class="img-fluid" alt="Second slide">
+				    </div>
+				    <div class="carousel-item">
+				      <img class="d-block w-100" src="https://rochemamabolo.files.wordpress.com/2015/07/blank-canvas.jpg" alt="Third slide">
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<!--
+
+-->
 
 {% endblock %}

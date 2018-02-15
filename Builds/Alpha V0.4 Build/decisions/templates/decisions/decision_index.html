@@ -1,15 +1,18 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-
-		<div class = userForms>
+<link href="../../static/css/decision.css" rel="stylesheet">
+		<div class="row">
+		<div class = "userForms" style="float: right;">
 			<h2> Custom Decision </h2>
 			<form action="" method="post">
 				{% csrf_token %}
-				<div>
-					What are you deciding on? {{ decisionForm.yourDecision }} {{decisionForm.errors}} <br>
+				<div class="col-6">
+					What are you deciding on? <br> {{ decisionForm.yourDecision }} {{decisionForm.errors}} <br>
+				<br>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 				</div>
-				<input type="submit" value="Next">
 			</form>
 		</div>
+	</div>
 {% endblock %}

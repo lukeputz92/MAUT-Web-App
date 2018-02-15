@@ -4,21 +4,21 @@
 
 {% load template_filters %}
 <div>
-<div>
+<div class="userForms">
 	<h2> Scores for {{criteria_name}} </h2>
 	<p> Below are different options for the given criteria. </p>
 	<p> For each option select how you feel about it based on the given criteria. </p>
 	<br>
 	<form action="" method="post">
 		{% csrf_token %}
-		<div>
+		<div class="form-group">
 			{% for form in collegeScoreForm %}
 			 <b> How do you feel about {{ form.label }} {{ criteria_units }}? </b>
-				<br> {{ form }} {{form.errors}} 
+				<br> {{ form }} {{form.errors}}
 				<br>
 			{% endfor %}
 		</div>
-		<input type="submit" value="Submit">
+<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div>
 </div>

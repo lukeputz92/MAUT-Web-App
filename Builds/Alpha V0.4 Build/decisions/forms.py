@@ -3,6 +3,7 @@ from decisions.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms.formsets import formset_factory, BaseFormSet
+from .college_api import *
 
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required=True)
@@ -25,6 +26,7 @@ class RegistrationForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+
 class UserForm(forms.ModelForm):
 	class Meta:
 		model = User
@@ -43,11 +45,10 @@ class EditProfileForm(UserChangeForm):
 
 
 class ItemForm(forms.Form):
+
 	item_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder': 'Item Name'
-								}))
+							widget=forms.TextInput())
 
 class BaseItemFormSet(BaseFormSet):
 	def __init__(self, *args, **kwargs):
@@ -69,11 +70,8 @@ class BaseItemFormSet(BaseFormSet):
 class CriteriaForm(forms.Form):
 	criteria_name = forms.CharField(
 							max_length=100,
-							widget=forms.TextInput(attrs={
-								'placeholder':'Criteria Name'
-								}))
+							widget=forms.TextInput())
 	criteria_weight = forms.IntegerField(widget=forms.TextInput(attrs={
-										'placeholder':'Weight',
 										'onblur' : 'calculate()',
 										}))
 
@@ -173,11 +171,11 @@ LOCATION_CHOICES = [
     ]
 
 class LocationFilterForm(forms.Form):
-    location_filter = forms.CharField(label='How would you like to filter your choices?', widget=forms.RadioSelect(choices=LOCATION_CHOICES))
+    location_filter = forms.CharField(label='How would you like to filter your choices?', widget=forms.Select(attrs={'class': 'form-control'},choices=LOCATION_CHOICES))
 
 class ZipFilterForm(forms.Form):
-	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput(attrs={'placeholder': 'Zip Code'}))
-	distance = forms.IntegerField(label = 'How many miles from the zip code would you like to search from?',widget = forms.TextInput(attrs={'placeholder': 'Distance'}))
+	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput())
+	distance = forms.IntegerField(label = 'How many miles from the zip code would you like to search from?',widget = forms.TextInput())
 
 
 STATES = [("AL", "Alabama"), ("AK", "Alaska"), ("AZ","Arizona"), ("AR","Arkansas"), ("CA","California"),
@@ -192,7 +190,7 @@ STATES = [("AL", "Alabama"), ("AK", "Alaska"), ("AZ","Arizona"), ("AR","Arkansas
           ("WV","West Virginia"), ("WI","Wisconsin"), ("WY","Wyoming")]
 
 class StateFilterForm(forms.Form):
-	state = forms.CharField(label='Which state would you like to search from?', widget=forms.RadioSelect(choices=STATES))
+	state = forms.CharField(label='Which state would you like to search from?', widget=forms.Select(attrs={'class': 'form-control'}, choices=STATES))
 
 REGIONS = [(0,"Zero - US Service Schools"),(1,"One - New England (CT,ME,MA,NH,RI,VT)"),(2,"Two - Mid East (DE, DC, MD, NJ, NY, PA)"),
 			(3,"Three - Great Lakes (IL, IN, MI, OH, WI)"),(4,"Four - Plains (IA, KS, MN, MO, NE, ND, SD)"),
@@ -201,48 +199,58 @@ REGIONS = [(0,"Zero - US Service Schools"),(1,"One - New England (CT,ME,MA,NH,RI
 			(9,"Nine - Outlying Areas (AS, FM, GU, MH, MP, PR, PW, VI)"),]
 
 class RegionFilterForm(forms.Form):
-	region = forms.CharField(label='Which region would you like to search from?', widget=forms.RadioSelect(choices=REGIONS))
+	region = forms.CharField(label='Which region would you like to search from?', widget=forms.Select(attrs={'class': 'form-control'}, choices=REGIONS))
 
 DECISION_CHOICES = [("car","Cars"),("college","Colleges"),("custom","Custom Decision")]
 class IndexForm(forms.Form):
 	decision_choice = forms.CharField(label='Which are you deciding on?', widget=forms.RadioSelect(choices=DECISION_CHOICES))
 
 class CollegeCriteriaForm(forms.Form):
-	institution_level = forms.BooleanField(required=False,label="Institution Level (2 yr, 4 yr, etc)")
-	out_of_state_tuition = forms.BooleanField(required=False,label="Out of State Tuition")
-	in_state_tuition = forms.BooleanField(required=False,label="In State Tuition")
-	retention_rate = forms.BooleanField(required=False,label="Retention Rate")
-	avg_age = forms.BooleanField(required=False,label="Average Age of Students Entering")
-	num_students = forms.BooleanField(required=False,label="Number of Undergraduate Students")
-	admission_rate = forms.BooleanField(required=False,label="Admission Rate")
+	def __init__(self, *args, **vargs):
+		super(CollegeCriteriaForm,self).__init__(*args,**vargs)
+		for i in range(len(APIT)):
+				field = forms.BooleanField(label=APIT[i]['name'],required=False)
+				self.fields[str(i)] = field
 
 class CollegeCriteriaWeightForm(forms.Form):
 	def __init__(self, *args, **vargs):
 		criteria_list = vargs.pop('criteria_list')
 		super(CollegeCriteriaWeightForm,self).__init__(*args,**vargs)
-		iter = 0
-		for key, value in criteria_list.items():
-				field = forms.IntegerField(label=value[1],
+		for i in range(len(criteria_list)):
+				field = forms.IntegerField(label=criteria_list[i],
 										widget=forms.TextInput(attrs={
-											'id':('weight_' + str(iter)),
+											'id':('weight_' + str(i)),
 											'placeholder':'Weight',
 											'onblur' : 'calculate()',
 											}))
-				self.fields[key] = field
-				iter+=1
+				self.fields[str(i)] = field
+
+	def clean(self):
+		if self.cleaned_data:
+			sum = 0
+			for key in self.cleaned_data:
+				if self.cleaned_data[key] > 100 or self.cleaned_data[key] < 0:
+					raise forms.ValidationError(('Invalid Weight Submitted. ' + str(self.cleaned_data[key]) + ' is not between 0 and 100'))
+				else:
+					sum = sum + self.cleaned_data[key]
+			if sum != 100:
+				raise forms.ValidationError('All the weights must sum to 100.')
+
 
 AUTO_CHOICES = [(0, "Higher Values = Better Scores"),(1, "Lower Values = Better Scores"),(2,"Manually Assign Scores")]
-
+AUTO_STR_CHOICES = [(2, "Can't Auto Assign Scores")]
 class CollegeAutoScoreForm(forms.Form):
 	def __init__(self, *args, **vargs):
 		criteria_list = vargs.pop('criteria_list')
 		super(CollegeAutoScoreForm,self).__init__(*args,**vargs)
-		iter = 0
-		for item in criteria_list:
-				field = forms.IntegerField(label=item[1],
-										widget=forms.RadioSelect(choices=AUTO_CHOICES))
-				self.fields[item[0]] = field
-				iter+=1
+		for i in range(len(criteria_list)):
+				if criteria_list[i]['is_num']:
+					choice = AUTO_CHOICES
+				else:
+					choice = AUTO_STR_CHOICES
+				field = forms.IntegerField(label=criteria_list[i]['name'],
+										widget=forms.Select(attrs={'class': 'form-control'},choices=choice))
+				self.fields[str(i)] = field
 
 OPTION_CHOICES = [(100, "Highly Like"), (75, "Like"), (50, "Neutral"), (25, "Dislike"), (0, "Highly Dislike")]
 
@@ -251,5 +259,5 @@ class CollegeScoreForm(forms.Form):
 		option_list = vargs.pop('the_option_list')
 		super(CollegeScoreForm,self).__init__(*args,**vargs)
 		for i in range(len(option_list)):
-			field = forms.IntegerField(label=str(option_list[i]), widget=forms.RadioSelect(choices=OPTION_CHOICES))
+			field = forms.IntegerField(label=str(option_list[i]), widget=forms.Select(attrs={'class': 'form-control'}, choices=OPTION_CHOICES))
 			self.fields[str(i)] = field

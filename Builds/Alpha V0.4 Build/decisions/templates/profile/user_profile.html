@@ -34,17 +34,17 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'userHome' %}">Home<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'userHome' %}">Home<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'UserDecisionView' %}">Make a Decision</a>
+            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">Make a Decision</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}?next=/login/">Logout</a>
+            <a class="nav-link text-white" href="{% url 'logout' %}?next=/login/">Logout</a>
           </li>
           <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="{% url 'carQuery' %}">API test</a>
           <a class="dropdown-item" href="{% url 'contact' %}"> Contact Us </a>
@@ -63,11 +63,12 @@
               <div class="profile-user-name">
                 {{user.first_name}} {{user.last_name}}
               </div>
-
+              <!--
               <div class="profile-user-buttons">
                 <button class="btn btn-success btn-sm"> Follow </button>
                 <button class="btn btn-danger btsn sm">Message</button>
               </div>
+            -->
               <div class="profile-user-menu">
                 <ul class= "nav flex-column">
                   <li class="nav-item"><a class= "nav-link active" href=""><i class="fa fa-home" aria-hidden="true"></i>  Overview</a></li>
@@ -106,15 +107,19 @@
             <div class="card-header">
              <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter0}}">
               {{decision|title}}
-             </a>
+            </a>
+              <div style="float: right;">
+              <a href=" {% url 'updateDecision' pk=decision.pk %}" class="btn btn-success btn-sm">Edit</a>
+            </div>
+              <div style="float: right;">
+              <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
             </div>
             <div id="collapse{{forloop.counter0}}" class="collapse collapse">
             <div class="card-body">
             {% for item in decision.item.all %}
               {{forloop.counter}}) {{ item.itemName }} | Score: {{item.itemScore}}<br>
             {% endfor %}
-             <a href=" {% url 'updateDecision' pk=decision.pk %}" class="btn btn-success btn-sm">Edit</a>
-             <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
             </div>
            </div>
           </div>
