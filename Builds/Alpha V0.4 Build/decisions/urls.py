@@ -21,12 +21,5 @@ urlpatterns = [
 	url(r'^calculation/$', views.calculation, name='calculation'),
 	url(r'^profile/(?P<pk>[0-9]+)/update', views.updateDecision, name='updateDecision'),
 	url(r'^profile/(?P<pk>[0-9]+)/delete', views.deleteDecision, name='deleteDecision'),
-	url(r'^college/$', views.college, name='college'),
-	url(r'^college_filter/$', views.college_filter, name='college_filter'),
-	url(r'^college_criteria/$', views.college_criteria, name='college_criteria'),
-	url(r'^college_criteria_weight/$', views.college_criteria_weight, name='college_criteria_weight'),
-	url(r'^college_scores/$', views.college_scores, name='college_scores'),
-	url(r'^college_results/$', views.college_results, name='college_results'),
-	url(r'^college_auto_scores/$', views.college_auto_scores, name='college_auto_scores'),
 	url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
 ]
