@@ -49,7 +49,7 @@ APIT = [
 	'units' : "institution level", 
 	"is_num" : False, 
 	"needs_table" : True, 
-	"table" : {1 : "4 year", 2 : "2 year", 3 : "4 year"} 
+	"table" : {1 : "4 year", 2 : "2 year", 3 : "Less than 2 year"} 
 	},
 	{
 	"name" : "Out of State Tuition",
