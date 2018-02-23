@@ -1,15 +1,11 @@
-{% extends 'base/base.html' %}
-
-{% block content %}
-
-{% load template_filters %}
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 <div class="userForms">
 	<h2> College Scoring </h2>
-	<p> For each criteria please select how you would like to score the criteria options. </p>
+	<p> Please select how you would like to score the criteria options. </p>
 	<form action="" method="post">
 		{% csrf_token %}
-		<div class = "col-10">
-			<table>
+		<div class="col-10">
+			<table class="table">
 				{% for form in collegeAutoScoreForm %}
 				<tr>
 					<td> <b> {{form.label}} </b> </td>
@@ -19,8 +15,8 @@
 				</tr>
 				{% endfor %}
 			</table>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div>
 

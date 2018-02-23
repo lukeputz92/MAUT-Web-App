@@ -10,10 +10,14 @@ LOCATION_CHOICES = [
 
 class LocationFilterForm(forms.Form):
     location_filter = forms.CharField(label='How would you like to filter your choices?', widget=forms.Select(attrs={'class': 'form-control'},choices=LOCATION_CHOICES))
+    def clean(self):
++        if self.cleaned_data:
++            if self.cleaned_data['zip_code'] > 99950 or self.cleaned_data['zip_code'] < 501:
++                raise forms.ValidationError(('Invalid zip code entered ' + str(self.cleaned_data['zip_code']) + ' is not a valid zip code'))
 
 class ZipFilterForm(forms.Form):
 	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput())
-	distance = forms.IntegerField(label = 'How many miles from the zip code would you like to search from?',widget = forms.TextInput())
+	distance = forms.IntegerField(label = 'How many miles from that would you like to search from?',widget = forms.TextInput())
 
 
 STATES = [("AL", "Alabama"), ("AK", "Alaska"), ("AZ","Arizona"), ("AR","Arkansas"), ("CA","California"),
@@ -77,6 +81,7 @@ class CollegeCriteriaWeightForm(forms.Form):
 
 AUTO_CHOICES = [(0, "Higher Values = Better Scores"),(1, "Lower Values = Better Scores"),(2,"Manually Assign Scores")]
 AUTO_STR_CHOICES = [(2, "Can't Auto Assign Scores")]
+
 class CollegeAutoScoreForm(forms.Form):
 	def __init__(self, *args, **vargs):
 		criteria_list = vargs.pop('criteria_list')
