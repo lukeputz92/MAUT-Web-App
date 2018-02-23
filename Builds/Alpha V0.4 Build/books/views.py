@@ -7,10 +7,9 @@ from .book_api import *
 
 def book_index(request):
 
-	if request.method == 'POST':
-		bookCriteriaForm = BookCriteriaForm(request.POST)
-	else:
-		bookCriteriaForm = BookCriteriaForm()
+    if request.method == 'POST':
+        bookCriteriaForm = BookCriteriaForm(request.POST)
+    else:
+        bookCriteriaForm = BookCriteriaForm()
 
-	return render(request,"books/books_index.html", {'bookCriteriaForm' : bookCriteriaForm})
-
+    return render(request,"books/books_index.html", {'bookCriteriaForm' : bookCriteriaForm})
