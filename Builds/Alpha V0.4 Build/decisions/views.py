@@ -17,6 +17,7 @@ from .college_api import *
 from .forms import *
 from .models import UserProfile, Decide, Item, Criteria
 
+#This functon handles the initial decision page.
 def index(request):
     if request.method == 'POST':
         indexForm = IndexForm(request.POST)

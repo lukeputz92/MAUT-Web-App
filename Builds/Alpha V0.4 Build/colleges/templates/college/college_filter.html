@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+{% load template_filters %}
+<div>
+<div class="userForms">
+	<h2> Location Filter </h2>
+	<form action="" method="post">
+		{% csrf_token %}
+		{% for form in locationFilter %}
+		<div class="" style="margin: auto;" >
+			{{ form.label }} {{ form }} {{form.errors}} <br>
+			{% endfor %}
+		</div>
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+	</form>
+</div>
+</div>
+
+{% endblock %}

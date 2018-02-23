@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'',include('decisions.urls')),
+    url(r'^college/',include('colleges.urls')),
+    url(r'books/',include('books.urls')),
     url(r'^admin/', include(admin.site.urls)),
     ]
 #if settings.DEBUG:
