@@ -1,29 +1,25 @@
-{% extends 'base/base.html' %}
-
-{% block content %}
-
-{% load template_filters %}
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 <style>
-th, td {
+  th,
+  td {
     padding: 15px;
-}
+  }
 </style>
 
+<br>
 <h2> Final Score Calculations </h2>
 <p> An item's overall score is derived from the score of all its criteria scores multipled by the criteria's weights summed together. </p>
 <p> ie: Item 1's Score = (Criteria 1's Weight * Item's Score on Criteria 1) + (Criteria 2's Weight * Item's Score on Criteria 2) + etc </p>
 <table>
-{% for row in rows %}
-	<tr>
-		{% for column in columns %}
-			{% if row == 0 or column == 0 %}
-			<th> {{matrix|listelem:row|listelem:column}} </th>
-			{% else %}
-			<td> {{matrix|listelem:row|listelem:column}}  </td>
-			{% endif %}
-		{% endfor %}
-	</tr>
-{% endfor %}
+  {% for row in rows %}
+  <tr>
+    {% for column in columns %} {% if row == 0 or column == 0 %}
+    <th> {{matrix|listelem:row|listelem:column}} </th>
+    {% else %}
+    <td> {{matrix|listelem:row|listelem:column}} </td>
+    {% endif %} {% endfor %}
+  </tr>
+  {% endfor %}
 </table>
 
 <button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>

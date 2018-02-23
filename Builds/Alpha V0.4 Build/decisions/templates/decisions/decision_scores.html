@@ -1,40 +1,35 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 
-{% block content %}
+<br>
+<div class="userForms">
+	<h2> Items Scores based on the Different Criteria </h2>
 
-		{% load template_filters %}
-
-		<div class= "userForms">
-			<h2> Items Scores based on the Different Criteria </h2>
-
-			<form action="" method="post">
-				{% csrf_token %}
-				<table>
-				<tr>
-					<th> Item/Criteria </th>
-					{{scoreForm.errors}}
-					<p> Enter a value 0-100 for each item based on each criteria. </p>
-					<p> The higher the value the better the item is based on the criteria. </p>
-					{% for criteria in request.session.criteriaList %}
-						<th> {{criteria.0}} </th>
-					{% endfor %}
-				</tr>
-				{% for item in request.session.itemList %}
-					<tr>
-						<th> {{item.0}} </th>
-						{% for criteria in request.session.criteriaList %}
-							{% with forloop.parentloop.counter0|addstr:"_"|addstr:forloop.counter0 as key %}
-							<td> {{scoreForm|keyvalue:key}} </td>
-							{% endwith %}
-						{% endfor %}
-					</tr>
+	<form action="" method="post">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<th> Item/Criteria </th>
+				{{scoreForm.errors}}
+				<p> Enter a value 0-100 for each item based on each criteria. </p>
+				<p> The higher the value the better the item is based on the criteria. </p>
+				{% for criteria in request.session.criteriaList %}
+				<th> {{criteria.0}} </th>
 				{% endfor %}
-			</table>
-			<div class="userForms">
+			</tr>
+			{% for item in request.session.itemList %}
+			<tr>
+				<th> {{item.0}} </th>
+				{% for criteria in request.session.criteriaList %} {% with forloop.parentloop.counter0|addstr:"_"|addstr:forloop.counter0 as key %}
+				<td> {{scoreForm|keyvalue:key}} </td>
+				{% endwith %} {% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		<div class="userForms">
 			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
 			<button class="btn btn-lg btn-primary" style="margin: auto;" type="submit">Submit</button>
-			</form>
-		</div>
+	</form>
 	</div>
+</div>
 
 {% endblock %}
