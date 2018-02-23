@@ -11,9 +11,9 @@ LOCATION_CHOICES = [
 class LocationFilterForm(forms.Form):
     location_filter = forms.CharField(label='How would you like to filter your choices?', widget=forms.Select(attrs={'class': 'form-control'},choices=LOCATION_CHOICES))
     def clean(self):
-+        if self.cleaned_data:
-+            if self.cleaned_data['zip_code'] > 99950 or self.cleaned_data['zip_code'] < 501:
-+                raise forms.ValidationError(('Invalid zip code entered ' + str(self.cleaned_data['zip_code']) + ' is not a valid zip code'))
+        if self.cleaned_data:
+            if self.cleaned_data['zip_code'] > 99950 or self.cleaned_data['zip_code'] < 501:
+                raise forms.ValidationError(('Invalid zip code entered ' + str(self.cleaned_data['zip_code']) + ' is not a valid zip code'))
 
 class ZipFilterForm(forms.Form):
 	zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput())
