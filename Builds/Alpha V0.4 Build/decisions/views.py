@@ -13,7 +13,6 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 #This functon handles the initial decision page.
-from .college_api import *
 from .forms import *
 from .models import UserProfile, Decide, Item, Criteria
 
