@@ -6,7 +6,7 @@
 
 	<form action="" method="post">
 		{% csrf_token %}
-		<table>
+		<table class="table">
 			<tr>
 				<th> Item/Criteria </th>
 				{{scoreForm.errors}}
@@ -25,9 +25,8 @@
 			</tr>
 			{% endfor %}
 		</table>
-		<div class="userForms">
 			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
-			<button class="btn btn-lg btn-primary" style="margin: auto;" type="submit">Submit</button>
+			<button class="btn btn-lg btn-primary" style="float: right;" type="submit">Submit</button>
 	</form>
 	</div>
 </div>

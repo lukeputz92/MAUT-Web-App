@@ -1,12 +1,6 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 
 
-<script>
-$('.carousel').carousel({
-  interval: 12000
-
-});
-</script>
 
 <style media="screen">
 .carousel-item {
@@ -48,7 +42,7 @@ $('.carousel').carousel({
 		<div class="carousel-item" style="background-image: url('https://wallpaperscraft.com/image/leaves_green_field_mountains_5704_1920x1080.jpg')">
 			<div class="carousel-caption">
 				<h3>Custom</h3>
-				<p>Create your own decision by filling out the criteria, weight and score for any set of items you choose then let MAUT do the math for you</p>
+				<p>Create your own decision using information on any set of items you choose.</p>
 				<a class="btn btn-link" href="{% url 'custom' %}"><font color="white">Get Started</a> </font>
 			</div>
 		</div>
@@ -63,5 +57,11 @@ $('.carousel').carousel({
 	</a>
 </div>
 </header>
+
+<script>
+$(document).ready(function(){
+    $("#carouselExampleIndicators").carousel({interval: 12000});
+});
+</script>
 
 {% endblock %}
