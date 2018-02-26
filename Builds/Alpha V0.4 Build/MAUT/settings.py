@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     'decisions',
     'colleges',
     'books',
+    'restaurants',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

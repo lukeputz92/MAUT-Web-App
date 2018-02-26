@@ -42,7 +42,7 @@
         <!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="rounded-circle" src="../../static/img/number2.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>1st: {% if collegeList.1.2 %} {% with "http://"|addstr:collegeList.1.2 as collegeurl %} <a href={{collegeurl}}> {% endwith %} {{collegeList.1.0}} </a>
+          <h2>2nd: {% if collegeList.1.2 %} {% with "http://"|addstr:collegeList.1.2 as collegeurl %} <a href={{collegeurl}}> {% endwith %} {{collegeList.1.0}} </a>
            {% else %} {{collegeList.1.0}} {% endif %} </h2>
           <p>Score was {{collegeList.1.1}}</p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
@@ -51,7 +51,7 @@
         {% if collegeList.2.0 %}
         <div class="col-lg-4">
           <img class="rounded-circle" src="../../static/img/number3.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>1st: {% if collegeList.2.2 %} {% with "http://"|addstr:collegeList.2.2 as collegeurl %} <a href={{collegeurl}}> {% endwith %} {{collegeList.2.0}} </a>
+          <h2>3rd: {% if collegeList.2.2 %} {% with "http://"|addstr:collegeList.2.2 as collegeurl %} <a href={{collegeurl}}> {% endwith %} {{collegeList.2.0}} </a>
            {% else %} {{collegeList.2.0}} {% endif %} </h2>
           <p>Score was {{collegeList.2.1}}</p>
           <!--
