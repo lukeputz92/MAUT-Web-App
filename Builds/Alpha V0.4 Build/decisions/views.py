@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 #from .forms import DecisionForm, UserForm, UserDecisionForm, DecideForm, ScoreForm, ItemForm, CriteriaForm, CriteriaFormSet, ItemFormSet, ContactForm, LocationFilterForm, ZipFilterForm, RegionFilterForm, StateFilterForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -288,6 +288,15 @@ def updateProfile(request):
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = EditProfileForm(request.POST, instance=request.user.profile)
         return redirect('/profile/home')
+
+@login_required
+def disableProfile(request):
+    user = User.objects.get(pk=request.user.pk)
+    user.is_active = False
+    user.save()
+    logout(request)
+    form = RegistrationForm()
+    return redirect('registration/reg_form.html', {'form' : form })
 
 
 
