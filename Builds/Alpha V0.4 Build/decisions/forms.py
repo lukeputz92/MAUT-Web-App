@@ -32,15 +32,11 @@ class UserForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email']
 
 
-class EditProfileForm(UserChangeForm):
+class EditProfileForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = (
-        'first_name',
-        'last_name',
-        'email',
-        'password'
-        )
+        model = UserProfile
+        fields = ['city','state','age','gender','income','race','ethnicity']
+    
 
 
 class ItemForm(forms.Form):

@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 #from .forms import DecisionForm, UserForm, UserDecisionForm, DecideForm, ScoreForm, ItemForm, CriteriaForm, CriteriaFormSet, ItemFormSet, ContactForm, LocationFilterForm, ZipFilterForm, RegionFilterForm, StateFilterForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -15,6 +15,7 @@ from django.core.mail import EmailMessage
 #This functon handles the initial decision page.
 from .forms import *
 from .models import UserProfile, Decide, Item, Criteria
+from django.urls import reverse
 
 #This functon handles the initial decision page.
 def index(request):
@@ -261,16 +262,41 @@ def userLogin(request):
             return redirect('/profile/home')
 
     else:
-    #template = loader.get_template('profile/user_profile.html')
         user = User.objects.get(username=request.user.username)
         profile = UserProfile.objects.get(user=user)
         all_decisions = profile.decide_set.all()
-        form = EditProfileForm(instance=request.user)
+        userForm = UserForm(instance=request.user)
+        profileForm = EditProfileForm(instance=request.user.profile)
         pwd = PasswordChangeForm(user=request.user)
 
-        args = {'form': form, 'all_decisions' : all_decisions, 'profile' : profile, 'pwd' : pwd}
+        args = {'profileForm' : profileForm, 'userForm' : userForm, 'all_decisions' : all_decisions, 'profile' : profile, 'pwd' : pwd}
 
         return render(request, 'profile/user_profile.html', args)
+
+
+@login_required
+def updateProfile(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+        return redirect('/profile/home')
+    else:
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+        return redirect('/profile/home')
+
+@login_required
+def disableProfile(request):
+    user = User.objects.get(pk=request.user.pk)
+    user.is_active = False
+    user.save()
+    logout(request)
+    return redirect('/login')
 
 
 
