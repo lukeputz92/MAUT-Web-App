@@ -36,18 +36,7 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['city','state','age','gender','income','race','ethnicity']
-    def save(self, commit=True):
-        user=super(EditProfileForm, self).save(commit=False)
-        user.city = self.cleaned_data['city']
-        user.state = self.cleaned_data['state']
-        user.age = self.cleaned_data['age']
-        user.gender = self.cleaned_data['gender']
-        user.income = self.cleaned_data['income']
-        user.race = self.cleaned_data['race']
-        user.ethnicity = self.cleaned_data['ethnicity']
-        if commit:
-            user.save()
-        return user
+    
 
 
 class ItemForm(forms.Form):
