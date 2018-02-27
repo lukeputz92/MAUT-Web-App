@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, render_to_response
 
 # Create your views here.
 
-def tutorial(request):
+def example(request):
     #if request.method == 'POST':
         #zipFilterForm = ZipFilterForm(request.POST)
 
@@ -20,4 +20,4 @@ def tutorial(request):
     #else:
         #zipFilterForm = ZipFilterForm()
 
-    return render(request, 'tutorial/index.html')
+    return render(request, 'example/index.html')
