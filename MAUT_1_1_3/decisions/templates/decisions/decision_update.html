@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %} {% block content %}
+<br>
+<div class="userForms">
+	<h2> Custom Decision </h2>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			What are you deciding on? {{ decisionForm.yourDecision }} {{decisionForm.errors}} <br>
+		</div>
+		<input type="submit" value="Next">
+	</form>
+</div>
+{% endblock %}
