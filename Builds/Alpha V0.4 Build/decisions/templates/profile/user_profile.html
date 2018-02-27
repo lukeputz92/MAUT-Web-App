@@ -152,10 +152,29 @@
                 <label class="col-lg-3 col-form-label form-control-label"></label>
                 <div class="col-lg-4">
                     <input type="submit" value="Save" class="btn btn-primary btn-sm">
-                    <a class="btn btn-danger" href="{% url 'disableProfile' %}" role="button">Disable Account</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeactivateAccount">Deactivate Account</button>
                 </div>
-                
+     
             </div>
+   <div id="DeactivateAccount" class="modal fade" role="dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>
+              Are you sure you want to deactivate your account?
+            </strong><br>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-danger" href="{% url 'disableProfile' %}" role="button">Yes, I'm sure</a>
+        </div>
+      </div>
+    </div>
+  </div>
         </form>
     </div>
     <div class="tab-pane" id="pwd">
