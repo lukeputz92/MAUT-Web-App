@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Decide(models.Model):
     decisionName = models.CharField(max_length=100, default='')
@@ -30,14 +31,24 @@ class Item(models.Model):
     has a one to one link with the django User model.
     It is created automatically when a User is created.
 '''
+genderChoices = (('M','Male'), ('F','Female'), ('Other','Other'), (None,'Prefer not to answer'))
+raceChoices = (('American Indian or Alaskan Native', 'American Indian or Alaskan Native'),
+                ('Asian', 'Asian'), ('Black or African American','Black or African American'), ('Native Hawaiian or Other Pacific Islander', 'Native Hawaiian or Other Pacific Islander'),
+                ('White', 'White'), (None,'Prefer not to answer'))
+ethnicityChoices = (('Hispanic or Latino','Hispanic or Latino' ), ('Not Hispanic or Latino', 'Not Hispanic or Latino'),
+                    (None,'Prefer not to answer'))
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    firstName = models.CharField(max_length=100, default='First name')
-    lastName = models.CharField(max_length=100, default='Last name')
-    city = models.CharField(max_length=100, default='City')
-    state = models.CharField(max_length=100, default='State')
-    #avatar = models.ImageField(upload_to='img/')
-    email = models.EmailField(max_length=128)
+    firstName = models.CharField(max_length=100, default='First')
+    lastName = models.CharField(max_length=100, default='Last')
+    city = models.CharField(max_length=100, null=True, blank=True)
+    state = models.CharField(max_length=100, null=True, blank=True)
+    age = models.PositiveIntegerField(validators=[MaxValueValidator(100), MinValueValidator(13)], null=True, blank=True)
+    gender = models.CharField(max_length=25,choices=genderChoices, null=True, blank=True)
+    income = models.PositiveIntegerField(null=True, blank=True)
+    race = models.CharField(max_length=50,choices=raceChoices, null=True, blank=True)
+    ethnicity = models.CharField(max_length=50,choices=ethnicityChoices, null=True, blank=True)
 
     def __str__(self):
         return self.user.username

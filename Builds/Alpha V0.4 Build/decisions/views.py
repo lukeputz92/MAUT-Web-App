@@ -273,6 +273,23 @@ def userLogin(request):
         return render(request, 'profile/user_profile.html', args)
 
 
+@login_required
+def updateProfile(request):
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+        return redirect('/profile/home')
+    else:
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+        return redirect('/profile/home')
+
+
 
 #Handles the contact us page.
 def contact(request):
