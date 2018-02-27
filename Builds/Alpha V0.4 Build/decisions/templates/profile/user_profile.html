@@ -130,72 +130,33 @@
         {% endif %}
       </div>
       <div class="tab-pane" id="edit">
-        <form role="form" method="post" >
+        <form action="{% url 'updateProfile' %}" method="post" >
           {% csrf_token %}
             <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                <div class="col-lg-9">
-                  {{form.first_name}}
-                </div>
+              <div class="col-lg-9">
+                {% for field in userForm %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                </p>
+                {% endfor %}
+                {% for field in profileForm %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                </p>
+                {% endfor %}
             </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                <div class="col-lg-9">
-                    {{form.last_name}}
-                </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                <div class="col-lg-9">
-                    {{form.email}}
-                </div>
-            </div>
-
-            <!--
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Location</label>
-                <div class="col-lg-3">
-                    {{form.city}}
-                </div>
-                <div class="col-lg-3">
-                    {{form.state}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                <div class="col-lg-9">
-                    {{form.user.username}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                <div class="col-lg-9">
-                    {{form.user.password}}
-                </div>
-            </div>
-          -->
-            <div class="form-group row">
+            <div class="form-group row" method="post">
                 <label class="col-lg-3 col-form-label form-control-label"></label>
-                <div class="col-lg-9">
-                    <button type="submit" class="btn btn-primary" name="edit">Save Changes</button>
+                <div class="col-lg-4">
+                    <input type="submit" value="Save" class="btn btn-primary btn-sm">
+                    
                 </div>
+                
             </div>
         </form>
-    </div>
-    <div class="tab-pane" id="pwd">
-      <form role ="form" method ="post">
-          {% csrf_token %}
-        <div class= "form-group row">
-          <div class="col-lg-9">
-            {{pwd.as_p}}
-          </div>
-        </div>
-      <div class="form-group row">
-          <label class="col-lg-3 col-form-label form-control-label"></label>
-          <div class="col-lg-9">
-              <button type="submit" class="btn btn-primary" name="pwd">Save Changes</button>
-          </div>
-      </form>
     </div>
 </div>
 </div>

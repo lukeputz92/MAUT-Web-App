@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^profile/home/$', views.userLogin, name='userHome'),
     url(r'^profile/decision/$', views.index, name='UserDecisionView'),
     url(r'^profile/results/$', views.userResults, name='userResults'),
+    url(r'^profile/updateprofile', views.updateProfile, name='updateProfile'),
     url(r'^criteria/$',views.criteria,name='criteria'),
     url(r'^scores/$',views.scores,name='scores'),
     url(r'^api/$', views.carQuery, name='carQuery'),

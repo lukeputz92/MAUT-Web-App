@@ -261,14 +261,14 @@ def userLogin(request):
             return redirect('/profile/home')
 
     else:
-    #template = loader.get_template('profile/user_profile.html')
         user = User.objects.get(username=request.user.username)
         profile = UserProfile.objects.get(user=user)
         all_decisions = profile.decide_set.all()
-        form = EditProfileForm(instance=request.user)
+        userForm = UserForm(instance=request.user)
+        profileForm = EditProfileForm(instance=request.user.profile)
         pwd = PasswordChangeForm(user=request.user)
 
-        args = {'form': form, 'all_decisions' : all_decisions, 'profile' : profile, 'pwd' : pwd}
+        args = {'profileForm' : profileForm, 'userForm' : userForm, 'all_decisions' : all_decisions, 'profile' : profile, 'pwd' : pwd}
 
         return render(request, 'profile/user_profile.html', args)
 
