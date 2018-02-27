@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'books/',include('books.urls')),
     url(r'restaurants/',include('restaurants.urls')),
     url(r'^admin/', include(admin.site.urls)),
+	url(r'tutorial/',include('tutorial.urls')),
     ]
 #if settings.DEBUG:
  #   urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
