@@ -15,6 +15,7 @@ from django.core.mail import EmailMessage
 #This functon handles the initial decision page.
 from .forms import *
 from .models import UserProfile, Decide, Item, Criteria
+from django.urls import reverse
 
 #This functon handles the initial decision page.
 def index(request):
@@ -295,8 +296,7 @@ def disableProfile(request):
     user.is_active = False
     user.save()
     logout(request)
-    form = RegistrationForm()
-    return redirect('registration/reg_form.html', {'form' : form })
+    return redirect('/login')
 
 
 
