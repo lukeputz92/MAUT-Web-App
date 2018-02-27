@@ -284,7 +284,6 @@ def scores(request):
 
     return render(request, 'restaurant/restaurant_scores.html', {"restaurantScoreForm" : restaurantScoreForm, "criteria_name" : criteria[0]['name'], "criteria_units" : criteria[0]["units"]})
 
-
 def results(request):
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)

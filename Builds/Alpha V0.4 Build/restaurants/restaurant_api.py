@@ -3,7 +3,7 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError
 import json
 
-#This is the link for the College API used with the key
+#This is the link for the Restaurant API used with the key
 REQUEST_URL = "https://developers.zomato.com/api/v2.1/geocode"
 
 HEADERS = {
