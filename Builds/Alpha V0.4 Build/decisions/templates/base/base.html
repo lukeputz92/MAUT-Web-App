@@ -35,11 +35,11 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto ">
       {% if user.is_authenticated %}
-      <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'userHome' %}">Home<span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">New Decision</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">Make a Decision</a>
+            <a class="nav-link text-white" href="{% url 'userHome' %}">Profile<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'logout' %}?next=/login/">Logout</a>
