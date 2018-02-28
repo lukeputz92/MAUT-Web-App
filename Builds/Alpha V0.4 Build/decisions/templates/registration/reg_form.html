@@ -37,14 +37,25 @@
             to create a profile press the 'I AGREE' button below. If you do not expressly agree to all terms and conditions, then please do not
             access or use our site or services.
           </p>
+          <input class="check_list" name="check_list[]" type="checkbox" onchange="document.getElementById('btn1').disabled = !this.checked;">I have read and agree to the Terms of Service</label>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-lg-5 btn-success btn-block" type="submit">I agree</button>
+          <button class="btn btn-lg-5 btn-success btn-block" type="submit" id="btn1" disabled="True">I agree</button>
 
         </div>
       </div>
     </div>
   </div>
   </form>
+<script type="text/javascript">
+function check() {
+  if(document.getElementById("btn1").checked = true){
+    $('#btn1').prop('disabled', false);
+  
+  } else {
+    $('#btn1').prop('enabled', true);
+  }
+};
+</script>
 
 {% endblock %}
