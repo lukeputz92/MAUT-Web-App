@@ -1,19 +1,16 @@
 from django.http import HttpResponse, HttpResponseRedirect
-#from .forms import DecisionForm, UserForm, UserDecisionForm, DecideForm, ScoreForm, ItemForm, CriteriaForm, CriteriaFormSet, ItemFormSet, ContactForm, LocationFilterForm, ZipFilterForm, RegionFilterForm, StateFilterForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
+from .forms import *
+from django.core.mail import EmailMessage, send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
+from django.contrib.auth import login, update_session_auth_hash
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
-from django.core.mail import send_mail, BadHeaderError
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .tokens import account_activation_token
-from django.core.mail import EmailMessage
-#This functon handles the initial decision page.
-from .forms import *
 from .models import UserProfile, Decide, Item, Criteria
 from django.urls import reverse
 
@@ -380,6 +377,38 @@ def calculation(request):
     else:
         return index(request)
 
+
+'''Handles the tutorial information and front page '''
+def example(request):
+    if request.method == 'POST':
+        contactForm = ContactForm(request.POST)		
+        if contactForm.is_valid():
+            subject = "MAUT Contact Form Submission"
+            message_content = contactForm.cleaned_data['content']
+            if contactForm.cleaned_data['contact_email']:
+                from_email = contactForm.cleaned_data['contact_email']
+            else:
+                from_email = "n/a"
+
+            message = "***This message is an automatically generated message from MAUT's contact page***\n" + "Name: " + contactForm.cleaned_data['contact_name'] + "\n" + "Email Address: " + from_email + "\n" + "Message: " + message_content + "\n"
+
+            try:
+                send_mail(subject, message, from_email, ['markamay@live.com','MAUtilityTheory@gmail.com','mark.brown8790@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return render(request,'contact/thankyou.html', {})
+        else:
+			# error sending email page: not yet implemented
+            return render(request,'front/front.html', {'form': ContactForm()})
+
+    else:
+        contactForm = ContactForm()
+
+    # return render(request,'contact/contact.html', {'form': ContactForm()})
+
+    return render(request, 'front/front.html', {'form': ContactForm()})
+
+
 @login_required()
 def deleteDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
@@ -387,8 +416,6 @@ def deleteDecision(request, pk):
     Decide.objects.filter(pk=pk).delete()
     all_decisions = profile.decide_set.all()
     return render(request, 'profile/user_profile.html', { 'all_decisions' : all_decisions})
-
-
 
 def updateDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
@@ -408,6 +435,8 @@ def updateDecision(request, pk):
     request.session["criteriaList"] = criteriaList
 
     return decision_index(request, autoFill = True)
+	
+	
 '''
     This function handles the first page of the college decision process.
     The first page is the page that prompts the user for which method of location

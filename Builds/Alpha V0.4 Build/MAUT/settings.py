@@ -1,3 +1,4 @@
+
 """
 Django settings for MAUT project.
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = (
     'colleges',
     'books',
     'restaurants',
+	'tutorial',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
