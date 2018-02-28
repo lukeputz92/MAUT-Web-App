@@ -8,6 +8,7 @@
 <meta name="author" content="">
 <link rel="icon" href = "../../static/Mico.ico">
 
+
 {% block title %}<title>MAUT- Multi Attribute Utility Theory </title> {% endblock %}
 <!-- Latest compiled and minified Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -21,19 +22,26 @@
 <link href="../../static/css/signin.css" rel="stylesheet">
 <link href="../../static/css/1/index.css" rel="stylesheet">
 <script type="text/javascript" src="../../static/static_jquery/js/jquery.js"></script>
+        <script src="../../static/tmp2/assets/js/main.js"></script>
 <link href="../../static/css/carousel.css" rel="stylesheet">
+
+ <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 </head>
 <body>
 
+<div class='preloader'><div class='loaded'>&nbsp;</div></div>
+
 {% block navbar %}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="{%url 'home' %}">MAUT</a>
+<!-- <a class="navbar-brand" href="#"><img src="../../static/assets/images/maut.png" alt="Logo" /></a> -->
+  <a class="nav-link text-white" href="{%url 'front' %}"><font size="+2"><strong>MAUT</strong></font></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto ">
+    <ul class="nav navbar-nav navbar-right">
       {% if user.is_authenticated %}
       <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'userHome' %}">Home<span class="sr-only">(current)</span></a>

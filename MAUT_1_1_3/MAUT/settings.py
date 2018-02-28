@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'books',
     'restaurants',
 	'tutorial',
-	'example',
+	#'example',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
