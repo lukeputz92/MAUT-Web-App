@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
-
+{% load static %}
 
 
 <style media="screen">
@@ -23,7 +23,7 @@
 	</ol>
 	<div class="carousel-inner" role="listbox">
 		<!-- Slide One - Set the background image for this slide in the line below -->
-		<div class="carousel-item active" style="background-image: url('http://linguistics.ohio.edu/opie/wp-content/uploads/2013/08/South_Green.jpg')"href="{% url 'college' %}">
+		<div class="carousel-item active" style="background-image:url({% static 'img/South_Green.jpg' %})"href="{% url 'college' %}">
 			<div class="carousel-caption">
 				<h3>Colleges</h3>
 				<p>Find colleges by filtering with categories such as tuition cost, location and retention rate.</p>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<!-- Slide Two - Set the background image for this slide in the line below -->
-		<div class="carousel-item" style="background-image: url('http://kb4images.com/images/library-wallpaper/36444494-library-wallpaper.jpg')">
+		<div class="carousel-item" style="background-image: url({% static '/img/books.jpg' %})">
 			<div class="carousel-caption">
 				<h3>Books</h3>
 				<p>Find books by filtering with categories such as author, publication date and genre.</p>
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<!-- Slide Three - Set the background image for this slide in the line below -->
-		<div class="carousel-item" style="background-image: url('https://aquaair-wetdry.com/wp-content/uploads/CroppedImage1600900-restaurant-alpenhof-zermatt.jpg')">
+		<div class="carousel-item" style="background-image: url({% static '/img/rest.jpg' %})">
 			<div class="carousel-caption">
 				<h3>Restaurants</h3>
 				<p>Find restaurants near you by filtering with categories such as user ratings and price range.</p>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<!-- Slide Four - Set the background image for this slide in the line below -->
-		<div class="carousel-item" style="background-image: url('https://wallpaperscraft.com/image/leaves_green_field_mountains_5704_1920x1080.jpg')">
+		<div class="carousel-item"  style="background-image: url({% static '/img/custom.jpg' %})">
 			<div class="carousel-caption">
 				<h3>Custom</h3>
 				<p>Create your own decision using information on any set of items you choose.</p>
