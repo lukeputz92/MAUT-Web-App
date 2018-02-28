@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 #from .forms import DecisionForm, UserForm, UserDecisionForm, DecideForm, ScoreForm, ItemForm, CriteriaForm, CriteriaFormSet, ItemFormSet, ContactForm, LocationFilterForm, ZipFilterForm, RegionFilterForm, StateFilterForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import login, logout, update_session_auth_hash
+from django.contrib.auth import login, logout, update_session_auth_hash, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -193,8 +193,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
-            new_user.is_active = False
+            #new_user.is_active = True
             new_user.save()
+            '''
             current_site = get_current_site(request)
             mail_subject = 'Activate your MAUT account'
             message = render_to_string('registration/acc_active_email.html', {
@@ -216,11 +217,10 @@ def register(request):
             new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, new_user)
             return redirect('/profile/home')
-            '''
     else:
         form = RegistrationForm()
     return render(request, 'registration/reg_form.html', {'form':form})
-
+'''
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -237,6 +237,7 @@ def activate(request, uidb64, token):
 
     return render(request, 'registration/message.html', {'message' : message})
 
+'''
 def userResults(request):
     return render(request, 'profile/user_result.html')
 
