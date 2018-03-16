@@ -1,3 +1,4 @@
+
 from django import forms
 from decisions.models import UserProfile
 from django.contrib.auth.models import User
@@ -145,16 +146,16 @@ ItemFormSet = formset_factory(ItemForm,min_num=1,extra=0,formset=BaseItemFormSet
 class ContactForm(forms.Form):
     contact_name = forms.CharField(label = "Name",required=True,
                                 widget = forms.TextInput(attrs={
-                                'placeholder':'Name'
+                                'placeholder':'Name', 'class':'form-control'
                                 }))
     contact_email = forms.EmailField(label = "Email",required=False,
                                 widget = forms.TextInput(attrs={
-                                    'placeholder': 'Email (optional)'
+                                    'placeholder': 'Email (optional)', 'class':'form-control'
                                     }))
     content = forms.CharField(label = "Message",
         required=True,
         widget=forms.Textarea(attrs={
-                                'placeholder': 'Message'
+                                'placeholder': 'Message', 'rows':'8', 'class':'form-control'
                               })
     )
 
@@ -250,3 +251,4 @@ class CollegeScoreForm(forms.Form):
         for i in range(len(option_list)):
             field = forms.IntegerField(label=str(option_list[i]), widget=forms.Select(attrs={'class': 'form-control'}, choices=OPTION_CHOICES))
             self.fields[str(i)] = field
+
