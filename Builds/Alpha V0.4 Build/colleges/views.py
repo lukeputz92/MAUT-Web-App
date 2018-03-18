@@ -104,10 +104,11 @@ def college_criteria_weight(request):
         collegeCriteriaWeightForm = CollegeCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
         criteriaList = [i['name'].replace(' ','+') for i in request.session['criteria_list']]
         criteriaList = json.dumps(criteriaList).replace(' ','')
+        print(collegeCriteriaWeightForm)
         
         
 
-    return render(request, 'college/college_criteria_weight.html', {"criteriaList" : criteriaList})
+    return render(request, 'college/college_criteria_weight.html', {"criteriaList" : criteriaList, "weightForm" : collegeCriteriaWeightForm})
 
 def college_auto_scores(request):
     if request.method=='POST':

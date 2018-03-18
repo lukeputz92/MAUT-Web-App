@@ -3,6 +3,8 @@
 
 <script src="https://d3js.org/d3.v3.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/pieChart.css' %}" />
+<form action="" method="post">
+	{% csrf_token %}
 <div id=main-container>
   <div id=chart-controls>
     <form id=nbForm>
@@ -22,9 +24,12 @@
     </div>
     <div id=pie></div>
     <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}>
+     <div>
+  	<input type="submit" value="Submit" style="display: block; margin: 0 auto;" class="btn btn-primary btn-sm">
+   </div>
   </div>
-  <div>
-  </div>
+ </form>
+ 
   <script type="text/javascript">
 var criteria = JSON.parse(document.getElementById("myVar").value);
 for (i = 0; i < criteria.length; i++){
@@ -74,7 +79,7 @@ var arc = d3.svg.arc()
 function init() {
   oldValue = [];
   moving_id = null;
-  
+  json = getData();
  
   d3.select('#rangebox tbody').html('');
 
@@ -98,6 +103,8 @@ function init() {
       .attr('max', (101 - nb_sliders));
     tr.append('td')
       .attr('class', 'range_value');
+
+    $("#weight_"+i).val(parseInt(json[i], 10))
   }
 
   d3.selectAll('#rangebox .range').each(function() {
@@ -428,6 +435,6 @@ function arcTween(a) {
     return arc(i(t));
   };
 }
-  </script>
 
+</script>
 {% endblock %}
