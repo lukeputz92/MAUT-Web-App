@@ -3,18 +3,18 @@
 
 <script src="https://d3js.org/d3.v3.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/pieChart.css' %}" />
-<form action="" method="post">
+<form action="" method="post" id="{{weightForm}}" >
 	{% csrf_token %}
-<div id=main-container>
-  <div id=chart-controls>
-    <form id=nbForm>
+<div id="main-container">
+  <div id="chart-controls">
+    <form id="nbForm">
       <ul id="menu">
          
           <h4>Rate Importance of Each Criteria</h4>
       </ul>
 
     </form>
-    <table id=rangebox>
+    <table id="rangebox">
 
       <tbody>
         <h5 class="HideOnLoad">Click boxes to edit labels</h5>
@@ -22,7 +22,7 @@
       </tbody>
     </table>
     </div>
-    <div id=pie></div>
+    <div id="pie"></div>
     <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}>
      <div>
   	<input type="submit" value="Submit" style="display: block; margin: 0 auto;" class="btn btn-primary btn-sm">
