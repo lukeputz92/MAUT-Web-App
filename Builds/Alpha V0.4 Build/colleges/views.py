@@ -4,6 +4,7 @@ from .forms import *
 #from .models import UserProfile, Decide, Item, Criteria
 from django.shortcuts import render, redirect, render_to_response
 from .college_api import *
+import json
 # Create your views here.
 '''
     This function handles the first page of the college decision process.
@@ -101,8 +102,12 @@ def college_criteria_weight(request):
             return HttpResponseRedirect('/college/auto_scores/')
     else:
         collegeCriteriaWeightForm = CollegeCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
+        criteriaList = json.dumps([i['name'] for i in request.session['criteria_list']])
+        print(criteriaList)
+        print(type(criteriaList))
+        
 
-    return render(request, 'college/college_criteria_weight.html', {"collegeCriteriaWeightForm" : collegeCriteriaWeightForm})
+    return render(request, 'college/college_criteria_weight.html', {"criteriaList" : criteriaList})
 
 def college_auto_scores(request):
     if request.method=='POST':
