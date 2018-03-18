@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import urls as auth_urls
 urlpatterns = [
-    url(r'^index/$', views.cars, name='cars'),
+    #url(r'^index/$', views.cars, name='cars'),
     url(r'^criteria/$', views.cars_criteria, name='cars_criteria'),
     url(r'^criteria_weight/$', views.cars_criteria_weight, name='cars_criteria_weight'),
     url(r'^scores/$', views.cars_scores, name='cars_scores'),

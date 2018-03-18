@@ -3,12 +3,9 @@ from django.forms.formsets import formset_factory, BaseFormSet
 from .cars_api import *
 
 
-class ZipFilterForm(forms.Form):
-    zip_code = forms.IntegerField(label = 'What zip code would you like to search from?',widget = forms.TextInput())
+class CarsSearchForm(forms.Form):
+    cars = forms.CharField(label = 'Enter the name of something you\'d like a cars for')
 
-    def clean(self):
-        if self.cleaned_data['zip_code'] > 99950 or self.cleaned_data['zip_code'] < 501:
-            raise forms.ValidationError(('Invalid zip code entered ' + str(self.cleaned_data['zip_code']) + ' is not a valid zip code'))
 
 class CarsCriteriaForm(forms.Form):
     def __init__(self, *args, **vargs):

@@ -32,69 +32,73 @@ FOR COPY AND PASTE:
 
 APIT = [
     {
-    "name" : "Year" ,
-    "api_variable" : "year" ,
+    "name" : "Time" ,
+    "api_variable" : "totalTimeInSeconds",
+    "units" : "" ,
+    "is_num" : True,
+    "needs_table" : False,
+
+    },
+    {
+    "name" : "Rating",
+    "api_variable" : "rating",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
     },
     {
-    "name" : "Make",
-    "api_variable" : "make",
+    "name" : "Sweet" ,
+    "api_variable" : "sweet",
     "units" : "",
-    "is_num" : False,
+    "is_num" : True,
     "needs_table" : False,
     },
     {
-    "name" : "Model",
-    "api_variable" : "model",
+    "name" : "Spicy" ,
+    "api_variable" : "piquant",
     "units" : "",
-    "is_num" : False,
+    "is_num" : True,
     "needs_table" : False,
     },
     {
-    "name" : "Body Type" ,
-    "api_variable" : " body_type" ,
+    "name" : "Bitter" ,
+    "api_variable" : "bitter",
     "units" : "",
-    "is_num" : False,
+    "is_num" : True,
     "needs_table" : False,
+    },
+    {
+    "name" : "Sour" ,
+    "api_variable" : "sour",
+    "units" : "",
+    "is_num" : True,
+    "needs_table" : False,
+    },
+    {
+    "name" : "Meaty" ,
+    "api_variable" : "meaty",
+    "units" : "",
+    "is_num" : True,
+    "needs_table" : False,
+    },
+    {
+    "name" : "Salty" ,
+    "api_variable" : "salty",
+    "units" : "",
+    "is_num" : True,
+    "needs_table" : False,
+    },
 
-    },
-    {
-    "name" : "Transmission",
-    "api_variable" : "transmission",
-    "units" : "",
-    "is_num" : False,
-    "needs_table" : False,
-
-    },
-    {
-    "name" : "Drivetrain",
-    "api_variable" : "drivetrain",
-    "units" : "",
-    "is_num" : False,
-    "needs_table" : False,
-
-    },
-    {
-    "name" : "Engine",
-    "api_variable" : "engine",
-    "units" : "",
-    "is_num" : False,
-    "needs_table" : False,
-
-    },
 ]
 
 
-URL = "http://api.marketcheck.com/v1/search"
-
-HEADERS = {'Host': 'marketcheck-prod.apigee.net'}
+URL='https://api.yummly.com/v1/api/recipes?_app_id=28058e3b&_app_key=97cc1c1261eb786ace7ee2eea91abf98&maxResult=1000'
 
 class CarsAPI:
     def __init__(self):
-        self.params = [("api_key", "ArUGlu0Tj3lCqM0JJd2caRPwsobJde6U"), ("radius", "100"), ]
+        self.params = {'maxResults' : '1000'}
 
+    """
     def locationFilter(self,zipcode):
         google_api = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyC-enO3ECdoTTn5_L6p2q8CgKELVIhySm8&address="
         search = google_api + str(zipcode)
@@ -106,8 +110,9 @@ class CarsAPI:
                     ('lat', str(location['lat'])),
                     ('lon', str(location['lng'])),
                 ]
+    """
 
     def pull(self):
-        response = requests.get(URL,headers=HEADERS,params=self.params)
+        response = requests.get(URL)
         json_obj = response.json()
-        return json_obj['']
+        return json_obj['matches']

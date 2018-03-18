@@ -6,25 +6,27 @@ from django.shortcuts import render, redirect, render_to_response
 from .cars_api import *
 # Create your views here.
 
+
 def cars(request):
     if request.method == 'POST':
-        zipFilterForm = ZipFilterForm(request.POST)
+        carsSearchForm = CarsSearchForm(request.POST)
 
-        if zipFilterForm.is_valid():
+        if carsSearchForm.is_valid():
             request.session['decision'] = CarsAPI()
-            request.session['decision'].locationFilter(zipFilterForm.cleaned_data['zip_code'])
 
             return HttpResponseRedirect('/cars/criteria/')
 
     else:
-        zipFilterForm = ZipFilterForm()
+        carsSearchForm = CarsSearchForm()
 
-    return render(request, 'cars/index.html', {'zipFilterForm': zipFilterForm})
+    return render(request, 'cars/index.html', {'carsSearchForm': carsSearchForm} )
+
 
 def cars_criteria(request):
     if request.method == 'POST':
         carsCriteriaForm = CarsCriteriaForm(request.POST)
         if carsCriteriaForm.is_valid():
+            request.session['decision'] = CarsAPI()
             criteria_options = []
             for i in range(len(APIT)):
                 if carsCriteriaForm.cleaned_data[str(i)]:
@@ -193,7 +195,6 @@ def cars_scores(request):
 
     else:
         request.session['remaining'] = len(request.session['criteria_list'])
-        print(request.session['decision'].params)
         cars_info_list = request.session['decision'].pull()
 
         '''
@@ -204,8 +205,10 @@ def cars_scores(request):
             cars[2] = the cars's current score with the criteria already scored
         '''
         carss = {}
+
         for cars in cars_info_list:
-            carss[cars['cars']['name']] = (cars['cars'], 0, 0)
+            cars = {k : v for k, v in cars.items() if v is not None}
+            carss[ cars['recipeName'] ] = (cars, 0, 0)
 
         cont = True
 
@@ -223,19 +226,24 @@ def cars_scores(request):
                 Option list stores all the possible values for every criteria.
                 Each cars in carss stores the index of its criteria option in the option list.
             '''
+
+            flavors = ['sweet', 'piquant', 'salty', 'bitter', 'sour', 'meaty']
             for key, value in carss.items():
-                if 'api_variable2' in criteria[0]:
-                    if value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']] in option_list:
-                        carss[key] = (carss[key][0],option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']]),carss[key][2])
-                    else:
-                        option_list.append(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
-                        carss[key] = (carss[key][0],len(option_list) - 1,carss[key][2])
+                if 'flavors' in value[0]:
+                    fdict = value[0]['flavors']
+                    if criteria[0]['api_variable'] in flavors:
+                        if fdict[criteria[0]['api_variable']] in option_list:
+                            carss[key] = ( carss[key][0], option_list.index( fdict[criteria[0]['api_variable']]), carss[key][2] )
+
+
+                elif 'totalTimeInSeconds'in value[0] and criteria[0]['api_variable'] not in flavors and value[0][criteria[0]['api_variable']] in option_list:
+                    carss[key] = (carss[key][0], option_list.index(value[0][criteria[0]['api_variable']]), carss[key][2])
                 else:
-                    if value[0][criteria[0]['api_variable']] in option_list:
-                        carss[key] = (carss[key][0],option_list.index(value[0][criteria[0]['api_variable']]),carss[key][2])
-                    else:
+                    if criteria[0]['api_variable'] in flavors:
+                        option_list.append(fdict[criteria[0]['api_variable']])
+                    elif 'totalTimeInSeconds' in value[0]:
                         option_list.append(value[0][criteria[0]['api_variable']])
-                        carss[key] = (carss[key][0],len(option_list) - 1,carss[key][2])
+                    carss[key] = (carss[key][0],len(option_list) - 1,carss[key][2])
 
             for i in range(0,len(option_list)):
                 option_list[i] = (option_list[i], i)
@@ -277,7 +285,7 @@ def cars_scores(request):
                 carsScoreForm = CarsScoreForm(the_option_list=option_list_names)
 
         if request.session['remaining'] <= 0:
-            return HttpResponseRedirect('/carss/results/')
+            return HttpResponseRedirect('/cars/results/')
 
         request.session['carss'] = carss
         request.session['option_list'] = option_list
@@ -315,4 +323,4 @@ def cars_results(request):
 
         request.session['carss'] = carsList
 
-    return render(request, 'cars/results.html', {"request" : request, "carsList" : carsList, "length" : len(carsList)})
+    return render(request, 'cars/cars_results.html', {"request" : request, "carsList" : carsList, "length" : len(carsList)})

@@ -131,7 +131,7 @@ def scores(request):
                                 restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']]),restaurants[key][2])
                             else:
                                 option_list.append(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
-                                restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])                    
+                                restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
                         else:
                             if value[0][criteria[0]['api_variable']] in option_list:
                                 restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']]),restaurants[key][2])
@@ -193,7 +193,9 @@ def scores(request):
 
     else:
         request.session['remaining'] = len(request.session['criteria_list'])
+        print(request.session['decision'].params)
         restaurant_info_list = request.session['decision'].pull()
+
 
         '''
             restaurants is a dictionary with all the restaurant information and their scores.
@@ -228,7 +230,7 @@ def scores(request):
                         restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']]),restaurants[key][2])
                     else:
                         option_list.append(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
-                        restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])                    
+                        restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
                 else:
                     if value[0][criteria[0]['api_variable']] in option_list:
                         restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']]),restaurants[key][2])
