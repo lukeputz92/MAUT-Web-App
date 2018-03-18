@@ -8,7 +8,7 @@
     <form id=nbForm>
       <ul id="menu">
          
-          <h4>Rate Importance of Each Criteria {{criteriaList}}</h4>
+          <h4>Rate Importance of Each Criteria</h4>
       </ul>
 
     </form>
@@ -21,12 +21,16 @@
     </table>
     </div>
     <div id=pie></div>
-    <input type="hidden" id="myVar" name="variable" value={{criteriaList}}>
+    <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}>
   </div>
   <div>
   </div>
   <script type="text/javascript">
-var nb_sliders = 7; // nb of range sliders
+var criteria = JSON.parse(document.getElementById("myVar").value);
+for (i = 0; i < criteria.length; i++){
+	criteria[i] = criteria[i].replace(/\+/g," ")
+}
+var nb_sliders = criteria.length; // nb of range sliders
 var moving_id = null; // id of the moved slider
 var oldValue = []; // previous values of the sliders
 
@@ -43,21 +47,10 @@ var margin = {
 var canvasWidth = radius * 2 + margin.left + margin.right,
   canvasHeight = radius * 2 + margin.top + margin.bottom;
 
-// color scheme (10, 20, 20b, 20c ...)
-//var color = d3.scale.ordinal()
-//  .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-//var color = d3.scale.category10(); 
+ 
 var color = d3.scale.category10();
 
-// center legend
-var legendData = [{
-  label: "Sample",
-  value: 300
-}, {
-  label: "Total People",
-  value: 7200000
-}]
+
 
 var pi = Math.PI; // 3.14
 
@@ -91,8 +84,8 @@ function init() {
     tr.append('td')
       .attr('class', 'edit')
       .attr('bgcolor', function(d, i){return color(i)})
-      .attr('contenteditable', true)
-      .text(i);
+      .attr('contenteditable', false)
+      .text(criteria[i]);
     
             
     tr.append('td')
