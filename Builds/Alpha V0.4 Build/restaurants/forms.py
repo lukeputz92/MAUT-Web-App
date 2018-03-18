@@ -56,6 +56,8 @@ class RestaurantAutoScoreForm(forms.Form):
                                         widget=forms.Select(attrs={'class': 'form-control'},choices=choice))
                 self.fields[str(i)] = field
 
+OPTION_CHOICES = [(100, "Highly Like"), (75, "Like"), (50, "Neutral"), (25, "Dislike"), (0, "Highly Dislike")]
+
 class RestaurantScoreForm(forms.Form):
     def __init__(self, *args, **vargs):
         option_list = vargs.pop('the_option_list')

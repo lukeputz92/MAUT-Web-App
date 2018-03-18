@@ -5128,10 +5128,10 @@ button.close {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 200px;
+  height: 200px;
   background: transparent no-repeat center center;
-  background-size: 100% 100%;
+  background-size: 1000% 1000%;
 }
 
 .carousel-control-prev-icon {
