@@ -21,8 +21,8 @@
 <div>
   <div class="results">
     <div id=centerer>
-      <h2> cars Results </h2>
-      <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/west-green-ohio-university-robert-powell.jpg">
+      <h2> Recipe Results </h2>
+      <img src="">
     </div>
     <br>
     <!-- Marketing messaging and featurettes
@@ -66,13 +66,13 @@
       <table class="table">
         <tr>
           <th> # </th>
-          <th> cars Name </th>
+          <th> Recipe Name </th>
           <th> Final Score </th>
         </tr>
         {% for item in carsList %} {% if forloop.counter > 3 %}
         <tr>
           <td> {{forloop.counter}} </td>
-          <td>  {item.0}} </td>
+          <td> {{item.0}} </td>
           <td> {{item.1}} </td>
         </tr>
         {% endif %} {% endfor %}
