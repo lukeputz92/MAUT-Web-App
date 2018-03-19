@@ -4,6 +4,7 @@ from .forms import *
 #from .models import UserProfile, Decide, Item, Criteria
 from django.shortcuts import render, redirect, render_to_response
 from .college_api import *
+from decisions.models import *
 # Create your views here.
 '''
     This function handles the first page of the college decision process.
