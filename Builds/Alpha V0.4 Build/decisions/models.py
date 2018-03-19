@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+'''
 class Decide(models.Model):
     decisionName = models.CharField(max_length=100, default='')
 
@@ -26,6 +27,7 @@ class Item(models.Model):
 
     def __str__(self):
         return self.itemName
+'''
 
 '''
     This model saves the user profile. This profile

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, render_to_response
 from .forms import *
 from django.core.mail import EmailMessage, send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth import login, update_session_auth_hash, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User

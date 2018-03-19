@@ -309,7 +309,12 @@ def college_scores(request):
         request.session['option_list'] = option_list
         request.session['remaining'] = request.session['remaining'] - 1
 
-    return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : criteria[0]['name'], "criteria_units" : criteria[0]["units"]})
+    if criteria[0]["units"] == "":
+        units = ""
+    else:
+        units = " " + criteria[0]["units"]
+
+    return render(request, 'college/college_scores.html', {"collegeScoreForm" : collegeScoreForm, "criteria_name" : criteria[0]['name'], "criteria_units" : units})
 
 
 def college_results(request):
