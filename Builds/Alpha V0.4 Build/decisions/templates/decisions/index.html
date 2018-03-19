@@ -20,7 +20,7 @@
 		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		<!-- <li data-target="#carouselExampleIndicators" data-slide-to="3"></li> -->
+	 	<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 	</ol>
 	<div class="carousel-inner" role="listbox">
 		<!-- Slide One - Set the background image for this slide in the line below -->
@@ -32,16 +32,15 @@
 			</div>
 		</div>
 		<!-- Slide Two - Set the background image for this slide in the line below -->
-		<!--
-		<div class="carousel-item" style="background-image: url({% static '/img/books.jpg' %})">
+		<div class="carousel-item" style="background-image: url({% static '/img/recipes.jpg' %})">
 			<div class="carousel-caption">
-				<h3>Books</h3>
-				<p>Find books by filtering with categories such as author, publication date and genre.</p>
-				<a class="btn btn-link" href="{% url 'book_index' %}"><font color="white">Get Started</a> </font>
+				<h3>Recipes</h3>
+				<p>Find recipes by filtering with ratings, cook time and flavors.</p>
+				<a class="btn btn-link" href="{% url 'cars_criteria' %}"><font color="white">Get Started</a> </font>
 
 			</div>
 		</div>
-		-->
+
 		<!-- Slide Three - Set the background image for this slide in the line below -->
 		<div class="carousel-item" style="background-image: url({% static '/img/rest.jpg' %})">
 			<div class="carousel-caption">
@@ -68,8 +67,17 @@
 		<span class="sr-only">Next</span>
 	</a>
 </div>
-</header>
+<!--
+<footer class="footer bg-dark text-white">
+	<div class="container">
 
+		<div class="footer-copyright py-3 text-center">
+			© 2018 Copyright:
+			<a href="https://www.ohio.edu/engineering/about/people/profiles.cfm?profile=kelsey"> The Ralph Kelsey Alliance </a>
+		</div>
+</div>
+</footer>
+-->
 <script>
 $(document).ready(function(){
     $("#carouselExampleIndicators").carousel({interval: 12000});

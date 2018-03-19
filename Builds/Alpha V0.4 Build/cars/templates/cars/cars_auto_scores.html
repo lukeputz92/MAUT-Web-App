@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+<script>
+function updateTextInput(val) {
+          document.getElementById('textInput').value=val;
+        }
+</script>
+
+<div class="container">
+<div class="userForms">
+	<br>
+	<h2> Recipe Scoring </h2>
+	<p> Use the sliders to score the options</p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="col-10">
+			<table class="table">
+				{% for form in carsAutoScoreForm %}
+				<tr>
+					<td> <b> {{form.label}} </b> </td>
+				</tr>
+				<tr>
+					<td> {{form}} {{form.errors}} </td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td> <b><label>Current Slider Value</label></b>		<output id="rangevalue" style="float: right;">50</output> </td>
+				</tr>
+			</table>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</div>
+	</form>
+</div>
+</div>
+
+{% endblock %}

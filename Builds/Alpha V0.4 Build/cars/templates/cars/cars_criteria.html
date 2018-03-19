@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="col-12">
+	<div class="userForms">
+		<h2> Recipe Criteria Selection </h2>
+		<p> Please select criteria you wish to use to make your decision. </p>
+		<form action="" method="post">
+			{% csrf_token %}
+			<div>
+				<table class="table">
+					{% for form in carsCriteriaForm %}
+					<tr>
+						<td> {{form.label}} </td>
+						<td> {{form}} {{form.errors}} </td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}
