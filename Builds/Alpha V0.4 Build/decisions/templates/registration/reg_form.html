@@ -5,6 +5,7 @@
 {% if message != "" %}
     <b style="color: green"> {{message}} </b>
 {% endif %}
+<link href="../../static/css/signin.css" rel="stylesheet">
 <!-- Forms for Django based registration -->
  <form class= "form-signin" method= "post">
   <h2 class="form-signin-heading">Create an account</h2>
@@ -32,8 +33,8 @@
             <strong>
               PLEASE READ THE FOLLOWING TERMS OF SERVICE CAREFULLY. BY ACCESSING OR USING OUR SITE AND SERVICES, YOU AGREE TO THE FOLLOWING TERMS:
             </strong><br>
-            The information you have provided to us, as well as any decisions you make through the MAUT website will be saved through the life 
-            of the software. If you choose to provide any of the optional information, found in the edit section of the user home page, it will 
+            The information you have provided to us, as well as any decisions you make through the MAUT website will be saved through the life
+            of the software. If you choose to provide any of the optional information, found in the edit section of the user home page, it will
             also be saved. This information will be used for statistical analysis in an academic setting. If you accept these terms and desire
             to create a profile press the 'I AGREE' button below. If you do not expressly agree to all terms and conditions, then please do not
             access or use our site or services.
@@ -52,7 +53,7 @@
 function check() {
   if(document.getElementById("btn1").checked = true){
     $('#btn1').prop('disabled', false);
-  
+
   } else {
     $('#btn1').prop('enabled', true);
   }

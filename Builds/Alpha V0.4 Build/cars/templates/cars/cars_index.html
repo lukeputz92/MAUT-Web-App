@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="userForms" style="margin: auto;">
+	<h2> Make a decision on Recipes </h2>
+	<p> Narrow down some of your options by location. </p>
+	<p> How would you like to narrow your results down? </p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			{{ locationFilterForm.location_filter }} {{locationFilterForm.errors}}
+		</div>
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+	</form>
+</div>
+
+{% endblock %}
