@@ -4,6 +4,7 @@ from .forms import *
 #from .models import UserProfile, Decide, Item, Criteria
 from django.shortcuts import render, redirect, render_to_response
 from .restaurant_api import *
+from decisions.models import *
 
 def restaurant(request):
     if request.method == 'POST':
