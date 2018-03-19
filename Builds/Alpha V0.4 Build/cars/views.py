@@ -4,6 +4,7 @@ from .forms import *
 #from .models import UserProfile, Decide, Item, Criteria
 from django.shortcuts import render, redirect, render_to_response
 from .cars_api import *
+from decisions.models import *
 # Create your views here.
 
 
@@ -297,7 +298,7 @@ def cars_results(request):
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)
         profile = UserProfile.objects.get(user=user)
-        newDecision = Decide(user_profile = profile, decisionName = "cars")
+        newDecision = Decide(user_profile = profile, decisionName = "Recipes")
         newDecision.save()
 
         carsList = request.session['carss']
