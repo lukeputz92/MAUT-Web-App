@@ -92,7 +92,7 @@ APIT = [
 ]
 
 
-URL='https://api.yummly.com/v1/api/recipes?_app_id=28058e3b&_app_key=97cc1c1261eb786ace7ee2eea91abf98&maxResult=1000'
+URL='https://api.yummly.com/v1/api/recipes?_app_id=28058e3b&_app_key=97cc1c1261eb786ace7ee2eea91abf98&maxResult=50'
 
 class CarsAPI:
     def __init__(self):
