@@ -1,7 +1,11 @@
 from django import forms
+from django.forms.widgets import NumberInput
 from django.forms.formsets import formset_factory, BaseFormSet
 from .cars_api import *
 
+
+class RangeInput(NumberInput):
+    input_type = 'range'
 
 class CarsSearchForm(forms.Form):
     cars = forms.CharField(label = 'Enter the name of something you\'d like a cars for')
@@ -52,7 +56,7 @@ class CarsAutoScoreForm(forms.Form):
                 else:
                     choice = AUTO_STR_CHOICES
                 field = forms.IntegerField(label=criteria_list[i]['name'],
-                                        widget=forms.Select(attrs={'class': 'form-control'},choices=choice))
+                                        widget=RangeInput(attrs={'class': 'form-control', 'onchange' : 'rangevalue.value=value'}))
                 self.fields[str(i)] = field
 
 OPTION_CHOICES = [(100, "Highly Like"), (75, "Like"), (50, "Neutral"), (25, "Dislike"), (0, "Highly Dislike")]

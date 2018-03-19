@@ -8,7 +8,7 @@
 		<form action="" method="post">
 			{% csrf_token %}
 			<div class="form-group">
-				{% for form in carsScoreForm %}
+				{% for form in collegeScoreForm %}
 				<b> How do you feel about {{ form.label }} {{ criteria_units }}? </b>
 				<br> {{ form }} {{form.errors}}
 				<br> {% endfor %}
