@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^college/',include('colleges.urls')),
     url(r'books/',include('books.urls')),
     url(r'restaurants/',include('restaurants.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  
     url(r'^admin/', include(admin.site.urls)),
 	url(r'tutorial/',include('tutorial.urls')),
 	#url(r'example/',include('example.urls')),
