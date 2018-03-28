@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="userForms">
+	<h2> College Scoring </h2>
+	<p> Please select how you would like to score the criteria options. </p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div class="col-10">
+			<table class="table">
+				{% for form in collegeAutoScoreForm %}
+				<tr>
+					<td> <b> {{form.label}} </b> </td>
+				</tr>
+				<tr>
+					<td> {{form}} {{form.errors}} </td>
+				</tr>
+				{% endfor %}
+			</table>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</div>
+	</form>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div style="text-align:center;">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%;"><b>HINT: Before was percentage of importance but now how important it is on a point scale</b></text>
+		<p style="font-family:Georgia;">It can be very confusing to ask the percentage of importance then asked again. The drop down menus are the values that will
+		be assigned to the item. Before it was how much of the pie will be taken up by the item, now you have to fill that pie with values.</p>
+	</div>
+</div>
+{% endblock %}

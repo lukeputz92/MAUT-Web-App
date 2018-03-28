@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="col-12">
+	<div class="userForms">
+		<h2> College Criteria Selection </h2>
+		<p> Please select criteria you wish to use to make your decision. </p>
+		<form action="" method="post">
+			{% csrf_token %}
+			<div>
+				<table class="table">
+					{% for form in collegeCriteriaForm %}
+					<tr>
+						<td> {{form.label}} </td>
+						<td> {{form}} {{form.errors}} </td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div style="text-align:center;">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%;"><b>HINT: What you click will appear as a criteria BUT the more you select the better the results will be</b></text>
+		<p style="font-family:Georgia;">When selecting the items above, many users will want to be quick about it. 
+		Remember this is your future so being quick isn't the best idea. Take some time to figure out what is important to you so the decision will be more personal.</p>
+	</div>
+</div>
+
+{% endblock %}

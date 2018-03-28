@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="userForms" style="margin: auto;">
+	<h2> Make a decision on colleges </h2>
+	<p> Narrow down some of your options by location. </p>
+	<p> How would you like to narrow your results down? </p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			{{ locationFilterForm.location_filter }} {{locationFilterForm.errors}}
+		</div>
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+	</form>
+</div>
+
+<br>
+<br>
+<br>
+<div>
+	<div style="text-align:center;">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%;"><b>Need help deciding on what is important? Here are some helpful <a href="http://student-tutor.com/blog/top-10-college-resources-for-high-school-students/">resources</a>.</b></text>
+	</div>
+</div>
+
+
+{% endblock %}

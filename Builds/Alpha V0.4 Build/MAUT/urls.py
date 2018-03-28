@@ -20,7 +20,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'',include('decisions.urls')),
+    url(r'^college/',include('colleges.urls')),
+    url(r'cars/',include('cars.urls')),
+    url(r'restaurants/',include('restaurants.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'tutorial/',include('tutorial.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     ]
 #if settings.DEBUG:
  #   urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="userForms" style="margin: auto;">
+	<h2> Make a decision on Restaurants </h2>
+	<p> Narrow down some of your options by location. </p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<div>
+			{{ zipFilterForm.label }}  {{ zipFilterForm }} {{zipFilterForm.errors}}
+		</div>
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+	</form>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div style="text-align:center;">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%;"><b>HINT: Want more resources to help you pick? <a href="https://delishably.com/dining-out/how-to-choose-a-restaurant-2">click here</a>.</b></text>
+		<p style="font-family:Georgia;">Choosing the right restaurant is just a click away!</p>
+	</div>
+</div>
+
+{% endblock %}

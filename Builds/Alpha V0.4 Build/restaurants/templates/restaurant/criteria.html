@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<br>
+<div class="col-12">
+	<div class="userForms">
+		<h2> Restaurant Criteria Selection </h2>
+		<p> Please select criteria you wish to use to make your decision. </p>
+		<form action="" method="post">
+			{% csrf_token %}
+			<div>
+				<table class="table">
+					{% for form in restaurantCriteriaForm %}
+					<tr>
+						<td> {{form.label}} </td>
+						<td> {{form}} {{form.errors}} </td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div style="text-align:center;">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%;"><b>HINT: Select what will help you better divide up the results</b></text>
+		<p style="font-family:Georgia;">The more items you use for the decision process the more personal the results will be. The items above are what you 
+		will be using to weight and better quantify the list of restaurants near the ZIP code you used.</p>
+	</div>
+</div>
+
+
+{% endblock %}

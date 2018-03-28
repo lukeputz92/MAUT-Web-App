@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,21 +36,17 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'userHome' %}">Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">New Decision</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">Make a Decision</a>
+            <a class="nav-link text-white" href="{% url 'userHome' %}">Profile<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="{% url 'logout' %}?next=/login/">Logout</a>
           </li>
-          <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="{% url 'carQuery' %}">API test</a>
-          <a class="dropdown-item" href="{% url 'contact' %}"> Contact Us </a>
-        </div>
-      </li>
+          <li class="nav-item">
+           <a class="nav-link text-white" href="{% url 'contact' %}"> Contact Us </a>
+          </li>
     </nav>
     <br>
 		<div class="container-fluid">
@@ -130,56 +127,51 @@
         {% endif %}
       </div>
       <div class="tab-pane" id="edit">
-        <form role="form" method="post" >
+        <form action="{% url 'updateProfile' %}" method="post" >
           {% csrf_token %}
             <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                <div class="col-lg-9">
-                  {{form.first_name}}
-                </div>
+              <div class="col-lg-9">
+                {% for field in userForm %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                </p>
+                {% endfor %}
+                {% for field in profileForm %}
+                <p>
+                  {{ field.label_tag }}<br>
+                  {{ field }}
+                </p>
+                {% endfor %}
             </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                <div class="col-lg-9">
-                    {{form.last_name}}
-                </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                <div class="col-lg-9">
-                    {{form.email}}
-                </div>
-            </div>
-
-            <!--
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Location</label>
-                <div class="col-lg-3">
-                    {{form.city}}
-                </div>
-                <div class="col-lg-3">
-                    {{form.state}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                <div class="col-lg-9">
-                    {{form.user.username}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                <div class="col-lg-9">
-                    {{form.user.password}}
-                </div>
-            </div>
-          -->
-            <div class="form-group row">
+            <div class="form-group row" method="post">
                 <label class="col-lg-3 col-form-label form-control-label"></label>
-                <div class="col-lg-9">
-                    <button type="submit" class="btn btn-primary" name="edit">Save Changes</button>
+                <div class="col-lg-4">
+                    <input type="submit" value="Save" class="btn btn-primary btn-sm">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeactivateAccount">Deactivate Account</button>
                 </div>
+     
             </div>
+   <div id="DeactivateAccount" class="modal fade" role="dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>
+            <strong>
+              Are you sure you want to deactivate your account?
+            </strong><br>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-danger" href="{% url 'disableProfile' %}" role="button">Yes, I'm sure</a>
+        </div>
+      </div>
+    </div>
+  </div>
         </form>
     </div>
     <div class="tab-pane" id="pwd">
