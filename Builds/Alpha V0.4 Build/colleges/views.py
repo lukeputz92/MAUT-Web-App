@@ -96,7 +96,7 @@ def college_criteria_weight(request):
                 [2] = auto-scoring option
                 '''
                 criteria_list[i] = (criteria_list[i],collegeCriteriaWeightForm.cleaned_data[str(i)],0)
-
+            print([i[1] for i in criteria_list])
             request.session['criteria_list'] = criteria_list
 
             return HttpResponseRedirect('/college/auto_scores/')
