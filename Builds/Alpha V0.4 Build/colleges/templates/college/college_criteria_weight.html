@@ -1,11 +1,38 @@
+<!doctype html>
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+
 <style>
 	.blank_row {
 		height: 25px;
 	}
+	
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+.bordered{
+	margin: auto 100px;
+	float: right;
+	width: 500px;
+	height: 325px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightgreen;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+.font_style_under{
+	family:Georgia;
+	size: 90%;
+	color: black;
+
 </style>
-<br>
-<div class="userForms">
+<body>
+<div class="userForms" style="margin: auto 2em; float: left;">
 	<h2> College Criteria Weights </h2>
 	<p> For each criteria enter a weight that can range from 1-100 </p>
 	<p> A higher weight means it is more important, a lesser weight means it is less important. </p>
@@ -38,13 +65,14 @@
 <br>
 <br>
 <div>
-	<div style="text-align:center;">
+	<div class="bordered">
 		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text style="font-family:Georgia;font-size:140%;"><b>HINT: Weight doesn't mean how much you weight but how <em>important</em> it is to you.</b></text>
-		<p style="font-family:Georgia;">The weight above should be thought of as a percentage. This item is most important to me to it will take up 80% of the decision. 
+		<text class="font_style"><b>Weight doesn't mean how much you weight but how <em>important</em> it is to you.</b></text>
+		<p class="font_style_under">The weight above should be thought of as a percentage. This item is most important to me to it will take up 80% of the decision. 
 		Thus, I would use 80% on item 1 but item 2 and 3 are less important to me meaning I would add 12 and 8 to item 2 and 3 respectively.</p>
 	</div>
 </div>
+
 
 <script type="text/javascript">
 	//This function checks all the weights entered on the page.
@@ -70,4 +98,5 @@
 		}
 	}
 </script>
+</body>
 {% endblock %}
