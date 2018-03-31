@@ -33,7 +33,6 @@ def cars_criteria(request):
                 if carsCriteriaForm.cleaned_data[str(i)]:
                     criteria_options.append(APIT[i])
 
-            print(criteria_options)
             request.session['criteria_list'] = criteria_options
 
             return HttpResponseRedirect('/cars/criteria_weight/')
@@ -73,7 +72,6 @@ def cars_auto_scores(request):
             criteria_list = request.session['criteria_list']
             for i in range(len(criteria_list)):
                 criteria_list[i] = (criteria_list[i][0], criteria_list[i][1], carsAutoScoreForm.cleaned_data[str(i)])
-
             request.session['criteria_list'] = criteria_list
 
             return HttpResponseRedirect('/cars/scores/')
@@ -91,6 +89,12 @@ def auto_scorer(num,max,min,asc):
         return ((100*(num-min))/(max-min))
     else:
         return((100*(max-num))/(max-min))
+
+def auto_scorer_2(actual, ideal, greatest):
+    if greatest == 0:
+        return 100
+    else:
+        return (100*(1-(abs(actual-ideal)/greatest)))
 
 def cars_scores(request):
     if request.method == 'POST':
@@ -148,24 +152,26 @@ def cars_scores(request):
 
                     option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
 
-                    if criteria[2] != 2:
-                        min = option_list[0][0]
-                        if option_list[-1][0] == None:
-                            max = option_list[-2][0]
-                        else:
-                            max = option_list[-1][0]
+                    if True:
+                        greatest = 0
+                        ideal = criteria[2]
+                        for item in option_list:
+                            temp_greatest = abs(item[0] - ideal)
+                            if temp_greatest > greatest:
+                                greatest = temp_greatest
 
                         for i in range(len(option_list)):
                             if option_list[i][0] == None:
                                 option_list[i] = (0,option_list[i][1])
                             else:
-                                option_list[i] = (auto_scorer(option_list[i][0],max,min,criteria[2]==0),option_list[i][1])
+                                option_list[i] = (auto_scorer_2(option_list[i][0],ideal,greatest),option_list[i][1])
 
                         for key, value in carss.items():
                             for i in range(len(option_list)):
                                 if value[1] == option_list[i][1]:
                                     new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
                                     carss[key] = (carss[key][0], carss[key][1], new_score)
+                                    print(carrs[key])
 
                         request.session['remaining'] = request.session['remaining'] - 1
                         request.session['carss'] = carss
@@ -241,6 +247,7 @@ def cars_scores(request):
                     carss[key] = (carss[key][0], option_list.index(value[0][criteria[0]['api_variable']]), carss[key][2])
                 else:
                     if criteria[0]['api_variable'] in flavors:
+                        fdict = value[0]['flavors']
                         option_list.append(fdict[criteria[0]['api_variable']])
                     elif 'totalTimeInSeconds' in value[0]:
                         option_list.append(value[0][criteria[0]['api_variable']])
@@ -251,18 +258,19 @@ def cars_scores(request):
 
             option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
 
-            if criteria[2] != 2:
-                min = option_list[0][0]
-                if option_list[-1][0] == None:
-                    max = option_list[-2][0]
-                else:
-                    max = option_list[-1][0]
+            if True:
+                greatest = 0
+                ideal = criteria[2]
+                for item in option_list:
+                    temp_greatest = abs(item[0] - ideal)
+                    if temp_greatest > greatest:
+                        greatest = temp_greatest
 
                 for i in range(len(option_list)):
                     if option_list[i][0] == None:
                         option_list[i] = (0,option_list[i][1])
                     else:
-                        option_list[i] = (auto_scorer(option_list[i][0],max,min,criteria[2]==0),option_list[i][1])
+                        option_list[i] = (auto_scorer_2(option_list[i][0],ideal,greatest),option_list[i][1])
 
                 for key, value in carss.items():
                     for i in range(len(option_list)):
