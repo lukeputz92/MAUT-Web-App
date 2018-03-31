@@ -309,7 +309,7 @@ def cars_results(request):
         newDecision = Decide(user_profile = profile, decisionName = "Recipes")
         newDecision.save()
 
-        carsList = request.session['carss']
+        carsList = request.session['carslist']
         criteriaList = request.session['criteria_list']
 
         for cars in carsList:
@@ -330,6 +330,6 @@ def cars_results(request):
 
         carsList = sorted(carsList, key = lambda x: x[1],reverse=True)
 
-        request.session['carss'] = carsList
+        request.session['carslist'] = carsList
 
     return render(request, 'cars/cars_results.html', {"request" : request, "carsList" : carsList, "length" : len(carsList)})

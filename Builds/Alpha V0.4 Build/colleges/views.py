@@ -325,7 +325,7 @@ def college_results(request):
         newDecision = Decide(user_profile = profile, decisionName = "College")
         newDecision.save()
 
-        collegeList = request.session['colleges']
+        collegeList = request.session['collegeList']
         criteriaList = request.session['criteria_list']
 
         for college in collegeList:
@@ -346,6 +346,6 @@ def college_results(request):
 
         collegeList = sorted(collegeList, key = lambda x: x[1],reverse=True)
 
-        request.session['colleges'] = collegeList
+        request.session['collegeList'] = collegeList
 
     return render(request, 'college/college_results.html', {"request" : request, "collegeList" : collegeList, "length" : len(collegeList)})
