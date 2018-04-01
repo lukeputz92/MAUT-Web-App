@@ -1,6 +1,31 @@
+<!doctype html>
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 500px;
+	height: 325px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightgreen;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
+<body>
 <br>
-<div class="userForms" style="margin: auto;">
+<div class="userForms" style="margin: auto 2em; float: left;">
 	<h2> Make a decision on colleges </h2>
 	<p> Narrow down some of your options by location. </p>
 	<p> How would you like to narrow your results down? </p>
@@ -13,16 +38,18 @@
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
 </div>
-
-<br>
-<br>
 <br>
 <div>
-	<div style="text-align:center;">
+	<div class="bordered" >
+		<header style="font-size:150%; color: black;"><strong>Need Help?</strong></header>
 		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text style="font-family:Georgia;font-size:140%;"><b>Need help deciding on what is important? Here are some helpful <a href="http://student-tutor.com/blog/top-10-college-resources-for-high-school-students/">resources</a>.</b></text>
+		<text class="font_style"><b>Need help deciding on what is important? Here are some helpful <a href="http://student-tutor.com/blog/top-10-college-resources-for-high-school-students/">resources</a>.</b></text><br>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>Throughout the decision making process hints like these will appear.</b></text><br>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>They will look like this and sometimes have links like above. Hopefully they help.</b></text><br>
 	</div>
 </div>
-
+</body>
 
 {% endblock %}

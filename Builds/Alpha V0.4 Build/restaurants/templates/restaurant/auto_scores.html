@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
 <script>
 var warnMessage = "You have unsaved changes on this page!";
 
@@ -11,8 +12,34 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+  th,
+  td {
+    padding: 15px;
+  }
+.bordered{
+	box-sizing: border-box;
+	margin: auto;
+	width: 600px;
+	height: 200px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: aquamarine;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <br>
-<div class="userForms">
+<div class="userForms" style="float: left; margin: auto 2em;">
 	<h2> Restaurant Scoring </h2>
 	<p> Please select how you would like to score the criteria options. </p>
 	<form action="" method="post">
@@ -36,10 +63,10 @@ $(document).ready(function() {
 <br>
 <br>
 <div>
-	<div style="text-align:center;">
+	<div class="bordered">
 		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text style="font-family:Georgia;font-size:140%;"><b>HINT: Now to give the parts of that pie values</b></text>
-		<p style="font-family:Georgia;">Now that you've decided upon what is most important to you percentage wise, it is time to give it value.
+		<text style="font-family:Georgia;font-size:140%; color: black;"><b>Now to give the parts of that pie values</b></text>
+		<p style="font-family:Georgia; color: black;">Now that you've decided upon what is most important to you percentage wise, it is time to give it value.
 		The value is either high or low (standard) or manual. If you feel that our auto selection just isn't personal enough then you can decided directly what
 		each item gets as a value.</p>
 	</div>
