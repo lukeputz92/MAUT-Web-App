@@ -1,5 +1,16 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<script>
+var warnMessage = "You have unsaved changes on this page!";
 
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
 <script>
 function updateTextInput(val) {
           document.getElementById('textInput').value=val;
@@ -27,7 +38,7 @@ function updateTextInput(val) {
 					<td> <b><label>Current Slider Value</label></b>		<output id="rangevalue" style="float: right;">50</output> </td>
 				</tr>
 			</table>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+			<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage=null" type="submit">Submit</button>
 		</div>
 	</form>
 </div>

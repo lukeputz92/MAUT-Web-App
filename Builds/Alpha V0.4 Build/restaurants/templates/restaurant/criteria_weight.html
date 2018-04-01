@@ -4,6 +4,18 @@
 		height: 25px;
 	}
 </style>
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
 <br>
 <div class="userForms">
 	<h2> Restaurant Criteria Weights </h2>
@@ -31,7 +43,7 @@
 			</table>
 		</div>
 		<br>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage=null" type="submit">Submit</button>
 	</form>
 </div>
 <br>

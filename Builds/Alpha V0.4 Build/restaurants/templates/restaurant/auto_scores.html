@@ -1,4 +1,16 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
 <br>
 <div class="userForms">
 	<h2> Restaurant Scoring </h2>
@@ -16,7 +28,7 @@
 				</tr>
 				{% endfor %}
 			</table>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+			<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage=null" type="submit">Submit</button>
 		</div>
 	</form>
 </div>

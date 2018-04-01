@@ -342,7 +342,7 @@ def results(request):
         newDecision = Decide(user_profile = profile, decisionName = "restaurant")
         newDecision.save()
 
-        restaurantList = request.session['restaurants']
+        restaurantList = request.session['restaurantlist']
         criteriaList = request.session['criteria_list']
 
         for restaurant in restaurantList:
@@ -363,6 +363,6 @@ def results(request):
 
         restaurantList = sorted(restaurantList, key = lambda x: x[1],reverse=True)
 
-        request.session['restaurants'] = restaurantList
+        request.session['restaurantlist'] = restaurantList
 
     return render(request, 'restaurant/results.html', {"request" : request, "restaurantList" : restaurantList, "length" : len(restaurantList)})

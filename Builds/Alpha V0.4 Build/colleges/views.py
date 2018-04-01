@@ -96,7 +96,7 @@ def college_criteria_weight(request):
                 [2] = auto-scoring option
                 '''
                 criteria_list[i] = (criteria_list[i],collegeCriteriaWeightForm.cleaned_data[str(i)],0)
-
+            print([i[1] for i in criteria_list])
             request.session['criteria_list'] = criteria_list
 
             return HttpResponseRedirect('/college/auto_scores/')
@@ -325,7 +325,7 @@ def college_results(request):
         newDecision = Decide(user_profile = profile, decisionName = "College")
         newDecision.save()
 
-        collegeList = request.session['colleges']
+        collegeList = request.session['collegeList']
         criteriaList = request.session['criteria_list']
 
         for college in collegeList:
@@ -346,6 +346,6 @@ def college_results(request):
 
         collegeList = sorted(collegeList, key = lambda x: x[1],reverse=True)
 
-        request.session['colleges'] = collegeList
+        request.session['collegeList'] = collegeList
 
     return render(request, 'college/college_results.html', {"request" : request, "collegeList" : collegeList, "length" : len(collegeList)})
