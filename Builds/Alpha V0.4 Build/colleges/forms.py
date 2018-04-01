@@ -59,23 +59,10 @@ class CollegeCriteriaWeightForm(forms.Form):
         super(CollegeCriteriaWeightForm,self).__init__(*args,**vargs)
         for i in range(len(criteria_list)):
                 field = forms.IntegerField(label=criteria_list[i],
-                                        widget=forms.TextInput(attrs={
-                                            'id':('weight_' + str(i)),
-                                            'placeholder':'Weight',
-                                            'onblur' : 'calculate()',
+                                        widget=forms.HiddenInput(attrs={
+                                            'id':('weight_' + str(i))
                                             }))
                 self.fields[str(i)] = field
-
-    def clean(self):
-        if self.cleaned_data:
-            sum = 0
-            for key in self.cleaned_data:
-                if self.cleaned_data[key] > 100 or self.cleaned_data[key] < 0:
-                    raise forms.ValidationError(('Invalid Weight Submitted. ' + str(self.cleaned_data[key]) + ' is not between 0 and 100'))
-                else:
-                    sum = sum + self.cleaned_data[key]
-            if sum != 100:
-                raise forms.ValidationError('All the weights must sum to 100.')
 
 
 AUTO_CHOICES = [(0, "Higher Values = Better Scores"),(1, "Lower Values = Better Scores"),(2,"Manually Assign Scores")]
@@ -85,6 +72,7 @@ class CollegeAutoScoreForm(forms.Form):
     def __init__(self, *args, **vargs):
         criteria_list = vargs.pop('criteria_list')
         super(CollegeAutoScoreForm,self).__init__(*args,**vargs)
+
         for i in range(len(criteria_list)):
                 if criteria_list[i]['is_num']:
                     choice = AUTO_CHOICES
