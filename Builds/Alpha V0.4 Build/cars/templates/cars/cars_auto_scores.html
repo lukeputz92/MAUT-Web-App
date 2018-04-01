@@ -1,13 +1,35 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 600px;
+	height: 250px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightsalmon;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <script>
 function updateTextInput(val) {
           document.getElementById('textInput').value=val;
         }
 </script>
 
+<div style="margin: auto 2em; float: left;">
 <div class="container">
-<div class="userForms">
 	<br>
 	<h2> Recipe Scoring </h2>
 	<p> Use the sliders to score the options</p>
@@ -31,6 +53,16 @@ function updateTextInput(val) {
 		</div>
 	</form>
 </div>
+</div>
+<br>
+<div>
+	<div class="bordered" >
+		<header style="font-size:150%; color: black;"><strong>Slide to the values you want</strong></header>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>Those sliders are there for the scores you want to give to your items</b></text><br>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>This means how much do you want those piece of pies to be weighted</b></text><br>
+	</div>
 </div>
 
 {% endblock %}

@@ -1,12 +1,35 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 600px;
+	height: 250px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightsalmon;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <br>
-<div class="col-12">
-	<div class="userForms">
+<div style="margin: auto 2em; float: left;">
+	<div class="col-12">
 		<h2> Recipe Criteria Selection </h2>
 		<p> Please select criteria you wish to use to make your decision. </p>
 		<form action="" method="post">
 			{% csrf_token %}
-			<div>
+			<div >
 				<table class="table">
 					{% for form in carsCriteriaForm %}
 					<tr>
@@ -20,5 +43,14 @@
 		</form>
 	</div>
 </div>
-
+<br>
+<div>
+	<div class="bordered" >
+		<header style="font-size:150%; color: black;"><strong>Need Help?</strong></header>
+				<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>Throughout the decision making process hints like these will appear.</b></text><br>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>They will look like this and sometimes have links like above. Hopefully they help.</b></text><br>
+	</div>
+</div>
 {% endblock %}
