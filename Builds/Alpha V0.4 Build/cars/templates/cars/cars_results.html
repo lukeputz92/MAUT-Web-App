@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
 <script>
 var warnMessage = "You have unsaved changes on this page!";
 
@@ -11,6 +12,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <style>
   #centerer {
     text-align: center;
@@ -89,6 +91,7 @@ $(document).ready(function() {
         </tr>
         {% endif %} {% endfor %}
       </table>
+
       {% endif %} 
         {% if request.session.saved %}
     <script>
@@ -114,6 +117,7 @@ $(document).ready(function() {
       </div>
     {% endif %}
     {% endif %}
+
     </div>
   </div>
 

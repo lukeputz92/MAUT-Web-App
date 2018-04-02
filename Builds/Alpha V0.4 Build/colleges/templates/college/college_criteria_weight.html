@@ -4,36 +4,39 @@
 {% load static%}
 
 <script src="https://d3js.org/d3.v3.js"></script>
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/pieChart.css' %}" />
-<form action="" method="post">
-	{% csrf_token %}
+<form id="post-form" method="post">
 <div id="main-container">
   <div id="chart-controls">
-    <form id="nbForm">
       <ul id="menu">
-         
+
           <h4>Rate Importance of Each Criteria</h4>
       </ul>
 
-    </form>
     <table id="rangebox">
 
       <tbody>
-        <h5 class="HideOnLoad">Click boxes to edit labels</h5>
-         
+
+
       </tbody>
     </table>
     </div>
     <div id="pie"></div>
     <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}>
-     <div>
-  	<input type="submit" value="Submit" style="display: block; margin: 0 auto;" class="btn btn-primary btn-sm">
-   </div>
+			{% csrf_token %}
+		{{weightForm}}
+			{% csrf_token %}
+  	<button id="post" type="submit" style="display: block; margin: 0 auto;" class="btn btn-primary btn-sm">Submit </button>
   </div>
  </form>
- 
-  <script type="text/javascript">
-var criteria = JSON.parse(document.getElementById("myVar").value);
+
+<script type="text/javascript">
+var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+console.log(document.getElementById("myVar").value)
+var criteriaDict = JSON.parse(document.getElementById("myVar").value);
+//console.log(Object.values(criteriaDict))
+var criteria = Object.values(criteriaDict);
 for (i = 0; i < criteria.length; i++){
 	criteria[i] = criteria[i].replace(/\+/g," ")
 }
@@ -54,7 +57,7 @@ var margin = {
 var canvasWidth = radius * 2 + margin.left + margin.right,
   canvasHeight = radius * 2 + margin.top + margin.bottom;
 
- 
+
 var color = d3.scale.category10();
 
 
@@ -82,7 +85,8 @@ function init() {
   oldValue = [];
   moving_id = null;
   json = getData();
- 
+
+
   d3.select('#rangebox tbody').html('');
 
   // append sliders to table
@@ -93,8 +97,8 @@ function init() {
       .attr('bgcolor', function(d, i){return color(i)})
       .attr('contenteditable', false)
       .text(criteria[i]);
-    
-            
+
+
     tr.append('td')
       .append('input')
       .attr('type', 'range')
@@ -119,7 +123,7 @@ function init() {
   showValues();
   pieChart();
   seteditboxcolor();
- 
+
   // content edit event
   d3.selectAll('.edit').on('input', function() {
     updateLabels();
@@ -153,7 +157,7 @@ function init() {
     equalize();
     showValues();
     updatePieChart();
-     
+
   });
 }
 
@@ -177,7 +181,7 @@ function seteditboxcolor() {
      var mycolors = [0,1,2,3,4,5,6,7,8,9];
      var editboxes = d3.selectAll('.edit')
                        .data(mycolors)
-                       .attr('bgcolor', function(d){ return color(d); }) 
+                       .attr('bgcolor', function(d){ return color(d); })
  }
 
 
@@ -261,8 +265,8 @@ function showValues() {
 
 // draw pie chart
 function pieChart() {
-  
-  
+
+
   var json = getData();
   var canvaCenterX = (radius * 2 + margin.left + margin.right) / 2;
   var canvaCenterY = (radius * 2 + margin.top + margin.bottom) / 2;
@@ -307,8 +311,8 @@ function pieChart() {
     .attr("fill", function(d, i) {
       return color(i);
     })
-    
-       
+
+
       .attr("d", arc)
     .each(function(d) {
       this._current = d;
@@ -317,13 +321,13 @@ function pieChart() {
     .text(function(d, i) {
       return json[i].value + '%';
     });
-      
+
   // group all ther paths into the slices class
   var arclabels = svg.select(".labels").selectAll("label").data(pie(getData()))
 
   // render the labels
   arclabels.enter()
-  
+
   .append("svg:text")
     .attr("class", "label")
     .attr("transform", function(d) {
@@ -341,7 +345,7 @@ function updatePieChart() {
   updateArcs();
   updateLabels();
   updateLabelLines();
-  
+
 }
 
 // update the slices of the pie chart
@@ -438,6 +442,37 @@ function arcTween(a) {
   };
 }
 
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+$('#post-form').on('submit', function(event){
+    console.log("form submitted!") // sanity check
+		create_post()
+		return true;
+
+});
+
+
+// AJAX for posting
+function create_post() {
+    console.log("create post is working!") // sanity check
+		var result = getData();
+
+		for (i = 0; i < result.length; i++){
+			var val = result[i.toString()].value;
+			var field = document.getElementById('weight_' + i.toString());
+			field.value = val;
+		}
+};
 
 
 </script>
