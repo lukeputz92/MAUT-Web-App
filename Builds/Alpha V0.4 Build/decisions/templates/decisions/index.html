@@ -21,6 +21,7 @@
 		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 	 	<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+	 	<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
 	</ol>
 	<div class="carousel-inner" role="listbox">
 		<!-- Slide One - Set the background image for this slide in the line below -->
@@ -50,6 +51,15 @@
 			</div>
 		</div>
 		<!-- Slide Four - Set the background image for this slide in the line below -->
+		<div class="carousel-item" style="background-image: url({% static '/img/movies.jpg' %})">
+			<div class="carousel-caption">
+				<h3>Movies</h3>
+				<p>Find movies you might enjoy by filtering with categories such as IMDB score</p>
+				<a class="btn btn-link" href="{% url 'movie_criteria' %}"><font color="white">Get Started</a> </font>
+			</div>
+		</div>
+
+		<!-- Slide Five - Set the background image for this slide in the line below -->
 		<div class="carousel-item"  style="background-image: url({% static '/img/custom.jpg' %})">
 			<div class="carousel-caption">
 				<h3>Custom</h3>
