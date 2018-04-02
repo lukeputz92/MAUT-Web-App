@@ -2,254 +2,254 @@ minScore = 8.0
 maxScore = 9.2
 minYear = 1921
 maxYear = 2017
-MOVIES = [{'title': 'The Shawshank Redemption', 'year': '1994', 'score': '9.2'}
-{'title': 'The Godfather', 'year': '1972', 'score': '9.2'}
-{'title': 'The Godfather: Part II', 'year': '1974', 'score': '9.0'}
-{'title': 'The Dark Knight', 'year': '2008', 'score': '9.0'}
-{'title': '12 Angry Men', 'year': '1957', 'score': '8.9'}
-{'title': "Schindler's List", 'year': '1993', 'score': '8.9'}
-{'title': 'The Lord of the Rings: The Return of the King', 'year': '2003', 'score': '8.9'}
-{'title': 'Pulp Fiction', 'year': '1994', 'score': '8.9'}
-{'title': 'The Good, the Bad and the Ugly', 'year': '1966', 'score': '8.8'}
-{'title': 'Fight Club', 'year': '1999', 'score': '8.8'}
-{'title': 'The Lord of the Rings: The Fellowship of the Ring', 'year': '2001', 'score': '8.8'}
-{'title': 'Forrest Gump', 'year': '1994', 'score': '8.7'}
-{'title': 'Star Wars: Episode V - The Empire Strikes Back', 'year': '1980', 'score': '8.7'}
-{'title': 'Inception', 'year': '2010', 'score': '8.7'}
-{'title': 'The Lord of the Rings: The Two Towers', 'year': '2002', 'score': '8.7'}
-{'title': "One Flew Over the Cuckoo's Nest", 'year': '1975', 'score': '8.7'}
-{'title': 'Goodfellas', 'year': '1990', 'score': '8.7'}
-{'title': 'The Matrix', 'year': '1999', 'score': '8.6'}
-{'title': 'Seven Samurai', 'year': '1954', 'score': '8.6'}
-{'title': 'Star Wars: Episode IV - A New Hope', 'year': '1977', 'score': '8.6'}
-{'title': 'City of God', 'year': '2002', 'score': '8.6'}
-{'title': 'Se7en', 'year': '1995', 'score': '8.6'}
-{'title': 'The Silence of the Lambs', 'year': '1991', 'score': '8.6'}
-{'title': "It's a Wonderful Life", 'year': '1946', 'score': '8.6'}
-{'title': 'Life Is Beautiful', 'year': '1997', 'score': '8.6'}
-{'title': 'The Usual Suspects', 'year': '1995', 'score': '8.6'}
-{'title': 'Spirited Away', 'year': '2001', 'score': '8.5'}
-{'title': 'Léon: The Professional', 'year': '1994', 'score': '8.5'}
-{'title': 'Saving Private Ryan', 'year': '1998', 'score': '8.5'}
-{'title': 'Interstellar', 'year': '2014', 'score': '8.5'}
-{'title': 'The Green Mile', 'year': '1999', 'score': '8.5'}
-{'title': 'American History X', 'year': '1998', 'score': '8.5'}
-{'title': 'Psycho', 'year': '1960', 'score': '8.5'}
-{'title': 'Once Upon a Time in the West', 'year': '1968', 'score': '8.5'}
-{'title': 'City Lights', 'year': '1931', 'score': '8.5'}
-{'title': 'Casablanca', 'year': '1942', 'score': '8.5'}
-{'title': 'The Intouchables', 'year': '2011', 'score': '8.5'}
-{'title': 'Modern Times', 'year': '1936', 'score': '8.5'}
-{'title': 'The Pianist', 'year': '2002', 'score': '8.5'}
-{'title': 'The Departed', 'year': '2006', 'score': '8.5'}
-{'title': 'Raiders of the Lost Ark', 'year': '1981', 'score': '8.5'}
-{'title': 'Terminator 2', 'year': '1991', 'score': '8.5'}
-{'title': 'Rear Window', 'year': '1954', 'score': '8.5'}
-{'title': 'Back to the Future', 'year': '1985', 'score': '8.5'}
-{'title': 'Whiplash', 'year': '2014', 'score': '8.5'}
-{'title': 'Gladiator', 'year': '2000', 'score': '8.5'}
-{'title': 'The Lion King', 'year': '1994', 'score': '8.5'}
-{'title': 'The Prestige', 'year': '2006', 'score': '8.5'}
-{'title': 'Memento', 'year': '2000', 'score': '8.4'}
-{'title': 'Apocalypse Now', 'year': '1979', 'score': '8.4'}
-{'title': 'Alien', 'year': '1979', 'score': '8.4'}
-{'title': 'The Great Dictator', 'year': '1940', 'score': '8.4'}
-{'title': 'Cinema Paradiso', 'year': '1988', 'score': '8.4'}
-{'title': 'Sunset Boulevard', 'year': '1950', 'score': '8.4'}
-{'title': 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb', 'year': '1964', 'score': '8.4'}
-{'title': 'Grave of the Fireflies', 'year': '1988', 'score': '8.4'}
-{'title': 'The Lives of Others', 'year': '2006', 'score': '8.4'}
-{'title': 'Coco', 'year': '2017', 'score': '8.4'}
-{'title': 'Paths of Glory', 'year': '1957', 'score': '8.4'}
-{'title': 'The Shining', 'year': '1980', 'score': '8.4'}
-{'title': 'Django Unchained', 'year': '2012', 'score': '8.4'}
-{'title': 'Princess Mononoke', 'year': '1997', 'score': '8.4'}
-{'title': 'American Beauty', 'year': '1999', 'score': '8.4'}
-{'title': 'The Dark Knight Rises', 'year': '2012', 'score': '8.4'}
-{'title': 'Witness for the Prosecution', 'year': '1957', 'score': '8.4'}
-{'title': 'Oldboy', 'year': '2003', 'score': '8.4'}
-{'title': 'Aliens', 'year': '1986', 'score': '8.4'}
-{'title': 'Once Upon a Time in America', 'year': '1984', 'score': '8.3'}
-{'title': 'Das Boot', 'year': '1981', 'score': '8.3'}
-{'title': 'Citizen Kane', 'year': '1941', 'score': '8.3'}
-{'title': 'North by Northwest', 'year': '1959', 'score': '8.3'}
-{'title': 'Vertigo', 'year': '1958', 'score': '8.3'}
-{'title': 'Braveheart', 'year': '1995', 'score': '8.3'}
-{'title': 'Reservoir Dogs', 'year': '1992', 'score': '8.3'}
-{'title': 'Star Wars: Episode VI - Return of the Jedi', 'year': '1983', 'score': '8.3'}
-{'title': 'Dangal', 'year': '2016', 'score': '8.3'}
-{'title': 'M', 'year': '1931', 'score': '8.3'}
-{'title': 'Your Name', 'year': '2016', 'score': '8.3'}
-{'title': 'Requiem for a Dream', 'year': '2000', 'score': '8.3'}
-{'title': 'Like Stars on Earth', 'year': '2007', 'score': '8.3'}
-{'title': 'Amadeus', 'year': '1984', 'score': '8.3'}
-{'title': 'Amélie', 'year': '2001', 'score': '8.3'}
-{'title': 'A Clockwork Orange', 'year': '1971', 'score': '8.3'}
-{'title': 'Lawrence of Arabia', 'year': '1962', 'score': '8.3'}
-{'title': 'Eternal Sunshine of the Spotless Mind', 'year': '2004', 'score': '8.3'}
-{'title': 'Double Indemnity', 'year': '1944', 'score': '8.3'}
-{'title': 'Taxi Driver', 'year': '1976', 'score': '8.3'}
-{'title': "Singin' in the Rain", 'year': '1952', 'score': '8.3'}
-{'title': '2001: A Space Odyssey', 'year': '1968', 'score': '8.3'}
-{'title': '3 Idiots', 'year': '2009', 'score': '8.3'}
-{'title': 'To Kill a Mockingbird', 'year': '1962', 'score': '8.3'}
-{'title': 'Toy Story', 'year': '1995', 'score': '8.3'}
-{'title': 'Full Metal Jacket', 'year': '1987', 'score': '8.3'}
-{'title': 'Inglourious Basterds', 'year': '2009', 'score': '8.3'}
-{'title': 'The Sting', 'year': '1973', 'score': '8.3'}
-{'title': 'Bicycle Thieves', 'year': '1948', 'score': '8.3'}
-{'title': 'The Kid', 'year': '1921', 'score': '8.3'}
-{'title': 'Toy Story 3', 'year': '2010', 'score': '8.3'}
-{'title': 'Snatch', 'year': '2000', 'score': '8.3'}
-{'title': 'Good Will Hunting', 'year': '1997', 'score': '8.3'}
-{'title': 'The Hunt', 'year': '2012', 'score': '8.3'}
-{'title': 'Monty Python and the Holy Grail', 'year': '1975', 'score': '8.3'}
-{'title': 'For a Few Dollars More', 'year': '1965', 'score': '8.3'}
-{'title': 'Scarface', 'year': '1983', 'score': '8.2'}
-{'title': 'L.A. Confidential', 'year': '1997', 'score': '8.2'}
-{'title': 'The Apartment', 'year': '1960', 'score': '8.2'}
-{'title': 'Metropolis', 'year': '1927', 'score': '8.2'}
-{'title': 'A Separation', 'year': '2011', 'score': '8.2'}
-{'title': 'Rashomon', 'year': '1950', 'score': '8.2'}
-{'title': 'Indiana Jones and the Last Crusade', 'year': '1989', 'score': '8.2'}
-{'title': 'Up', 'year': '2009', 'score': '8.2'}
-{'title': 'Yojimbo', 'year': '1961', 'score': '8.2'}
-{'title': 'All About Eve', 'year': '1950', 'score': '8.2'}
-{'title': 'Batman Begins', 'year': '2005', 'score': '8.2'}
-{'title': 'Some Like It Hot', 'year': '1959', 'score': '8.2'}
-{'title': 'Unforgiven', 'year': '1992', 'score': '8.2'}
-{'title': 'The Treasure of the Sierra Madre', 'year': '1948', 'score': '8.2'}
-{'title': 'My Father and My Son', 'year': '2005', 'score': '8.2'}
-{'title': 'Downfall', 'year': '2004', 'score': '8.2'}
-{'title': 'Die Hard', 'year': '1988', 'score': '8.2'}
-{'title': 'Heat', 'year': '1995', 'score': '8.2'}
-{'title': 'Raging Bull', 'year': '1980', 'score': '8.2'}
-{'title': 'Three Billboards Outside Ebbing, Missouri', 'year': '2017', 'score': '8.2'}
-{'title': 'Ikiru', 'year': '1952', 'score': '8.2'}
-{'title': 'The Great Escape', 'year': '1963', 'score': '8.2'}
-{'title': 'The Third Man', 'year': '1949', 'score': '8.2'}
-{'title': 'Children of Heaven', 'year': '1997', 'score': '8.2'}
-{'title': 'Chinatown', 'year': '1974', 'score': '8.2'}
-{'title': "Pan's Labyrinth", 'year': '2006', 'score': '8.2'}
-{'title': 'Incendies', 'year': '2010', 'score': '8.2'}
-{'title': 'My Neighbor Totoro', 'year': '1988', 'score': '8.2'}
-{'title': 'Ran', 'year': '1985', 'score': '8.2'}
-{'title': 'Judgment at Nuremberg', 'year': '1961', 'score': '8.2'}
-{'title': 'The Secret in Their Eyes', 'year': '2009', 'score': '8.2'}
-{'title': 'The Gold Rush', 'year': '1925', 'score': '8.2'}
-{'title': "Howl's Moving Castle", 'year': '2004', 'score': '8.2'}
-{'title': 'The Bridge on the River Kwai', 'year': '1957', 'score': '8.2'}
-{'title': 'On the Waterfront', 'year': '1954', 'score': '8.2'}
-{'title': 'Inside Out', 'year': '2015', 'score': '8.2'}
-{'title': 'The Seventh Seal', 'year': '1957', 'score': '8.2'}
-{'title': 'Lock, Stock and Two Smoking Barrels', 'year': '1998', 'score': '8.2'}
-{'title': 'A Beautiful Mind', 'year': '2001', 'score': '8.2'}
-{'title': 'Casino', 'year': '1995', 'score': '8.2'}
-{'title': 'Room', 'year': '2015', 'score': '8.2'}
-{'title': 'Mr. Smith Goes to Washington', 'year': '1939', 'score': '8.2'}
-{'title': 'The Elephant Man', 'year': '1980', 'score': '8.1'}
-{'title': 'Sherlock Jr.', 'year': '1924', 'score': '8.1'}
-{'title': 'The Wolf of Wall Street', 'year': '2013', 'score': '8.1'}
-{'title': 'V for Vendetta', 'year': '2005', 'score': '8.1'}
-{'title': 'Blade Runner', 'year': '1982', 'score': '8.1'}
-{'title': 'Wild Strawberries', 'year': '1957', 'score': '8.1'}
-{'title': 'The General', 'year': '1926', 'score': '8.1'}
-{'title': 'Warrior', 'year': '2011', 'score': '8.1'}
-{'title': 'Dial M for Murder', 'year': '1954', 'score': '8.1'}
-{'title': 'Trainspotting', 'year': '1996', 'score': '8.1'}
-{'title': 'Gone with the Wind', 'year': '1939', 'score': '8.1'}
-{'title': 'Gran Torino', 'year': '2008', 'score': '8.1'}
-{'title': 'No Country for Old Men', 'year': '2007', 'score': '8.1'}
-{'title': 'The Sixth Sense', 'year': '1999', 'score': '8.1'}
-{'title': 'Fargo', 'year': '1996', 'score': '8.1'}
-{'title': 'The Deer Hunter', 'year': '1978', 'score': '8.1'}
-{'title': 'There Will Be Blood', 'year': '2007', 'score': '8.1'}
-{'title': 'The Thing', 'year': '1982', 'score': '8.1'}
-{'title': 'Finding Nemo', 'year': '2003', 'score': '8.1'}
-{'title': 'The Big Lebowski', 'year': '1998', 'score': '8.1'}
-{'title': 'Come and See', 'year': '1985', 'score': '8.1'}
-{'title': 'Sunrise', 'year': '1927', 'score': '8.1'}
-{'title': 'Cool Hand Luke', 'year': '1967', 'score': '8.1'}
-{'title': 'Tokyo Story', 'year': '1953', 'score': '8.1'}
-{'title': 'Kill Bill: Vol. 1', 'year': '2003', 'score': '8.1'}
-{'title': 'Rebecca', 'year': '1940', 'score': '8.1'}
-{'title': 'The Bandit', 'year': '1996', 'score': '8.1'}
-{'title': 'Andrei Rublev', 'year': '1966', 'score': '8.1'}
-{'title': 'Shutter Island', 'year': '2010', 'score': '8.1'}
-{'title': 'Hacksaw Ridge', 'year': '2016', 'score': '8.1'}
-{'title': 'How to Train Your Dragon', 'year': '2010', 'score': '8.1'}
-{'title': 'Blade Runner 2049', 'year': '2017', 'score': '8.1'}
-{'title': 'Mary and Max', 'year': '2009', 'score': '8.1'}
-{'title': 'Gone Girl', 'year': '2014', 'score': '8.1'}
-{'title': 'Into the Wild', 'year': '2007', 'score': '8.1'}
-{'title': 'Life of Brian', 'year': '1979', 'score': '8.1'}
-{'title': 'Wild Tales', 'year': '2014', 'score': '8.1'}
-{'title': 'Rang De Basanti', 'year': '2006', 'score': '8.1'}
-{'title': 'It Happened One Night', 'year': '1934', 'score': '8.1'}
-{'title': 'The Passion of Joan of Arc', 'year': '1928', 'score': '8.1'}
-{'title': 'Platoon', 'year': '1986', 'score': '8.1'}
-{'title': 'In the Name of the Father', 'year': '1993', 'score': '8.1'}
-{'title': 'Hotel Rwanda', 'year': '2004', 'score': '8.1'}
-{'title': 'Network', 'year': '1976', 'score': '8.1'}
-{'title': 'Stand by Me', 'year': '1986', 'score': '8.1'}
-{'title': 'The Grand Budapest Hotel', 'year': '2014', 'score': '8.1'}
-{'title': 'The Wages of Fear', 'year': '1953', 'score': '8.1'}
-{'title': 'Stalker', 'year': '1979', 'score': '8.1'}
-{'title': 'Ben-Hur', 'year': '1959', 'score': '8.1'}
-{'title': 'Jurassic Park', 'year': '1993', 'score': '8.1'}
-{'title': 'Rush', 'year': '2013', 'score': '8.1'}
-{'title': 'Persona', 'year': '1966', 'score': '8.1'}
-{'title': '12 Years a Slave', 'year': '2013', 'score': '8.1'}
-{'title': 'Memories of Murder', 'year': '2003', 'score': '8.1'}
-{'title': 'Million Dollar Baby', 'year': '2004', 'score': '8.1'}
-{'title': 'The Truman Show', 'year': '1998', 'score': '8.1'}
-{'title': 'The 400 Blows', 'year': '1959', 'score': '8.1'}
-{'title': 'Mad Max: Fury Road', 'year': '2015', 'score': '8.1'}
-{'title': 'Spotlight', 'year': '2015', 'score': '8.1'}
-{'title': 'Logan', 'year': '2017', 'score': '8.1'}
-{'title': 'Amores Perros', 'year': '2000', 'score': '8.1'}
-{'title': 'Before Sunrise', 'year': '1995', 'score': '8.1'}
-{'title': "Hachi: A Dog's Tale", 'year': '2009', 'score': '8.1'}
-{'title': 'Butch Cassidy and the Sundance Kid', 'year': '1969', 'score': '8.1'}
-{'title': 'La La Land', 'year': '2016', 'score': '8.1'}
-{'title': 'Nausicaä of the Valley of the Wind', 'year': '1984', 'score': '8.1'}
-{'title': 'The Princess Bride', 'year': '1987', 'score': '8.1'}
-{'title': 'Prisoners', 'year': '2013', 'score': '8.0'}
-{'title': 'A Wednesday', 'year': '2008', 'score': '8.0'}
-{'title': 'The Maltese Falcon', 'year': '1941', 'score': '8.0'}
-{'title': 'Catch Me If You Can', 'year': '2002', 'score': '8.0'}
-{'title': 'Harry Potter and the Deathly Hallows: Part 2', 'year': '2011', 'score': '8.0'}
-{'title': 'Rocky', 'year': '1976', 'score': '8.0'}
-{'title': 'The Nights of Cabiria', 'year': '1957', 'score': '8.0'}
-{'title': 'The Grapes of Wrath', 'year': '1940', 'score': '8.0'}
-{'title': 'Monsters, Inc.', 'year': '2001', 'score': '8.0'}
-{'title': 'Diabolique', 'year': '1955', 'score': '8.0'}
-{'title': 'Donnie Darko', 'year': '2001', 'score': '8.0'}
-{'title': 'Barry Lyndon', 'year': '1975', 'score': '8.0'}
-{'title': 'Gandhi', 'year': '1982', 'score': '8.0'}
-{'title': 'Paper Moon', 'year': '1973', 'score': '8.0'}
-{'title': 'Touch of Evil', 'year': '1958', 'score': '8.0'}
-{'title': 'The Terminator', 'year': '1984', 'score': '8.0'}
-{'title': 'La Haine', 'year': '1995', 'score': '8.0'}
-{'title': 'Groundhog Day', 'year': '1993', 'score': '8.0'}
-{'title': 'The Wizard of Oz', 'year': '1939', 'score': '8.0'}
-{'title': 'The Bourne Ultimatum', 'year': '2007', 'score': '8.0'}
-{'title': 'Annie Hall', 'year': '1977', 'score': '8.0'}
-{'title': 'Dead Poets Society', 'year': '1989', 'score': '8.0'}
-{'title': '8½', 'year': '1963', 'score': '8.0'}
-{'title': 'Jaws', 'year': '1975', 'score': '8.0'}
-{'title': 'The Help', 'year': '2011', 'score': '8.0'}
-{'title': 'In the Mood for Love', 'year': '2000', 'score': '8.0'}
-{'title': 'The Best Years of Our Lives', 'year': '1946', 'score': '8.0'}
-{'title': 'Infernal Affairs', 'year': '2002', 'score': '8.0'}
-{'title': 'Paris, Texas', 'year': '1984', 'score': '8.0'}
-{'title': 'Twelve Monkeys', 'year': '1995', 'score': '8.0'}
-{'title': 'Tangerines', 'year': '2013', 'score': '8.0'}
-{'title': 'Beauty and the Beast', 'year': '1991', 'score': '8.0'}
-{'title': 'Three Colors: Red', 'year': '1994', 'score': '8.0'}
-{'title': 'Before Sunset', 'year': '2004', 'score': '8.0'}
-{'title': 'Dog Day Afternoon', 'year': '1975', 'score': '8.0'}
-{'title': 'The Battle of Algiers', 'year': '1966', 'score': '8.0'}]
+MOVIES = [{'title': 'The Shawshank Redemption', 'score': '9.2', 'year': '1994'},
+{'title': 'The Godfather', 'score': '9.2', 'year': '1972'},
+{'title': 'The Godfather: Part II', 'score': '9.0', 'year': '1974'},
+{'title': 'The Dark Knight', 'score': '9.0', 'year': '2008'},
+{'title': '12 Angry Men', 'score': '8.9', 'year': '1957'},
+{'title': "Schindler's List", 'score': '8.9', 'year': '1993'},
+{'title': 'The Lord of the Rings: The Return of the King', 'score': '8.9', 'year': '2003'},
+{'title': 'Pulp Fiction', 'score': '8.9', 'year': '1994'},
+{'title': 'The Good, the Bad and the Ugly', 'score': '8.8', 'year': '1966'},
+{'title': 'Fight Club', 'score': '8.8', 'year': '1999'},
+{'title': 'The Lord of the Rings: The Fellowship of the Ring', 'score': '8.8', 'year': '2001'},
+{'title': 'Forrest Gump', 'score': '8.7', 'year': '1994'},
+{'title': 'Star Wars: Episode V - The Empire Strikes Back', 'score': '8.7', 'year': '1980'},
+{'title': 'Inception', 'score': '8.7', 'year': '2010'},
+{'title': 'The Lord of the Rings: The Two Towers', 'score': '8.7', 'year': '2002'},
+{'title': "One Flew Over the Cuckoo's Nest", 'score': '8.7', 'year': '1975'},
+{'title': 'Goodfellas', 'score': '8.7', 'year': '1990'},
+{'title': 'The Matrix', 'score': '8.6', 'year': '1999'},
+{'title': 'Seven Samurai', 'score': '8.6', 'year': '1954'},
+{'title': 'Star Wars: Episode IV - A New Hope', 'score': '8.6', 'year': '1977'},
+{'title': 'City of God', 'score': '8.6', 'year': '2002'},
+{'title': 'Se7en', 'score': '8.6', 'year': '1995'},
+{'title': 'The Silence of the Lambs', 'score': '8.6', 'year': '1991'},
+{'title': "It's a Wonderful Life", 'score': '8.6', 'year': '1946'},
+{'title': 'Life Is Beautiful', 'score': '8.6', 'year': '1997'},
+{'title': 'The Usual Suspects', 'score': '8.6', 'year': '1995'},
+{'title': 'Spirited Away', 'score': '8.5', 'year': '2001'},
+{'title': 'Léon: The Professional', 'score': '8.5', 'year': '1994'},
+{'title': 'Saving Private Ryan', 'score': '8.5', 'year': '1998'},
+{'title': 'Interstellar', 'score': '8.5', 'year': '2014'},
+{'title': 'The Green Mile', 'score': '8.5', 'year': '1999'},
+{'title': 'American History X', 'score': '8.5', 'year': '1998'},
+{'title': 'Psycho', 'score': '8.5', 'year': '1960'},
+{'title': 'Once Upon a Time in the West', 'score': '8.5', 'year': '1968'},
+{'title': 'City Lights', 'score': '8.5', 'year': '1931'},
+{'title': 'Casablanca', 'score': '8.5', 'year': '1942'},
+{'title': 'The Intouchables', 'score': '8.5', 'year': '2011'},
+{'title': 'Modern Times', 'score': '8.5', 'year': '1936'},
+{'title': 'The Pianist', 'score': '8.5', 'year': '2002'},
+{'title': 'The Departed', 'score': '8.5', 'year': '2006'},
+{'title': 'Raiders of the Lost Ark', 'score': '8.5', 'year': '1981'},
+{'title': 'Terminator 2', 'score': '8.5', 'year': '1991'},
+{'title': 'Rear Window', 'score': '8.5', 'year': '1954'},
+{'title': 'Back to the Future', 'score': '8.5', 'year': '1985'},
+{'title': 'Whiplash', 'score': '8.5', 'year': '2014'},
+{'title': 'Gladiator', 'score': '8.5', 'year': '2000'},
+{'title': 'The Lion King', 'score': '8.5', 'year': '1994'},
+{'title': 'The Prestige', 'score': '8.5', 'year': '2006'},
+{'title': 'Memento', 'score': '8.4', 'year': '2000'},
+{'title': 'Apocalypse Now', 'score': '8.4', 'year': '1979'},
+{'title': 'Alien', 'score': '8.4', 'year': '1979'},
+{'title': 'The Great Dictator', 'score': '8.4', 'year': '1940'},
+{'title': 'Cinema Paradiso', 'score': '8.4', 'year': '1988'},
+{'title': 'Sunset Boulevard', 'score': '8.4', 'year': '1950'},
+{'title': 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb', 'score': '8.4', 'year': '1964'},
+{'title': 'Grave of the Fireflies', 'score': '8.4', 'year': '1988'},
+{'title': 'The Lives of Others', 'score': '8.4', 'year': '2006'},
+{'title': 'Coco', 'score': '8.4', 'year': '2017'},
+{'title': 'Paths of Glory', 'score': '8.4', 'year': '1957'},
+{'title': 'The Shining', 'score': '8.4', 'year': '1980'},
+{'title': 'Django Unchained', 'score': '8.4', 'year': '2012'},
+{'title': 'Princess Mononoke', 'score': '8.4', 'year': '1997'},
+{'title': 'American Beauty', 'score': '8.4', 'year': '1999'},
+{'title': 'The Dark Knight Rises', 'score': '8.4', 'year': '2012'},
+{'title': 'Witness for the Prosecution', 'score': '8.4', 'year': '1957'},
+{'title': 'Oldboy', 'score': '8.4', 'year': '2003'},
+{'title': 'Aliens', 'score': '8.4', 'year': '1986'},
+{'title': 'Once Upon a Time in America', 'score': '8.3', 'year': '1984'},
+{'title': 'Das Boot', 'score': '8.3', 'year': '1981'},
+{'title': 'Citizen Kane', 'score': '8.3', 'year': '1941'},
+{'title': 'North by Northwest', 'score': '8.3', 'year': '1959'},
+{'title': 'Vertigo', 'score': '8.3', 'year': '1958'},
+{'title': 'Braveheart', 'score': '8.3', 'year': '1995'},
+{'title': 'Reservoir Dogs', 'score': '8.3', 'year': '1992'},
+{'title': 'Star Wars: Episode VI - Return of the Jedi', 'score': '8.3', 'year': '1983'},
+{'title': 'Dangal', 'score': '8.3', 'year': '2016'},
+{'title': 'M', 'score': '8.3', 'year': '1931'},
+{'title': 'Your Name', 'score': '8.3', 'year': '2016'},
+{'title': 'Requiem for a Dream', 'score': '8.3', 'year': '2000'},
+{'title': 'Like Stars on Earth', 'score': '8.3', 'year': '2007'},
+{'title': 'Amadeus', 'score': '8.3', 'year': '1984'},
+{'title': 'Amélie', 'score': '8.3', 'year': '2001'},
+{'title': 'A Clockwork Orange', 'score': '8.3', 'year': '1971'},
+{'title': 'Lawrence of Arabia', 'score': '8.3', 'year': '1962'},
+{'title': 'Eternal Sunshine of the Spotless Mind', 'score': '8.3', 'year': '2004'},
+{'title': 'Double Indemnity', 'score': '8.3', 'year': '1944'},
+{'title': 'Taxi Driver', 'score': '8.3', 'year': '1976'},
+{'title': "Singin' in the Rain", 'score': '8.3', 'year': '1952'},
+{'title': '2001: A Space Odyssey', 'score': '8.3', 'year': '1968'},
+{'title': '3 Idiots', 'score': '8.3', 'year': '2009'},
+{'title': 'To Kill a Mockingbird', 'score': '8.3', 'year': '1962'},
+{'title': 'Toy Story', 'score': '8.3', 'year': '1995'},
+{'title': 'Full Metal Jacket', 'score': '8.3', 'year': '1987'},
+{'title': 'Inglourious Basterds', 'score': '8.3', 'year': '2009'},
+{'title': 'The Sting', 'score': '8.3', 'year': '1973'},
+{'title': 'Bicycle Thieves', 'score': '8.3', 'year': '1948'},
+{'title': 'The Kid', 'score': '8.3', 'year': '1921'},
+{'title': 'Toy Story 3', 'score': '8.3', 'year': '2010'},
+{'title': 'Snatch', 'score': '8.3', 'year': '2000'},
+{'title': 'Good Will Hunting', 'score': '8.3', 'year': '1997'},
+{'title': 'The Hunt', 'score': '8.3', 'year': '2012'},
+{'title': 'Monty Python and the Holy Grail', 'score': '8.3', 'year': '1975'},
+{'title': 'For a Few Dollars More', 'score': '8.3', 'year': '1965'},
+{'title': 'Scarface', 'score': '8.2', 'year': '1983'},
+{'title': 'L.A. Confidential', 'score': '8.2', 'year': '1997'},
+{'title': 'The Apartment', 'score': '8.2', 'year': '1960'},
+{'title': 'Metropolis', 'score': '8.2', 'year': '1927'},
+{'title': 'A Separation', 'score': '8.2', 'year': '2011'},
+{'title': 'Rashomon', 'score': '8.2', 'year': '1950'},
+{'title': 'Indiana Jones and the Last Crusade', 'score': '8.2', 'year': '1989'},
+{'title': 'Up', 'score': '8.2', 'year': '2009'},
+{'title': 'Yojimbo', 'score': '8.2', 'year': '1961'},
+{'title': 'All About Eve', 'score': '8.2', 'year': '1950'},
+{'title': 'Batman Begins', 'score': '8.2', 'year': '2005'},
+{'title': 'Some Like It Hot', 'score': '8.2', 'year': '1959'},
+{'title': 'Unforgiven', 'score': '8.2', 'year': '1992'},
+{'title': 'The Treasure of the Sierra Madre', 'score': '8.2', 'year': '1948'},
+{'title': 'My Father and My Son', 'score': '8.2', 'year': '2005'},
+{'title': 'Downfall', 'score': '8.2', 'year': '2004'},
+{'title': 'Die Hard', 'score': '8.2', 'year': '1988'},
+{'title': 'Heat', 'score': '8.2', 'year': '1995'},
+{'title': 'Raging Bull', 'score': '8.2', 'year': '1980'},
+{'title': 'Three Billboards Outside Ebbing, Missouri', 'score': '8.2', 'year': '2017'},
+{'title': 'Ikiru', 'score': '8.2', 'year': '1952'},
+{'title': 'The Great Escape', 'score': '8.2', 'year': '1963'},
+{'title': 'The Third Man', 'score': '8.2', 'year': '1949'},
+{'title': 'Children of Heaven', 'score': '8.2', 'year': '1997'},
+{'title': 'Chinatown', 'score': '8.2', 'year': '1974'},
+{'title': "Pan's Labyrinth", 'score': '8.2', 'year': '2006'},
+{'title': 'Incendies', 'score': '8.2', 'year': '2010'},
+{'title': 'My Neighbor Totoro', 'score': '8.2', 'year': '1988'},
+{'title': 'Ran', 'score': '8.2', 'year': '1985'},
+{'title': 'Judgment at Nuremberg', 'score': '8.2', 'year': '1961'},
+{'title': 'The Secret in Their Eyes', 'score': '8.2', 'year': '2009'},
+{'title': 'The Gold Rush', 'score': '8.2', 'year': '1925'},
+{'title': "Howl's Moving Castle", 'score': '8.2', 'year': '2004'},
+{'title': 'The Bridge on the River Kwai', 'score': '8.2', 'year': '1957'},
+{'title': 'On the Waterfront', 'score': '8.2', 'year': '1954'},
+{'title': 'Inside Out', 'score': '8.2', 'year': '2015'},
+{'title': 'The Seventh Seal', 'score': '8.2', 'year': '1957'},
+{'title': 'Lock, Stock and Two Smoking Barrels', 'score': '8.2', 'year': '1998'},
+{'title': 'A Beautiful Mind', 'score': '8.2', 'year': '2001'},
+{'title': 'Casino', 'score': '8.2', 'year': '1995'},
+{'title': 'Room', 'score': '8.2', 'year': '2015'},
+{'title': 'Mr. Smith Goes to Washington', 'score': '8.2', 'year': '1939'},
+{'title': 'The Elephant Man', 'score': '8.1', 'year': '1980'},
+{'title': 'Sherlock Jr.', 'score': '8.1', 'year': '1924'},
+{'title': 'The Wolf of Wall Street', 'score': '8.1', 'year': '2013'},
+{'title': 'V for Vendetta', 'score': '8.1', 'year': '2005'},
+{'title': 'Blade Runner', 'score': '8.1', 'year': '1982'},
+{'title': 'Wild Strawberries', 'score': '8.1', 'year': '1957'},
+{'title': 'The General', 'score': '8.1', 'year': '1926'},
+{'title': 'Warrior', 'score': '8.1', 'year': '2011'},
+{'title': 'Dial M for Murder', 'score': '8.1', 'year': '1954'},
+{'title': 'Trainspotting', 'score': '8.1', 'year': '1996'},
+{'title': 'Gone with the Wind', 'score': '8.1', 'year': '1939'},
+{'title': 'Gran Torino', 'score': '8.1', 'year': '2008'},
+{'title': 'No Country for Old Men', 'score': '8.1', 'year': '2007'},
+{'title': 'The Sixth Sense', 'score': '8.1', 'year': '1999'},
+{'title': 'Fargo', 'score': '8.1', 'year': '1996'},
+{'title': 'The Deer Hunter', 'score': '8.1', 'year': '1978'},
+{'title': 'There Will Be Blood', 'score': '8.1', 'year': '2007'},
+{'title': 'The Thing', 'score': '8.1', 'year': '1982'},
+{'title': 'Finding Nemo', 'score': '8.1', 'year': '2003'},
+{'title': 'The Big Lebowski', 'score': '8.1', 'year': '1998'},
+{'title': 'Come and See', 'score': '8.1', 'year': '1985'},
+{'title': 'Sunrise', 'score': '8.1', 'year': '1927'},
+{'title': 'Cool Hand Luke', 'score': '8.1', 'year': '1967'},
+{'title': 'Tokyo Story', 'score': '8.1', 'year': '1953'},
+{'title': 'Kill Bill: Vol. 1', 'score': '8.1', 'year': '2003'},
+{'title': 'Rebecca', 'score': '8.1', 'year': '1940'},
+{'title': 'The Bandit', 'score': '8.1', 'year': '1996'},
+{'title': 'Andrei Rublev', 'score': '8.1', 'year': '1966'},
+{'title': 'Shutter Island', 'score': '8.1', 'year': '2010'},
+{'title': 'Hacksaw Ridge', 'score': '8.1', 'year': '2016'},
+{'title': 'How to Train Your Dragon', 'score': '8.1', 'year': '2010'},
+{'title': 'Blade Runner 2049', 'score': '8.1', 'year': '2017'},
+{'title': 'Mary and Max', 'score': '8.1', 'year': '2009'},
+{'title': 'Gone Girl', 'score': '8.1', 'year': '2014'},
+{'title': 'Into the Wild', 'score': '8.1', 'year': '2007'},
+{'title': 'Life of Brian', 'score': '8.1', 'year': '1979'},
+{'title': 'Wild Tales', 'score': '8.1', 'year': '2014'},
+{'title': 'Rang De Basanti', 'score': '8.1', 'year': '2006'},
+{'title': 'It Happened One Night', 'score': '8.1', 'year': '1934'},
+{'title': 'The Passion of Joan of Arc', 'score': '8.1', 'year': '1928'},
+{'title': 'Platoon', 'score': '8.1', 'year': '1986'},
+{'title': 'In the Name of the Father', 'score': '8.1', 'year': '1993'},
+{'title': 'Hotel Rwanda', 'score': '8.1', 'year': '2004'},
+{'title': 'Network', 'score': '8.1', 'year': '1976'},
+{'title': 'Stand by Me', 'score': '8.1', 'year': '1986'},
+{'title': 'The Grand Budapest Hotel', 'score': '8.1', 'year': '2014'},
+{'title': 'The Wages of Fear', 'score': '8.1', 'year': '1953'},
+{'title': 'Stalker', 'score': '8.1', 'year': '1979'},
+{'title': 'Ben-Hur', 'score': '8.1', 'year': '1959'},
+{'title': 'Jurassic Park', 'score': '8.1', 'year': '1993'},
+{'title': 'Rush', 'score': '8.1', 'year': '2013'},
+{'title': 'Persona', 'score': '8.1', 'year': '1966'},
+{'title': '12 Years a Slave', 'score': '8.1', 'year': '2013'},
+{'title': 'Memories of Murder', 'score': '8.1', 'year': '2003'},
+{'title': 'Million Dollar Baby', 'score': '8.1', 'year': '2004'},
+{'title': 'The Truman Show', 'score': '8.1', 'year': '1998'},
+{'title': 'The 400 Blows', 'score': '8.1', 'year': '1959'},
+{'title': 'Mad Max: Fury Road', 'score': '8.1', 'year': '2015'},
+{'title': 'Spotlight', 'score': '8.1', 'year': '2015'},
+{'title': 'Logan', 'score': '8.1', 'year': '2017'},
+{'title': 'Amores Perros', 'score': '8.1', 'year': '2000'},
+{'title': 'Before Sunrise', 'score': '8.1', 'year': '1995'},
+{'title': "Hachi: A Dog's Tale", 'score': '8.1', 'year': '2009'},
+{'title': 'Butch Cassidy and the Sundance Kid', 'score': '8.1', 'year': '1969'},
+{'title': 'La La Land', 'score': '8.1', 'year': '2016'},
+{'title': 'Nausicaä of the Valley of the Wind', 'score': '8.1', 'year': '1984'},
+{'title': 'The Princess Bride', 'score': '8.1', 'year': '1987'},
+{'title': 'Prisoners', 'score': '8.0', 'year': '2013'},
+{'title': 'A Wednesday', 'score': '8.0', 'year': '2008'},
+{'title': 'The Maltese Falcon', 'score': '8.0', 'year': '1941'},
+{'title': 'Catch Me If You Can', 'score': '8.0', 'year': '2002'},
+{'title': 'Harry Potter and the Deathly Hallows: Part 2', 'score': '8.0', 'year': '2011'},
+{'title': 'Rocky', 'score': '8.0', 'year': '1976'},
+{'title': 'The Nights of Cabiria', 'score': '8.0', 'year': '1957'},
+{'title': 'The Grapes of Wrath', 'score': '8.0', 'year': '1940'},
+{'title': 'Monsters, Inc.', 'score': '8.0', 'year': '2001'},
+{'title': 'Diabolique', 'score': '8.0', 'year': '1955'},
+{'title': 'Donnie Darko', 'score': '8.0', 'year': '2001'},
+{'title': 'Barry Lyndon', 'score': '8.0', 'year': '1975'},
+{'title': 'Gandhi', 'score': '8.0', 'year': '1982'},
+{'title': 'Paper Moon', 'score': '8.0', 'year': '1973'},
+{'title': 'Touch of Evil', 'score': '8.0', 'year': '1958'},
+{'title': 'The Terminator', 'score': '8.0', 'year': '1984'},
+{'title': 'La Haine', 'score': '8.0', 'year': '1995'},
+{'title': 'Groundhog Day', 'score': '8.0', 'year': '1993'},
+{'title': 'The Wizard of Oz', 'score': '8.0', 'year': '1939'},
+{'title': 'The Bourne Ultimatum', 'score': '8.0', 'year': '2007'},
+{'title': 'Annie Hall', 'score': '8.0', 'year': '1977'},
+{'title': 'Dead Poets Society', 'score': '8.0', 'year': '1989'},
+{'title': '8½', 'score': '8.0', 'year': '1963'},
+{'title': 'Jaws', 'score': '8.0', 'year': '1975'},
+{'title': 'The Help', 'score': '8.0', 'year': '2011'},
+{'title': 'In the Mood for Love', 'score': '8.0', 'year': '2000'},
+{'title': 'The Best Years of Our Lives', 'score': '8.0', 'year': '1946'},
+{'title': 'Infernal Affairs', 'score': '8.0', 'year': '2002'},
+{'title': 'Paris, Texas', 'score': '8.0', 'year': '1984'},
+{'title': 'Twelve Monkeys', 'score': '8.0', 'year': '1995'},
+{'title': 'Tangerines', 'score': '8.0', 'year': '2013'},
+{'title': 'Beauty and the Beast', 'score': '8.0', 'year': '1991'},
+{'title': 'Three Colors: Red', 'score': '8.0', 'year': '1994'},
+{'title': 'Before Sunset', 'score': '8.0', 'year': '2004'},
+{'title': 'Dog Day Afternoon', 'score': '8.0', 'year': '1975'},
+{'title': 'The Battle of Algiers', 'score': '8.0', 'year': '1966'}]
 
 APIT = [ 
 {'name' : 'year', 'is_num' : True},

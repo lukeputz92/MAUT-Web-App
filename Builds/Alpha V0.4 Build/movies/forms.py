@@ -2,10 +2,10 @@ from django import forms
 
 class MovieCriteriaForm(forms.Form):
 	def __init__(self, *args, **vargs):
-        super(CollegeCriteriaForm,self).__init__(*args,**vargs)
-        for i in range(len(APIT)):
-                field = forms.BooleanField(label=APIT[i]['name'],required=False)
-                self.fields[str(i)] = field
+		super(CollegeCriteriaForm,self).__init__(*args,**vargs)
+		for i in range(len(APIT)):
+			field = forms.BooleanField(label=APIT[i]['name'],required=False)
+			self.fields[str(i)] = field
 
 class MovieCriteriaWeightForm(forms.Form):
     def __init__(self, *args, **vargs):
