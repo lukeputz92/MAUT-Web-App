@@ -69,7 +69,7 @@ def movie_scores(request):
 		x = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][0][2]) * request.session['criteria_list'][0][1] / 100
 		y = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][1][2]) * request.session['criteria_list'][1][1] / 100
 		movieList.append((m['title'],round(x+y,2)))
-
+		movieList = sorted(movieList, key = lambda x: x[1],reverse=True)
 	request.session['movieList'] = movieList
 	print(movieList)
 	return render(request, 'movies/movie_results.html', {"request" : request, "movieList" : movieList, "length" : len(movieList)})
