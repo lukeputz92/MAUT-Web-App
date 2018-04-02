@@ -1,4 +1,28 @@
+<!doctype html>
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 500px;
+	height: 325px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightgreen;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <br>
 <script>
 var warnMessage = "You have unsaved changes on this page!";
@@ -27,9 +51,9 @@ $(document).ready(function() {
 <br>
 <br>
 <div>
-	<div style="text-align:center;">
+	<div class="bordered">
 		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text style="font-family:Georgia;font-size:140%;"><b>HINT: When using the above filter make sure that you use correct inputs.</b></text>
+		<text class="font_style"><b>When using the above filter make sure that you use correct inputs.</b></text>
 		<p>Example being ZIC code. '00ad0' is not a ZIP code but '04951' is one.</p>
 	</div>
 </div>

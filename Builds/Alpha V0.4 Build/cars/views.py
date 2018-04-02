@@ -20,7 +20,7 @@ def cars(request):
     else:
         carsSearchForm = CarsSearchForm()
 
-    return render(request, 'cars/index.html', {'carsSearchForm': carsSearchForm} )
+    return render(request, 'recipes/index.html', {'carsSearchForm': carsSearchForm} )
 
 
 def cars_criteria(request):
@@ -35,7 +35,7 @@ def cars_criteria(request):
 
             request.session['criteria_list'] = criteria_options
 
-            return HttpResponseRedirect('/cars/criteria_weight/')
+            return HttpResponseRedirect('/recipes/criteria_weight/')
     else:
         carsCriteriaForm = CarsCriteriaForm()
 
@@ -58,7 +58,7 @@ def cars_criteria_weight(request):
 
             request.session['criteria_list'] = criteria_list
 
-            return HttpResponseRedirect('/cars/auto_scores/')
+            return HttpResponseRedirect('/recipes/auto_scores/')
     else:
         carsCriteriaWeightForm = CarsCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
 
@@ -74,7 +74,7 @@ def cars_auto_scores(request):
                 criteria_list[i] = (criteria_list[i][0], criteria_list[i][1], carsAutoScoreForm.cleaned_data[str(i)])
             request.session['criteria_list'] = criteria_list
 
-            return HttpResponseRedirect('/cars/scores/')
+            return HttpResponseRedirect('/recipes/scores/')
 
     else:
         carsAutoScoreForm = CarsAutoScoreForm(criteria_list = [i[0] for i in request.session['criteria_list']])
@@ -197,7 +197,7 @@ def cars_scores(request):
                 request.session['remaining'] = request.session['remaining'] - 1
 
             else:
-                return HttpResponseRedirect('/cars/results/')
+                return HttpResponseRedirect('/recipes/results/')
 
     else:
         request.session['remaining'] = len(request.session['criteria_list'])
@@ -304,7 +304,7 @@ def cars_scores(request):
                 carsScoreForm = CarsScoreForm(the_option_list=option_list_names)
 
         if request.session['remaining'] <= 0:
-            return HttpResponseRedirect('/cars/results/')
+            return HttpResponseRedirect('/recipes/results/')
 
         request.session['carss'] = carss
         request.session['option_list'] = option_list

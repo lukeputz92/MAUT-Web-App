@@ -11,14 +11,40 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	margin: auto 2em;
+	float:right;
+	width: 700px;
+	height: 200px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightgreen;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+.font_style_under{
+	family:Georgia;
+	size: 40%;
+	color: black;
+}
+</style>
+
 <br>
-<div class="col-12">
-	<div class="userForms">
+<div  class="userForms" style="float:left; margin: auto 2em;">
 		<h2> College Criteria Selection </h2>
 		<p> Please select criteria you wish to use to make your decision. </p>
 		<form action="" method="post">
 			{% csrf_token %}
-			<div>
+			<div class="col-10">
 				<table class="table">
 					{% for form in collegeCriteriaForm %}
 					<tr>
@@ -30,16 +56,14 @@ $(document).ready(function() {
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage = null" type="submit">Submit</button>
 		</form>
-	</div>
 </div>
 <br>
 <br>
-<br>
 <div>
-	<div style="text-align:center;">
+	<div class="bordered">
 		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text style="font-family:Georgia;font-size:140%;"><b>HINT: What you click will appear as a criteria BUT the more you select the better the results will be</b></text>
-		<p style="font-family:Georgia;">When selecting the items above, many users will want to be quick about it. 
+		<text class="font_style"><b>What you click will appear as a criteria BUT the more you select the better the results will be</b></text>
+		<p class="font_style_under">When selecting the items above, many users will want to be quick about it. 
 		Remember this is your future so being quick isn't the best idea. Take some time to figure out what is important to you so the decision will be more personal.</p>
 	</div>
 </div>
