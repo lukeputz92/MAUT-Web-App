@@ -64,11 +64,12 @@ def auto_scorer(num,max,min,asc):
 
 def movie_scores(request):
 	movs = MOVIES
+	movieList = []
 	for m in movs:
 		x = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][0][2]) * request.session['criteria_list'][0][1] / 100
 		y = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][1][2]) * request.session['criteria_list'][1][1] / 100
-		m['finalScore'] = round(x+y,2)
-	movieList = movs
+		movieList.append((m['title'],round(x+y,2)))
+
 	request.session['movieList'] = movieList
 	print(movieList)
 	return render(request, 'movies/movie_results.html', {"request" : request, "movieList" : movieList, "length" : len(movieList)})
