@@ -1,4 +1,16 @@
 {% extends 'base/base.html' %} {% block content %}
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
 <style>
   #centerer {
     text-align: center;
@@ -22,7 +34,7 @@
   <div class="results">
     <div id=centerer>
       <h2> Restaurant Results </h2>
-      <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/west-green-ohio-university-robert-powell.jpg">
+     <!-- <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/west-green-ohio-university-robert-powell.jpg"> -->
     </div>
     <br>
     <!-- Marketing messaging and featurettes
@@ -77,13 +89,30 @@
         </tr>
         {% endif %} {% endfor %}
       </table>
-      {% endif %} {% if request.user.is_authenticated %} {% if request.session.saved %}
-      <b> Decision saved successfully! </b> {% else %}
-      <form action="" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Save">
-      </form>
-      {% endif %} {% endif %}
+  {% if request.session.saved %}
+    <script>
+      warnMessage = null;
+    </script>
+    <div id=centerer>
+    <b> Decision saved successfully! </b> 
+    </div>
+    {% else %}
+    {% if request.user.is_authenticated %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <div id=centerer>
+        <button class="btn btn-lg btn-primary" onclick="warnMessage=null" type="submit">Save</button>
+      </div>
+    </form>
+    {% else %}
+      <div id=centerer>
+        You must be logged in to save this decision.
+      </div>
+      <div id=centerer>
+      <a onclick="warnMessage=null" class ="btn btn-lg btn-primary" href="{% url 'login' %}?next={% firstof request.path '/' %}">Login</a>
+      </div>
+    {% endif %}
+    {% endif %}
     </div>
   </div>
 

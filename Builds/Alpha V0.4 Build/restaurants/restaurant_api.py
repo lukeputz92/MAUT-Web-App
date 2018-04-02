@@ -18,6 +18,7 @@ Each criteria option is represented as a dictionary with the following informati
 {
 'name' : User-friendly string with name of the criteria
 'api_variable' : String containing the info that needs to be appended to the query to get that criteria info
+'api_variable2' : Optional string if the desired value is within an additional dictionary
 'units' : String saying how that criteria is measured (for example tuition would be dollars, distance would be miles/inches/etc)
 'is_num' : Bool saying whether the criteria is measured as a number. Used to see if automatic scoring is possible.
 'needs_table' : Bool saying whether or not the information in the database is the actual information
@@ -26,6 +27,7 @@ Each criteria option is represented as a dictionary with the following informati
                 and 3 as other. Because of this you might need a table hardcoded here to translate the 1 to 2 year and 2
                 to 4 year and 3 to other.
 'table' : Dictionary mapping the criteria's database value to its actual value. Only used if needs_table is true
+'is_list' : Bool saying whether ot not the information returned is actually a list (contained in a string separated by commas)
 }
 FOR COPY AND PASTE:
     {
@@ -35,6 +37,7 @@ FOR COPY AND PASTE:
     "is_num" : ,
     "needs_table" : ,
     "table" : ,
+    "is_list" : ,
     },
 '''
 
@@ -45,6 +48,7 @@ APIT = [
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
+    "is_list" : False,
     },
     {
     "name" : "User Rating",
@@ -53,6 +57,36 @@ APIT = [
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
+    "is_list" : False,
+    },
+    {
+    "name" : "Is Delivering Now",
+    "api_variable" : "is_delivering_now",
+    "units" : "",
+    "is_num" : False,
+    "needs_table" : True,
+    "table" : {
+        0 : "restaurant isn't delivering right now",
+        1 : "restaurant is delivering right now"
+    },
+    "is_list" : False,
+    },
+
+    {
+    "name" : "Currency",
+    "api_variable" : "currency",
+    "units" : "",
+    "is_num" : False,
+    "needs_table" : False,
+    "is_list" : False,
+    },
+    {
+    "name" : "Cuisine Type",
+    "api_variable" : "cuisines",
+    "units" : "",
+    "is_num" : False,
+    "needs_table" : False,
+    "is_list" : True,
     },
 ]
 

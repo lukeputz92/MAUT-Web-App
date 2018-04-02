@@ -1,3 +1,4 @@
+
 """MAUT URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,12 +22,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'',include('decisions.urls')),
     url(r'^college/',include('colleges.urls')),
-    url(r'books/',include('books.urls')),
+    url(r'recipes/',include('cars.urls')),
     url(r'restaurants/',include('restaurants.urls')),
-    url(r'^oauth/', include('social_django.urls', namespace='social')),  
     url(r'^admin/', include(admin.site.urls)),
-	url(r'tutorial/',include('tutorial.urls')),
-	#url(r'example/',include('example.urls')),
+    url(r'tutorial/',include('tutorial.urls')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

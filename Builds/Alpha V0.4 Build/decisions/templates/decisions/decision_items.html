@@ -1,7 +1,42 @@
 {% extends 'base/base.html' %} {% block content %}
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 4em;
+	float: right;
+	width: 600px;
+	height: 200px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: thistle;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
 
 <br>
-<div class="userForms">
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
+
+<div class="userForms" style="float:left; margin: auto 2em;">
+
 	<form action="" method="post">
 		{% csrf_token %}
 		<div class=col-10>
@@ -13,7 +48,7 @@
 			{% endfor %} {{ itemFormSet.management_form }}
 			<br>
 			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
-			<button class="btn btn-lg btn-primary" style="float: right;" type="submit">Submit</button>
+			<button class="btn btn-lg btn-primary" style="float: right;" onclick="warnMessage=null" type="submit">Submit</button>
 		</div>
 	</form>
 
@@ -260,5 +295,12 @@
 		}
 	</script>
 </div>
-
+<br>
+<div>
+	<div class="bordered" >
+		<header style="font-size:140%; color: black;"><strong>Decide on items within your category you picked</strong></header>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>Put in the names of the items you want to decide on. For example I want to decide on Harry Potter books. So I want to add in items like prisoner of azkaban, or half-blood prince.</b></text><br>
+	</div>
+</div>
 {% endblock %}

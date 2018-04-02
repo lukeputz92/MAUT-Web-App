@@ -153,20 +153,23 @@ def scores(request):
 def results(request):
     #Saves the data to the database
     if request.method == 'POST':
-        user = User.objects.get(username=request.user.username)
-        profile = UserProfile.objects.get(user=user)
-        newDecision = Decide(user_profile = profile, decisionName = request.session['decisionName'])
-        newDecision.save()
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user.username)
+            profile = UserProfile.objects.get(user=user)
+            newDecision = Decide(user_profile = profile, decisionName = request.session['decisionName'])
+            newDecision.save()
 
-        itemList = request.session['itemList']
-        criteriaList = request.session['criteriaList']
+            itemList = request.session['itemList']
+            criteriaList = request.session['criteriaList']
 
-        for item in itemList:
-            newItem = Item(itemName = item[0], itemScore = item[1], decision = newDecision)
-            newItem.save()
-        for criteria in criteriaList:
-            newCriteria = Criteria(criteriaName = criteria[0], criteriaWeight = criteria[1], decision = newDecision)
-            newCriteria.save()
+            for item in itemList:
+                newItem = Item(itemName = item[0], itemScore = item[1], decision = newDecision)
+                newItem.save()
+            for criteria in criteriaList:
+                newCriteria = Criteria(criteriaName = criteria[0], criteriaWeight = criteria[1], decision = newDecision)
+                newCriteria.save()
+        else:
+            return HttpResponseRedirect('/login/')
 
         request.session['saved'] = True
     else:
@@ -434,6 +437,7 @@ def updateDecision(request, pk):
     request.session["itemList"] = itemList
     request.session["criteriaList"] = criteriaList
 
+<<<<<<< HEAD
     return decision_index(request, autoFill = True)
 	
 	
@@ -794,3 +798,6 @@ def college_results(request):
         request.session['colleges'] = collegeList
 
     return render(request, 'college/college_results.html', {"request" : request, "collegeList" : collegeList, "length" : len(collegeList)})
+=======
+    return decision_index(request, autoFill = True)
+>>>>>>> master

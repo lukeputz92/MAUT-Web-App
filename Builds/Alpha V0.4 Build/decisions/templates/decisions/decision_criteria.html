@@ -1,6 +1,42 @@
 {% extends 'base/base.html' %} {% block content %}
+
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
+
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 600px;
+	height: 200px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: thistle;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <br>
-<div class="userForms">
+<div class="userForms" style="float:left;">
   <div class="col-12">
     <form action="" method="post">
       {% csrf_token %}
@@ -20,11 +56,19 @@
           <br>
           <p>Remaining Weight: <input type="text" value="100" id="remaining" onblur="calculate()" readonly> </p>
           <button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
-          <button class="btn btn-lg btn-primary" style="float: right;" type="submit">Submit</button>
+          <button class="btn btn-lg btn-primary" style="float: right;" onclick="warnMessage=null" type="submit">Submit</button>
         </div>
     </form>
     </div>
   </div>
+</div>
+
+<div>
+	<div class="bordered" >
+		<header style="font-size:150%; color: black;"><strong>Sub-category of what you are deciding on</strong></header>
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>The criteria you want to use for this is something you find important on deciding. Going with the example previous, I would want to decide on user rating or length of book to differentiate.</b></text><br>
+	</div>
 </div>
 
 <!-- including jquery plugin -->

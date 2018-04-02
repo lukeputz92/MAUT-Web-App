@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'books',
     'restaurants',
 	'tutorial',
+    'cars',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
 )
 
 ROOT_URLCONF = 'MAUT.urls'
@@ -76,8 +78,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                 'social_django.context_processors.backends', 
                 'social_django.context_processors.login_redirect', 
+=======
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
+>>>>>>> master
             ],
         },
     },
@@ -92,7 +99,13 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'MAUT.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
 
+    'django.contrib.auth.backends.ModelBackend',
+)
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -135,8 +148,11 @@ EMAIL_HOST_PASSWORD = 'calebsucksdick'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+<<<<<<< HEAD
 CLICKY_SITE_ID = 'maut'
 
+=======
+>>>>>>> master
 SOCIAL_AUTH_GITHUB_KEY = '435edbaa28740e017d42'
 SOCIAL_AUTH_GITHUB_SECRET = 'fd249117f7f1c76865cc20093b1469d37edcdb61'
 

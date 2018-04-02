@@ -1,7 +1,33 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+  <!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+  th,
+  td {
+    padding: 15px;
+  }
+.bordered{
+	box-sizing: border-box;
+	margin: auto;
+	width: 650px;
+	height: 200px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: aquamarine;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
 <br>
-<div class="userForms" style="margin: auto;">
-	<h2> Make a decision on restaurants </h2>
+<div class="userForms" style="margin: auto 2em; float: left;">
+	<h2> Make a decision on Restaurants </h2>
 	<p> Narrow down some of your options by location. </p>
 	<form action="" method="post">
 		{% csrf_token %}
@@ -11,6 +37,16 @@
 		<br>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 	</form>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div class ="bordered">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%; color: black;"><b>Want more resources to help you pick? <a style="color: red;" href="https://delishably.com/dining-out/how-to-choose-a-restaurant-2">click here</a>.</b></text>
+		<p style="font-family:Georgia; color: black;">Choosing the right restaurant is just a click away!</p>
+	</div>
 </div>
 
 {% endblock %}

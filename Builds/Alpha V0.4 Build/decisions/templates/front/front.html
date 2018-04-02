@@ -6,6 +6,7 @@
 -->
 
 <!doctype html>
+    <link rel="icon" href = "../../static/Mico.ico">
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -31,12 +32,88 @@
         <link rel="stylesheet" href="../../static/tmp2/assets/css/responsive.css" />
 
         <script src="../../static/tmp2/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        {% block title %}<title>MAUT- Multi Attribute Utility Theory </title> {% endblock %}
+<!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <!-- CDNS for JS, JPOPPER, JQUERY -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <!-- Custom styles for this template -->
+        <link href="../../static/css/starter-template.css" rel="stylesheet">
+        <link href="../../static/css/signin.css" rel="stylesheet">
+        <link href="../../static/css/1/index.css" rel="stylesheet">
+        <script type="text/javascript" src="../../static/static_jquery/js/jquery.js"></script>
+        <link href="../../static/css/carousel.css" rel="stylesheet">
+
     </head>
+	
+	<!--Style format: DO NOT CHANGE YAH DICK HEAD! Yeah you!! The one looking at the HTML code. Don't do it! OR do it, I am just a comment.-->
+	<style>
+	.bordered_custom{
+		width: 240px;
+		height: 350px;
+		padding: 20px;
+		border-radius: 8px;
+		border: 10px double lightgreen;
+		background-color: white;
+	}
+	.bordered_api{
+		width: 240px;
+		height: 350px;
+		padding: 20px;
+		border-radius: 8px;
+		border: 10px double dodgerblue;
+		background-color: white;
+	}
+	</style>
+	
     <body>
-		
-		{% extends 'base/base.html' %}
-		{% block content %}
-		
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="{%url 'home' %}">MAUT</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto ">
+      {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'UserDecisionView' %}">New Decision</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'userHome' %}">Profile<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'logout' %}?next=/login/">Logout</a>
+          </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'index' %}">New Decision <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'login' %}">Sign In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'register' %}">Create Account</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'contact' %}"> Contact Us </a>
+      </li>
+
+      <!-- deprecated code from Luke's pointless stuff
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="{% url 'contact' %}"> Contact Us </a>
+        </div>
+      </li>
+      -->
+    </ul>
+  </div>
+</nav>		
         <!--Home page style-->
         <header id="home" class="home">
             <div class="overlay-fluid-block">
@@ -63,14 +140,14 @@
 
                         <div class="col-sm-6">
                             <div class="single_features_left text-center">
-                                <img src="../../static/tmp2/assets/images/feature-2.jpg" alt="" />
+                                <img src="../../static/tmp2/assets/images/stok_img.jpg" alt="" />
                             </div>
                         </div>
 
                         <div class="col-sm-6 margin-top-60">
                             <div class="single_features_right ">
                                 <h2>WHAT DOES IT DO?</h2>
-                                <p>MAUT reads in from hosted API's (Application Programming Interface). Then the user takes decides what is important to them. 
+                                <p>MAUT reads in from hosted API's (Application Programming Interface). Then the user takes what is important to them. 
 								By applying scores to what is important it will objectively rank what you "should" consider based on what is important to you.
 								Click the button below for step by step instructions.</p>
                                 <div class="features_buttom">
@@ -102,7 +179,7 @@
                         </div>
                          <div class="col-sm-6">
                             <div class="single_features_left text-center">
-                                <img src="../../static/tmp2/assets/images/feature-1.jpg" alt="" />
+                                <img src="../../static/tmp2/assets/images/stock_img2.jpg" alt="" />
                             </div>
                         </div>
 
@@ -110,68 +187,6 @@
                 </div>
             </div>
         </section><!--End of Features 2 Section -->
-
-
-        <!-- <section id="service" class="service2 sections lightbg"> -->
-            <!-- <div class="container"> -->
-                <!-- <div class="row"> -->
-                    <!-- <div class="main_service2"> -->
-                        <!-- <div class="head_title text-center"> -->
-                            <!-- <h2>SERVICES WE PROVIDE</h2> -->
-                            <!-- <p>condimentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p> -->
-                        <!-- </div> -->
-
-                        <!-- <div class="service_content"> -->
-                            <!-- <div class="col-md-6 col-sm-6"> -->
-                                <!-- <div class="single_service2"> -->
-                                    <!-- <div class="single_service_left"> -->
-                                        <!-- <img src="../../static/tmp2/assets/images/flaticon1.png" alt="" /> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="single_service_right"> -->
-                                        <!-- <h2>Branding</h2> -->
-                                        <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.</p> -->
-                                    <!-- </div> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-md-6 col-sm-6"> -->
-                                <!-- <div class="single_service2"> -->
-                                    <!-- <div class="single_service_left"> -->
-                                       <!-- <img src="../../static/tmp2/assets/images/flaticon2.png" alt="" /> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="single_service_right"> -->
-                                        <!-- <h2>Branding</h2> -->
-                                        <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.</p> -->
-                                    <!-- </div> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-md-6 col-sm-6"> -->
-                                <!-- <div class="single_service2"> -->
-                                    <!-- <div class="single_service_left"> -->
-                                      <!-- <img src="../../static/tmp2/assets/images/flaticon3.png" alt="" /> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="single_service_right"> -->
-                                        <!-- <h2>Branding</h2> -->
-                                        <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.</p> -->
-                                    <!-- </div> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                            <!-- <div class="col-md-6 col-sm-6"> -->
-                                <!-- <div class="single_service2"> -->
-                                    <!-- <div class="single_service_left"> -->
-                                        <!-- <img src="../../static/tmp2/assets/images/flaticon4.png" alt="" /> -->
-                                    <!-- </div> -->
-                                    <!-- <div class="single_service_right"> -->
-                                        <!-- <h2>Branding</h2> -->
-                                        <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.</p> -->
-                                    <!-- </div> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
-                        <!-- </div> -->
-                    <!-- </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
-        <!-- </section><!-- End of Service2 Section -->		 -->
-
 
 
         <!-- Sections -->
@@ -266,7 +281,47 @@
                             </li>
                         </ul> <!-- .cd-pricing-wrapper -->
                     </li>
+						
+					<li>
+                        <ul class="cd-pricing-wrapper">
+                            <li data-type="monthly" class="is-visible">
+                                <header class="cd-pricing-header">
+                                    <h2>Recipe API</h2>
+                                </header> <!-- .cd-pricing-header -->
 
+                                <div class="cd-pricing-body">
+                                    <ul class="cd-pricing-features">
+                                        <img src="../../static/tmp2/assets/images/stock_img3.jpg" alt="" style="width: 100%; height: 100%" />
+                                    </ul>
+                                </div> <!-- .cd-pricing-body -->
+
+                                <footer class="cd-pricing-footer">
+                                    <a class="cd-select" href="{% url 'cars_criteria' %}"><font size="+1"><strong>Recipe API</strong></font></a>
+                                </footer>  <!-- .cd-pricing-footer -->
+                            </li>
+
+                            <li data-type="yearly" class="is-hidden">
+                                <header class="cd-pricing-header">
+                                    <h2>Recipe Details</h2>
+                                </header> <!-- .cd-pricing-header -->
+
+                                <div class="cd-pricing-body">
+                                    <ul class="cd-pricing-features">
+                                        <p>This wonderful API allows you to use a slider to adjust different aspects of flavour which will allow you to select different recipes based off that. An example would be "Something with high spice, low salt, and medium bitter" would return recipes that match those levels.</p>
+                                    </ul>
+                                </div> <!-- .cd-pricing-body -->
+
+                                <footer class="cd-pricing-footer">
+                                    <a class="cd-select" href="{% url 'cars_criteria' %}"><font size="+1"><strong>Recipe API</strong></font></a>
+                                </footer>  <!-- .cd-pricing-footer -->
+                            </li>
+                        </ul> <!-- .cd-pricing-wrapper -->
+                    </li>
+					</ul>
+					
+					<br><br>
+					
+					<ul class="cd-pricing-list cd-bounce-invert">
                     <li>
                         <ul class="cd-pricing-wrapper">
                             <li data-type="monthly" class="is-visible">
@@ -302,6 +357,7 @@
                             </li>
                         </ul> <!-- .cd-pricing-wrapper -->
                     </li>
+					</div>
                 </ul> <!-- .cd-pricing-list -->
             </div> <!-- .cd-pricing-container -->	
 
@@ -320,8 +376,8 @@
 				<h2>Custom Decision</h2>
                     <div class="portfolio-wrapper text-center">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
-                                <i class="fa fa-arrow-down"></i>
+							<div class="bordered_custom">
+                                <i class="fa fa-arrow-down" style="font-size: 2em; color: deepskyblue;"></i>
                                 <div class="separator"></div>
                                 <h4>Start Here!</h4>
                                 <p>First pick what you want to decide on. Example: Books</p>
@@ -329,7 +385,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+							<div class="bordered_custom">
                                 <i class="fa fa-folder-open"></i>
                                 <div class="separator"></div>
                                 <h4>Item Selection</h4>
@@ -338,7 +394,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+							<div class="bordered_custom">
                                 <i class="fa fa-edit"></i>
                                 <div class="separator"></div>
                                 <h4>Add Weight</h4>
@@ -347,31 +403,31 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+							<div class="bordered_custom">
                                 <i class="fa fa-edit"></i>
                                 <div class="separator"></div>
                                 <h4>Score those Items!</h4>
-								<p>Score those items you picked with a subjective ranking. These numbers are limited only by a max value of 100. Example: Harry Potter series are long so I would rank it lower, maybe 2 or 3. The genre however is wonderful so I would rank it at about 30 or so.</p>
+								<p style="font-size: 0.9em;">Score those items you picked with a subjective ranking. These numbers are limited only by a max value of 100. Example: Harry Potter series are long so I would rank it lower, maybe 2 or 3. The genre however is wonderful so I would rank it at about 30 or so.</p>
                             </div>
                         </div>
 
                     </div>
                 </div>
-
+				<br><br>
                 <!-- row 2 for custom decisions -->
                 <div class="row">
                     <div class="portfolio-wrapper text-center">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
-                                <i class="fa fa-child"></i>
+							<div class="bordered_custom">
+                                <i class="fa fa-child" style="font-size: 2em;"></i>
                                 <div class="separator"></div>
                                 <h4>Results!</h4>
 								<p>Now our software will spit out an objective ranking of your subjective decisions</p>
                             </div>
                         </div>
 						
-						<div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+						<div class="col-md-3 col-sm-6 col-xs-12" style="margin-left: 109px">
+							<div class="bordered_custom">
                                 <i class="fa fa-comment"></i>
                                 <div class="separator"></div>
                                 <h4>Provide FeedBack!</h4>
@@ -388,8 +444,8 @@
 				<h2>An API Decision</h2>
                     <div class="portfolio-wrapper text-center">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
-                                <i class="fa fa-crosshairs"></i>
+                            <div class="bordered_api">
+                                <i class="fa fa-crosshairs" style="font-size: 3em; color: yellowgreen"></i>
                                 <div class="separator"></div>
                                 <h4>Pick an API!</h4>
                                 <p>Pick an API you want to pull from. I picked College for this example.</p>
@@ -397,7 +453,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-folder-open"></i>
                                 <div class="separator"></div>
                                 <h4>Narrow it Down</h4>
@@ -406,7 +462,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-edit"></i>
                                 <div class="separator"></div>
                                 <h4>Values for Narrowing</h4>
@@ -415,7 +471,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-folder-open"></i>
                                 <div class="separator"></div>
                                 <h4>Pick Criteria</h4>
@@ -429,7 +485,7 @@
 				<div class="row">
                     <div class="portfolio-wrapper text-center">
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-edit"></i>
                                 <div class="separator"></div>
                                 <h4>Weight those Criteria</h4>
@@ -438,7 +494,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-edit"></i>
                                 <div class="separator"></div>
                                 <h4>Score Them!</h4>
@@ -447,8 +503,8 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
-                                <i class="fa fa-child"></i>
+                            <div class="bordered_api">
+                                <i class="fa fa-child" style="font-size: 2em;"></i>
                                 <div class="separator"></div>
                                 <h4>Results!</h4>
 								<p>Now our software will spit out an objective ranking of your subjective decisions</p>
@@ -456,7 +512,7 @@
                         </div>
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="community-edition">
+                            <div class="bordered_api">
                                 <i class="fa fa-comment"></i>
                                 <div class="separator"></div>
                                 <h4>Provide FeedBack!</h4>
@@ -616,5 +672,4 @@
         <script src="../../static/tmp2/assets/js/modernizr.js"></script>
         <script src="../../static/tmp2/assets/js/main.js"></script>
     </body>
-{% endblock %}
-	</html>
+    	</html>

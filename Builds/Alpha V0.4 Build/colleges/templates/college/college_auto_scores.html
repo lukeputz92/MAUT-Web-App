@@ -1,5 +1,28 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
-<div class="userForms">
+<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+.bordered{
+	box-sizing: border-box;
+	margin: auto 100px;
+	float: right;
+	width: 500px;
+	height: 325px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: lightgreen;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
+<br>
+<div class="userForms" style="float:left;">
 	<h2> College Scoring </h2>
 	<p> Please select how you would like to score the criteria options. </p>
 	<form action="" method="post">
@@ -19,5 +42,14 @@
 		</div>
 	</form>
 </div>
-
+<br>
+<br>
+<div>
+	<div class="bordered">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text class="font_style"><b>Before was percentage of importance but now how important it is on a point scale</b></text>
+		<p style="font-family:Georgia; color: black;">It can be very confusing to ask the percentage of importance then asked again. The drop down menus are the values that will
+		be assigned to the item. Before it was how much of the pie will be taken up by the item, now you have to fill that pie with values.</p>
+	</div>
+</div>
 {% endblock %}
