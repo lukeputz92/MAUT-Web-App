@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import urls as auth_urls
 urlpatterns = [
     url(r'^$', views.example, name='home'),
+    url(r'^$', views.example, name='front'),
 	url(r'^index/$', views.index, name ='index'),
     url(r'^custom/$',views.decision_index,name='custom'),
     url(r'^results/$', views.results, name = 'results'),

@@ -78,13 +78,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-<<<<<<< HEAD
                 'social_django.context_processors.backends', 
                 'social_django.context_processors.login_redirect', 
-=======
-                'social_django.context_processors.backends',  # <--
-                'social_django.context_processors.login_redirect', # <--
->>>>>>> master
             ],
         },
     },
@@ -148,11 +143,9 @@ EMAIL_HOST_PASSWORD = 'calebsucksdick'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-<<<<<<< HEAD
+
 CLICKY_SITE_ID = 'maut'
 
-=======
->>>>>>> master
 SOCIAL_AUTH_GITHUB_KEY = '435edbaa28740e017d42'
 SOCIAL_AUTH_GITHUB_SECRET = 'fd249117f7f1c76865cc20093b1469d37edcdb61'
 
