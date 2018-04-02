@@ -252,5 +252,5 @@ MOVIES = [{'title': 'The Shawshank Redemption', 'score': '9.2', 'year': '1994'},
 {'title': 'The Battle of Algiers', 'score': '8.0', 'year': '1966'}]
 
 APIT = [ 
-{'name' : 'year', 'is_num' : True},
-{'name' : 'IMDBscore', 'is_num' : True}]
+{'name' : 'Year of Release', 'is_num' : True},
+{'name' : 'IMDB Score', 'is_num' : True}]
