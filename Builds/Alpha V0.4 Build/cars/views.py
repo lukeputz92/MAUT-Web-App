@@ -108,7 +108,7 @@ def cars_scores(request):
                 weighted_scores.append(((carsScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]),request.session['option_list'][i][1]))
 
             carss = request.session['carss']
-
+            print(carss)
             for key, value in carss.items():
                 for i in range(len(weighted_scores)):
                     if value[1] == weighted_scores[i][1]:
@@ -171,7 +171,6 @@ def cars_scores(request):
                                 if value[1] == option_list[i][1]:
                                     new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
                                     carss[key] = (carss[key][0], carss[key][1], new_score)
-                                    print(carrs[key])
 
                         request.session['remaining'] = request.session['remaining'] - 1
                         request.session['carss'] = carss
@@ -218,6 +217,8 @@ def cars_scores(request):
             carss[ cars['recipeName'] ] = (cars, 0, 0)
 
         cont = True
+        for key, value in carss.items():
+            print(value[0])
 
         while cont and request.session['remaining'] > 0:
             option_list = []
@@ -233,11 +234,13 @@ def cars_scores(request):
                 Option list stores all the possible values for every criteria.
                 Each cars in carss stores the index of its criteria option in the option list.
             '''
-
+            fdict_defined = False
+            del_key = []
             flavors = ['sweet', 'piquant', 'salty', 'bitter', 'sour', 'meaty']
             for key, value in carss.items():
                 if 'flavors' in value[0]:
                     fdict = value[0]['flavors']
+                    fdict_defined = True
                     if criteria[0]['api_variable'] in flavors:
                         if fdict[criteria[0]['api_variable']] in option_list:
                             carss[key] = ( carss[key][0], option_list.index( fdict[criteria[0]['api_variable']]), carss[key][2] )
@@ -247,8 +250,12 @@ def cars_scores(request):
                     carss[key] = (carss[key][0], option_list.index(value[0][criteria[0]['api_variable']]), carss[key][2])
                 else:
                     if criteria[0]['api_variable'] in flavors:
-                        fdict = value[0]['flavors']
-                        option_list.append(fdict[criteria[0]['api_variable']])
+                        if fdict_defined:
+                            print("is defined")
+                            option_list.append(fdict[criteria[0]['api_variable']])
+                        else:
+                            print("wasn't defined")
+                            del_key.append(key)
                     elif 'totalTimeInSeconds' in value[0]:
                         option_list.append(value[0][criteria[0]['api_variable']])
                     carss[key] = (carss[key][0],len(option_list) - 1,carss[key][2])
@@ -256,11 +263,14 @@ def cars_scores(request):
             for i in range(0,len(option_list)):
                 option_list[i] = (option_list[i], i)
 
+            for key in del_key:
+                carss.pop(key,None)
+
             option_list = sorted(option_list, key=lambda x: (x[0] is None, x[0]))
 
             if True:
                 greatest = 0
-                ideal = criteria[2]
+                ideal = criteria[2]/100
                 for item in option_list:
                     temp_greatest = abs(item[0] - ideal)
                     if temp_greatest > greatest:
