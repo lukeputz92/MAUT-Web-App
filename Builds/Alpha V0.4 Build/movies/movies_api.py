@@ -251,3 +251,5 @@ movies = [{'title': 'The Shawshank Redemption', 'year': '1994', 'score': '9.2'}
 {'title': 'Dog Day Afternoon', 'year': '1975', 'score': '8.0'}
 {'title': 'The Battle of Algiers', 'year': '1966', 'score': '8.0'}]
 
+def get_movies():
+	return movies
