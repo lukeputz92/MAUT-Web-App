@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^college/',include('colleges.urls')),
     url(r'recipes/',include('cars.urls')),
     url(r'restaurants/',include('restaurants.urls')),
+    url(r'movies/',include('movies.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'tutorial/',include('tutorial.urls')),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
