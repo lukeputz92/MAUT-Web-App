@@ -49,7 +49,7 @@ class UserProfile(models.Model):
     state = models.CharField(max_length=100, null=True, blank=True)
     age = models.PositiveIntegerField(validators=[MaxValueValidator(100), MinValueValidator(13)], null=True, blank=True)
     gender = models.CharField(max_length=25,choices=genderChoices, null=True, blank=True)
-    income = models.PositiveIntegerField(null=True, blank=True)
+    income = models.PositiveIntegerField(validators=[MaxValueValidator(1000000000), MinValueValidator(0)], null=True, blank=True)
     race = models.CharField(max_length=50,choices=raceChoices, null=True, blank=True)
     ethnicity = models.CharField(max_length=50,choices=ethnicityChoices, null=True, blank=True)
 

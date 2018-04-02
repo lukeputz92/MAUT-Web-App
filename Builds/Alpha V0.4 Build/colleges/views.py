@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import *
 #from .models import UserProfile, Decide, Item, Criteria
 from django.shortcuts import render, redirect, render_to_response
 from .college_api import *
+import json
 from decisions.models import *
+
 # Create your views here.
 '''
     This function handles the first page of the college decision process.
@@ -82,6 +84,7 @@ def college_criteria(request):
 
     return render(request, 'college/college_criteria.html', {"collegeCriteriaForm" : collegeCriteriaForm})
 
+
 def college_criteria_weight(request):
     if request.method == 'POST':
         collegeCriteriaWeightForm = CollegeCriteriaWeightForm(request.POST, criteria_list = [i['name'] for i in request.session['criteria_list']])
@@ -102,8 +105,9 @@ def college_criteria_weight(request):
             return HttpResponseRedirect('/college/auto_scores/')
     else:
         collegeCriteriaWeightForm = CollegeCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
-
-    return render(request, 'college/college_criteria_weight.html', {"collegeCriteriaWeightForm" : collegeCriteriaWeightForm})
+    criteriaList = [i['name'].replace(' ','+') for i in request.session['criteria_list']]
+    criteriaList = json.dumps(criteriaList).replace(' ','')
+    return render(request, 'college/college_criteria_weight.html', {"criteriaList" : criteriaList, "weightForm" : collegeCriteriaWeightForm})
 
 def college_auto_scores(request):
     if request.method=='POST':
@@ -285,6 +289,7 @@ def college_scores(request):
                 for key, value in colleges.items():
                     for i in range(len(option_list)):
                         if value[1] == option_list[i][1]:
+                            print(option_list[0][0], " clist", request.session['criteria_list'])
                             new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
                             colleges[key] = (colleges[key][0], colleges[key][1], new_score)
 
