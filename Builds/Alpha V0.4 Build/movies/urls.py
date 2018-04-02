@@ -6,4 +6,5 @@ from django.contrib.auth import urls as auth_urls
 urlpatterns = [
     url(r'^criteria/$', views.movie_criteria, name='movie_criteria'),
     url(r'^criteria_weight/$', views.movie_criteria_weight, name='criteria_weight'),
+    url(r'^auto_scores/$', views.movie_auto_scores, name='movie_auto_scores'),
 ]
