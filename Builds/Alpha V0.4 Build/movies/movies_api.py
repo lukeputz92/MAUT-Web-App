@@ -2,7 +2,7 @@ minScore = 8.0
 maxScore = 9.2
 minYear = 1921
 maxYear = 2017
-movies = [{'title': 'The Shawshank Redemption', 'year': '1994', 'score': '9.2'}
+MOVIES = [{'title': 'The Shawshank Redemption', 'year': '1994', 'score': '9.2'}
 {'title': 'The Godfather', 'year': '1972', 'score': '9.2'}
 {'title': 'The Godfather: Part II', 'year': '1974', 'score': '9.0'}
 {'title': 'The Dark Knight', 'year': '2008', 'score': '9.0'}
@@ -251,5 +251,6 @@ movies = [{'title': 'The Shawshank Redemption', 'year': '1994', 'score': '9.2'}
 {'title': 'Dog Day Afternoon', 'year': '1975', 'score': '8.0'}
 {'title': 'The Battle of Algiers', 'year': '1966', 'score': '8.0'}]
 
-def get_movies():
-	return movies
+APIT = [ 
+{'name' : 'year', 'is_num' : True},
+{'name' : 'IMDBscore', 'is_num' : True}]
