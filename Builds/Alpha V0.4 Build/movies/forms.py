@@ -1,8 +1,11 @@
 from django import forms
 
 class MovieCriteriaForm(forms.Form):
-	year = institution_level = forms.BooleanField(required=False,label="Year of Release")
-	IMDBscore = institution_level = forms.BooleanField(required=False,label="IMDB Score")
+	def __init__(self, *args, **vargs):
+        super(CollegeCriteriaForm,self).__init__(*args,**vargs)
+        for i in range(len(APIT)):
+                field = forms.BooleanField(label=APIT[i]['name'],required=False)
+                self.fields[str(i)] = field
 
 class MovieCriteriaWeightForm(forms.Form):
     def __init__(self, *args, **vargs):
