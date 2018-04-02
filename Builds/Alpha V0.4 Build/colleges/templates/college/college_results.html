@@ -33,7 +33,7 @@ $(document).ready(function() {
 <div>
   <div class="results">
     <div id=centerer>
-      <h2> College Results </h2>
+      <h2> Movie Results </h2>
       <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/west-green-ohio-university-robert-powell.jpg">
     </div>
     <br>
@@ -46,26 +46,23 @@ $(document).ready(function() {
       <div class="row">
         <div class="col-lg-4">
           <img class="rounded-circle" src="../../static/img/number1.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>1st: {% if collegeList.0.2 %} {% with "http://"|addstr:collegeList.0.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.0.0}} </a>
-           {% else %} {{collegeList.0.0}} {% endif %} </h2>
-          <p>Score was {{collegeList.0.1}}</p>
+          <h2>1st: {{movieList.0.0}} </h2>
+          <p>Score was {{movieList.0.1}}</p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="rounded-circle" src="../../static/img/number2.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>2nd: {% if collegeList.1.2 %} {% with "http://"|addstr:collegeList.1.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.1.0}} </a>
-           {% else %} {{collegeList.1.0}} {% endif %} </h2>
-          <p>Score was {{collegeList.1.1}}</p>
+          <h2>2nd: {{movieList.1.0}}  </h2>
+          <p>Score was {{movieList.1.1}}</p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
         {% if collegeList.2.0 %}
         <div class="col-lg-4">
           <img class="rounded-circle" src="../../static/img/number3.png" alt="Generic placeholder image" width="140" height="140">
-          <h2>3rd: {% if collegeList.2.2 %} {% with "http://"|addstr:collegeList.2.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.2.0}} </a>
-           {% else %} {{collegeList.2.0}} {% endif %} </h2>
-          <p>Score was {{collegeList.2.1}}</p>
+          <h2>3rd: {{movieList.2.0}}  </h2>
+          <p>Score was {{movieList.2.1}}</p>
           <!--
   <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
           <!--
@@ -81,13 +78,13 @@ $(document).ready(function() {
       <table class="table">
         <tr>
           <th> # </th>
-          <th> College Name </th>
+          <th> Movie Title </th>
           <th> Final Score </th>
         </tr>
-        {% for item in collegeList %} {% if forloop.counter > 3 %}
+        {% for item in movieList %} {% if forloop.counter > 3 %}
         <tr>
           <td> {{forloop.counter}} </td>
-          <td> {% if item.2 %} {% with "http://"|addstr:item.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{item.0}} </a> {% else %} {{item.0}} {% endif %} </td>
+          <td> {{item.0}} {% endif %} </td>
           <td> {{item.1}} </td>
         </tr>
         {% endif %} {% endfor %}

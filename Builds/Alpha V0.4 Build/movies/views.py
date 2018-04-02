@@ -30,8 +30,6 @@ def movie_criteria_weight(request):
 			criteria_list = request.session['criteria_list']
 			for i in range(len(criteria_list)):
 				criteria_list[i] = (criteria_list[i],movieCriteriaWeightForm.cleaned_data[str(i)],0)
-			print(criteria_list)
-			print([i[1] for i in criteria_list])
 			request.session['criteria_list'] = criteria_list
 			return HttpResponseRedirect('/movies/auto_scores/')
 
@@ -49,7 +47,56 @@ def movie_auto_scores(request):
 			for i in range(len(criteria_list)):
 				criteria_list[i] = (criteria_list[i][0], criteria_list[i][1], movieAutoScoreForm.cleaned_data[str(i)])
 				request.session['criteria_list'] = criteria_list
+			print(request.session['criteria_list'])
 			return HttpResponseRedirect('/movies/scores/')
 	else:
 		movieAutoScoreForm = MovieAutoScoreForm(criteria_list = [i[0] for i in request.session['criteria_list']])
 	return render(request, 'movies/movie_auto_scores.html', {"movieAutoScoreForm" : movieAutoScoreForm})
+
+def auto_scorer(num,max,min,asc):
+	if max==min:
+		return 100
+	if asc:
+		return((100*(max-num))/(max-min))
+	else:
+		return ((100*(num-min))/(max-min))
+
+
+def movie_scores(request):
+	movs = MOVIES
+	for m in movs:
+		x = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][0][2]) * request.session['criteria_list'][0][1] / 100
+		y = auto_scorer(float(m['Year of Release']),maxYear,minYear, request.session['criteria_list'][1][2]) * request.session['criteria_list'][1][1] / 100
+		m['finalScore'] = round(x+y,2)
+	movieList = movs
+	request.session['movieList'] = movieList
+	print(movieList)
+	return render(request, 'movies/movie_results.html', {"request" : request, "movieList" : movieList, "length" : len(movieList)})
+'''
+def movie_results(request):
+	if request.method == 'POST':
+		user = User.objects.get(username=request.user.username)
+		profile = UserProfile.objects.get(user=user)
+		newDecision = Decide(user_profile = profile, decisionName = "Movie")
+		newDecision.save()
+		movieList = request.session['movieList']
+		criteriaList = request.session['criteria_list']
+		for movie in movieList:
+			newItem = Item(itemName = movie[0], itemScore = movie[-1], decision = newDecision)
+			newItem.save()
+		for criteria in criteriaList:
+			newCriteria = Criteria(criteriaName = criteria[0]['name'], criteriaWeight = criteria[1], decision = newDecision)
+			newCriteria.save()
+		request.session['saved'] = True
+	else:
+		request.session['saved'] = False
+		movieList = request.session['movieList']
+		movieList = sorted(movieList, key = lambda x: x['finalScore'],reverse=True)
+		print(movieList)
+		request.session['movieList'] = movieList
+	return render(request, 'movies/movie_results.html', {"request" : request, "movieList" : movieList, "length" : len(movieList)})
+
+
+'''
+
+

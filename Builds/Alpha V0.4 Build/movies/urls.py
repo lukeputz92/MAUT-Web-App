@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^criteria_weight/$', views.movie_criteria_weight, name='criteria_weight'),
     url(r'^auto_scores/$', views.movie_auto_scores, name='movie_auto_scores'),
     url(r'^scores/$', views.movie_scores, name='movie_scores'),
+    #url(r'^results/$', views.movie_results, name='movie_results'),
 ]
