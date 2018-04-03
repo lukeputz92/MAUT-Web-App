@@ -381,8 +381,8 @@ def deleteDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
     profile = UserProfile.objects.get(user=user)
     Decide.objects.filter(pk=pk).delete()
-    all_decisions = profile.decide_set.all()
-    return render(request, 'profile/user_profile.html', { 'all_decisions' : all_decisions})
+
+    return redirect('/profile/home')
 
 @login_required()
 def updateDecision(request, pk):

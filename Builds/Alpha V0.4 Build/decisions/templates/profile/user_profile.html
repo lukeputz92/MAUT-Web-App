@@ -5,8 +5,13 @@
 function rename(pk,decision) {
 
   var name = prompt("What new name would you like to give this decision?",decision);
-  window.location = "http://" + "{{ request.get_host }}" +"/profile/" + pk + "/" + name + "/rename";
 
+  if (name.includes('/')) {
+    window.alert("Names can't have a forward slash (/) in them");
+  }
+  else {
+    window.location = "http://" + "{{ request.get_host }}" +"/profile/" + pk + "/" + name + "/rename";
+  }
 }
 </script>
 
