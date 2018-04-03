@@ -412,7 +412,5 @@ def renameDecision(request,pk,name):
     myDecision.decisionName = name
     myDecision.save()
 
-    all_decisions = profile.decide_set.all()
-    return render(request, 'profile/user_profile.html', {'all_decisions' : all_decisions})
-	
+    return redirect('/profile/home')
 	
