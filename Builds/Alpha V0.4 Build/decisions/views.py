@@ -193,51 +193,15 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
-            #new_user.is_active = True
             new_user.save()
-            '''
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your MAUT account'
-            message = render_to_string('registration/acc_active_email.html', {
-                'user': new_user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(new_user.pk)),
-                'token':account_activation_token.make_token(new_user),
-                })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                        mail_subject, message, to=[to_email]
-            )
-            email.send()
 
-            message = "Thank you for registering. You must confirm your email address before logging in."
-
-            return render(request, 'registration/message.html', {'message' : message})
-            '''
             new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, new_user)
             return redirect('/profile/home')
     else:
         form = RegistrationForm()
     return render(request, 'registration/reg_form.html', {'form':form})
-'''
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        login(request, user)
-        message = "Thank you for confirming your email address. You may now log in."
-    else:
-        message = "Your activation link is invalid!"
 
-    return render(request, 'registration/message.html', {'message' : message})
-
-'''
 def userResults(request):
     return render(request, 'profile/user_result.html')
 
@@ -420,6 +384,7 @@ def deleteDecision(request, pk):
     all_decisions = profile.decide_set.all()
     return render(request, 'profile/user_profile.html', { 'all_decisions' : all_decisions})
 
+@login_required()
 def updateDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
     profile = UserProfile.objects.get(user=user)
@@ -438,5 +403,16 @@ def updateDecision(request, pk):
     request.session["criteriaList"] = criteriaList
 
     return decision_index(request, autoFill = True)
+
+@login_required()
+def renameDecision(request,pk,name):
+    user = User.objects.get(pk=request.user.pk)
+    profile = UserProfile.objects.get(user=user)
+    myDecision = Decide.objects.get(pk=pk)
+    myDecision.decisionName = name
+    myDecision.save()
+
+    all_decisions = profile.decide_set.all()
+    return render(request, 'profile/user_profile.html', {'all_decisions' : all_decisions})
 	
 	

@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^calculation/$', views.calculation, name='calculation'),
     url(r'^profile/(?P<pk>[0-9]+)/update', views.updateDecision, name='updateDecision'),
     url(r'^profile/(?P<pk>[0-9]+)/delete', views.deleteDecision, name='deleteDecision'),
+    url(r'^profile/(?P<pk>[0-9]+)/(?P<name>([^\/]+))/rename', views.renameDecision, name='renameDecision')
     #url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activate, name='activate'),
 ]

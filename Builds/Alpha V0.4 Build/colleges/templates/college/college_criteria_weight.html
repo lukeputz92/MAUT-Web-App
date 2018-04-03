@@ -10,7 +10,6 @@
 <div id="main-container">
   <div id="chart-controls">
       <ul id="menu">
-
           <h4>Rate Importance of Each Criteria</h4>
       </ul>
 
@@ -20,13 +19,13 @@
 
 
       </tbody>
+
     </table>
     </div>
     <div id="pie"></div>
     <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}>
 			{% csrf_token %}
 		{{weightForm}}
-			{% csrf_token %}
   	<button id="post" type="submit" style="display: block; margin: 0 auto;" class="btn btn-primary btn-sm"> Submit 
       <button>
   </div>
