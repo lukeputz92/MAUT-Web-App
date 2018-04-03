@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
+
+  <!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<style>
+  th,
+  td {
+    padding: 15px;
+	align: left;
+  }
+.bordered{
+	box-sizing: border-box;
+	margin: auto;
+	width: 650px;
+	height: 210px;
+	padding: 20px;
+	border-radius: 8px;
+	border: 5px solid black;
+	background-color: aquamarine;
+	text-align: center;
+	overflow: auto;
+}
+.font_style{
+	family:Georgia;
+	size: 100%;
+	color: black;
+}
+</style>
+
+<br>
+<script>
+var warnMessage = "You have unsaved changes on this page!";
+
+$(document).ready(function() {
+       window.onbeforeunload = function () {
+            if (warnMessage != null) return warnMessage;
+       }
+    $('input:submit').click(function(e) {
+        warnMessage = null;
+    });
+});
+</script>
+
+<div style="float:left; margin: auto 2em;">
+	<div class="col-12">
+		<h2> Restaurant Criteria Selection </h2>
+		<p> Please select criteria you wish to use to make your decision. </p>
+		<form action="" method="post">
+			{% csrf_token %}
+			<div >
+				<table class="table">
+					{% for form in restaurantCriteriaForm %}
+					<tr>
+						<td> {{form.label}} </td>
+						<td> {{form}} {{form.errors}} </td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage=null" type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<div>
+	<div class="bordered">
+		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
+		<text style="font-family:Georgia;font-size:140%; color: black;"><b>Select what will help you better divide up the results</b></text>
+		<p style="font-family:Georgia; color: black;">The more items you use for the decision process the more personal the results will be. The items above are what you 
+		will be using to weight and better quantify the list of restaurants near the ZIP code you used.</p>
+	</div>
+</div>
+
+
+{% endblock %}
