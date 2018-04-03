@@ -80,7 +80,7 @@ $(document).ready(function() {
       <table class="table">
         <tr>
           <th> # </th>
-          <th> College Name </th>
+          <th> Recipe Name </th>
           <th> Final Score </th>
         </tr>
         {% for item in carsList %} {% if forloop.counter > 3 %}
@@ -91,13 +91,13 @@ $(document).ready(function() {
         </tr>
         {% endif %} {% endfor %}
       </table>
-      {% endif %} 
+      {% endif %}
   {% if request.session.saved %}
     <script>
       warnMessage = null;
     </script>
     <div id=centerer>
-    <b> Decision saved successfully! </b> 
+    <b> Decision saved successfully! </b>
     </div>
     {% else %}
     {% if request.user.is_authenticated %}
