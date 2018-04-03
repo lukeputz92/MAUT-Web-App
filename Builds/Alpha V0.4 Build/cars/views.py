@@ -332,11 +332,12 @@ def cars_results(request):
         request.session['saved'] = True
 
     else:
+        yummly = "www.yummly.com/recipe/"
         request.session['saved'] = False
         carsList = []
 
         for key,value in request.session['carss'].items():
-            carsList.append((key,(round((value[2]/100),2))))
+            carsList.append((key,(round((value[2]/100),2)),yummly+value[0]['id']))
 
         carsList = sorted(carsList, key = lambda x: x[1],reverse=True)
 
