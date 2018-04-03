@@ -1,6 +1,20 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script>
+function rename(pk,decision) {
+
+  var name = prompt("What new name would you like to give this decision?",decision);
+
+  if (name.includes('/')) {
+    window.alert("Names can't have a forward slash (/) in them");
+  }
+  else {
+    window.location = "http://" + "{{ request.get_host }}" +"/profile/" + pk + "/" + name + "/rename";
+  }
+}
+</script>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -106,10 +120,13 @@
               {{decision|title}}
             </a>
               <div style="float: right;">
+              <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
+              </div>
+              <div style="float: right;">
               <a href=" {% url 'updateDecision' pk=decision.pk %}" class="btn btn-success btn-sm">Edit</a>
             </div>
               <div style="float: right;">
-              <a href=" {% url 'deleteDecision' pk=decision.pk %}" class="btn btn-danger btn-sm">Delete</a>
+              <button class = "btn btn-success btn sm" onclick="rename({{decision.pk}},'{{decision|title}}')">Rename</button>
             </div>
             </div>
             <div id="collapse{{forloop.counter0}}" class="collapse collapse">
