@@ -168,6 +168,11 @@ def results(request):
             for criteria in criteriaList:
                 newCriteria = Criteria(criteriaName = criteria[0], criteriaWeight = criteria[1], decision = newDecision)
                 newCriteria.save()
+
+            if "updateDecision" in request.session:
+                Decide.objects.filter(pk=request.session['updateDecision']).delete()
+                request.session.pop("updateDecision",None)
+
         else:
             return HttpResponseRedirect('/login/')
 
@@ -380,15 +385,22 @@ def example(request):
 def deleteDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
     profile = UserProfile.objects.get(user=user)
-    Decide.objects.filter(pk=pk).delete()
+    myDecision = Decide.objects.get(pk=pk)
 
-    return redirect('/profile/home')
+    if myDecision.user_profile==profile:
+        Decide.objects.filter(pk=pk).delete()
+        return redirect('/profile/home')
+    else:
+        return render(request,'profile/forbidden.html',{})
 
 @login_required()
 def updateDecision(request, pk):
     user = User.objects.get(pk=request.user.pk)
     profile = UserProfile.objects.get(user=user)
     myDecision = Decide.objects.get(pk=pk)
+
+    if not myDecision.user_profile==profile:
+        return render(request,'profile/forbidden.html',{})
 
     itemList = []
     for item in myDecision.item.all():
@@ -401,6 +413,7 @@ def updateDecision(request, pk):
     request.session["decisionName"] = myDecision.decisionName
     request.session["itemList"] = itemList
     request.session["criteriaList"] = criteriaList
+    request.session["updateDecision"] = pk
 
     return decision_index(request, autoFill = True)
 
@@ -409,6 +422,10 @@ def renameDecision(request,pk,name):
     user = User.objects.get(pk=request.user.pk)
     profile = UserProfile.objects.get(user=user)
     myDecision = Decide.objects.get(pk=pk)
+
+    if not myDecision.user_profile==profile:
+        return render(request,'profile/forbidden.html',{})
+
     myDecision.decisionName = name
     myDecision.save()
 
