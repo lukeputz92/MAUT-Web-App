@@ -18,6 +18,7 @@ def restaurant(request):
 
     else:
         zipFilterForm = ZipFilterForm()
+        request.session.pop('saved',None)
 
     return render(request, 'restaurant/index.html', {'zipFilterForm': zipFilterForm})
 

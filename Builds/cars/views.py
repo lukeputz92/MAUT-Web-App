@@ -19,6 +19,7 @@ def cars(request):
 
     else:
         carsSearchForm = CarsSearchForm()
+        request.session.pop('saved',None)
 
     return render(request, 'recipes/index.html', {'carsSearchForm': carsSearchForm} )
 

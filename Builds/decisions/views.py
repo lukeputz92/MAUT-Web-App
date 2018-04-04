@@ -53,6 +53,8 @@ def decision_index(request, autoFill = False):
             decisionForm = DecideForm(initial={'yourDecision' : request.session["decisionName"]})
         else:
             decisionForm = DecideForm()
+            request.session.pop('saved',None)
+            request.session.pop('updateDecision',None)
 
     return render(request, 'decisions/decision_index.html', {'decisionForm': decisionForm})
 

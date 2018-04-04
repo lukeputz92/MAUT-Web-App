@@ -23,7 +23,7 @@ def college(request):
             return HttpResponseRedirect('/college/filter/')
     else:
         locationFilterForm = LocationFilterForm()
-
+        request.session.pop('saved',None)
     return render(request, 'college/college_index.html', {'locationFilterForm': locationFilterForm})
 
 '''

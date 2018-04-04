@@ -20,6 +20,7 @@ def movie_criteria(request):
 
 	else:
 		movieCriteriaForm = MovieCriteriaForm()
+		request.session.pop('saved',None)
 
 	return render(request, 'movies/movie_criteria.html',{'movieCriteriaForm' : movieCriteriaForm})
 
