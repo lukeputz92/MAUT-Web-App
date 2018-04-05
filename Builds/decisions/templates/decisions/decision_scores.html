@@ -12,63 +12,58 @@ $(document).ready(function() {
     });
 });
 </script>
-<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
 <style>
-.bordered{
-	box-sizing: border-box;
-	margin: auto;
-	width: 600px;
-	height: 200px;
-	padding: 20px;
-	border-radius: 8px;
-	border: 5px solid black;
-	background-color: thistle;
-	text-align: center;
-	overflow: auto;
-}
-.font_style{
-	family:Georgia;
-	size: 100%;
-	color: black;
-}
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
-
 <br>
-<div class="userForms" style="float:left; margin: auto 2em;">
-	<h2> Items Scores based on the Different Criteria </h2>
-
-	<form action="" method="post">
-		{% csrf_token %}
-		<table class="table">
-			<tr>
-				<th> Item/Criteria </th>
-				{{scoreForm.errors}}
-				<p> Enter a value 0-100 for each item based on each criteria. </p>
-				<p> The higher the value the better the item is based on the criteria. </p>
-				{% for criteria in request.session.criteriaList %}
-				<th> {{criteria.0}} </th>
-				{% endfor %}
-			</tr>
-			{% for item in request.session.itemList %}
-			<tr>
-				<th> {{item.0}} </th>
-				{% for criteria in request.session.criteriaList %} {% with forloop.parentloop.counter0|addstr:"_"|addstr:forloop.counter0 as key %}
-				<td> {{scoreForm|keyvalue:key}} </td>
-				{% endwith %} {% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
-			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
-			<button class="btn btn-lg btn-primary" style="float: right;" onclick="warnMessage=null" type="submit">Submit</button>
-	</form>
-	</div>
-</div>
 <br>
-<div>
-	<div class="bordered" >
-		<header style="font-size:140%; color: black;"><strong>Now is the time to decide the importance</strong></header>
-		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text class="font_style"><b>Here you will want to apply the score (or multiplier) that will decide upon the results using a mathematical formula to be as objective as possible.</b></text><br>
-	</div>
+<div class="container">
+  <div class="row">
+    <div class="userForms col-5" style="margin: auto 2em; float: left;">
+        <h2> Scores for {{criteria_name}} </h2>
+        <p> Below are different options for the given criteria. </p>
+        <p> Select how you feel about each based on the given criteria. </p>
+        <form action="" method="post">
+      		{% csrf_token %}
+      		<table class="table">
+      			<tr>
+      				<th> Item/Criteria </th>
+      				{{scoreForm.errors}}
+      				<p> Enter a value 0-100 for each item based on each criteria. </p>
+      				<p> The higher the value the better the item is based on the criteria. </p>
+      				{% for criteria in request.session.criteriaList %}
+      				<th> {{criteria.0}} </th>
+      				{% endfor %}
+      			</tr>
+      			{% for item in request.session.itemList %}
+      			<tr>
+      				<th> {{item.0}} </th>
+      				{% for criteria in request.session.criteriaList %} {% with forloop.parentloop.counter0|addstr:"_"|addstr:forloop.counter0 as key %}
+      				<td> {{scoreForm|keyvalue:key}} </td>
+      				{% endwith %} {% endfor %}
+      			</tr>
+      			{% endfor %}
+      		</table>
+      			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
+      			<button class="btn btn-lg btn-primary" style="float: right;" onclick="warnMessage=null" type="submit">Submit</button>
+      	</form>
+      </div>
+      <div class="col-6">
+        <div class="card text-white bg-dark mb-3" style="width: 30rem; margin:auto;">
+          <div class="card-header" style="margin: auto">Helpful Hints</div>
+          <div class="card-body" style="margin:auto;">
+            <p class="card-text">Assign a value to each part of the overall criteria</p>
+            <p class="card-text">If a part of a criteria has a higher score then the items that better match that part will have a higher score in the overall decision</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
