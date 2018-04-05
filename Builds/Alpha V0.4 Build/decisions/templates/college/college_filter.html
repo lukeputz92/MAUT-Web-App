@@ -1,24 +1,27 @@
-{% extends 'base/base.html' %}
-
-{% block content %}
-
-{% load template_filters %}
+{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 <br>
-<div>
-<div class="userForms">
-	<h2> Location Filter </h2>
-	<form action="" method="post">
-		{% csrf_token %}
-		{{locationFilter.non_field_errors}}
-		{% for form in locationFilter %}
-		<div class="" style="margin: auto;" >
-			{{ form.label }} {{ form }} {{form.errors}}
-			{% endfor %}
+<br>
+<div class="container">
+	<div class="row">
+	<div class="userForms col-5" style="margin: auto 2em; float: left;">
+			<h3> Location Filter </h3>
+			<form class="form" method="post">
+				{% csrf_token %} {{locationFilter.non_field_errors}} {% for form in locationFilter %}
+					{{ form.label }} {{ form }} {{form.errors}} <br> {% endfor %}
+				<br>
+				<button class="btn btn-lg btn-primary btn-sm" type="submit">Submit</button>
+			</form>
 		</div>
-		<br>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-	</form>
-</div>
+		<div class="col-6">
+			<div class="card text-white bg-dark mb-3" style="max-width: 30rem; float: right;">
+				<div class="card-header">Hints</div>
+				<div class="card-body">
+					<h4 class="card-title">Enter a valid zip code </h4>
+					<p class="card-text">Throughout the decision making process hints like these will appear.</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

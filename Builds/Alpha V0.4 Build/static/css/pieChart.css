@@ -12,9 +12,9 @@
 
 #chart-controls{
   float: left;
-  width: 200px;
+  width: 480px;
   margin: 10px;
-  padding-top: 50px;
+  padding-top: 80px;
 }
 
 #pie {
@@ -44,11 +44,6 @@ td.edit {
  padding: 10px;
  border: thick white solid;
 }
-
-body {
-
-  padding: 40px;
- }
 
 input.range {
     width: 250px;

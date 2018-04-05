@@ -5,13 +5,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/pieChart.css' %}" />
 <div class="container">
 
-  <h4>Rate Importance of Each Criteria</h4>
   <div class="row">
+
     <form id="post-form" method="post">
       <div id="main-container">
-        <div id="chart-controls" class="col-6">
 
+        <div id="chart-controls" class="">
           <ul id="menu">
+            <h4>Rate Importance of Each Criteria</h4>
           </ul>
 
           <table id="rangebox">
@@ -21,13 +22,13 @@
 
             </tbody>
           </table>
+          <div class="row">
+            <button id="post" type="submit" style="margin: 0 auto;" class="btn btn-primary btn-sm">Submit </button>
+          </div>
         </div>
         <div id="pie" class="col-6"></div>
         <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}> {% csrf_token %} {{weightForm}} {% csrf_token %}
       </div>
-  </div>
-  <div class="row">
-    <button id="post" type="submit" style="margin: 0 auto;" class="btn btn-primary btn-sm">Submit </button>
   </div>
   </form>
 </div>

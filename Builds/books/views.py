@@ -11,6 +11,5 @@ def book_index(request):
         bookCriteriaForm = BookCriteriaForm(request.POST)
     else:
         bookCriteriaForm = BookCriteriaForm()
-        request.session.pop('saved',None)
 
     return render(request,"books/books_index.html", {'bookCriteriaForm' : bookCriteriaForm})
