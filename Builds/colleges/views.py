@@ -24,6 +24,7 @@ def college(request):
     else:
         locationFilterForm = LocationFilterForm()
         request.session.pop('saved',None)
+        
     return render(request, 'college/college_index.html', {'locationFilterForm': locationFilterForm})
 
 '''
