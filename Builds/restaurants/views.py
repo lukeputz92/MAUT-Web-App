@@ -143,11 +143,12 @@ def scores(request):
                         for key,value in restaurants.items():
                             restaurants[key] = (restaurants[key][0], [], restaurants[key][2])
                             for option in value[0][criteria[0]['api_variable']].split(','):
-                                if option in option_list:
-                                    restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option)],restaurants[key][2])
-                                else:
-                                    option_list.append(option)
-                                    restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
+                                if option != "":
+                                    if option in option_list:
+                                        restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option)],restaurants[key][2])
+                                    else:
+                                        option_list.append(option)
+                                        restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
                     else:
                         '''
                             Option list stores all the possible values for every criteria.
@@ -221,7 +222,6 @@ def scores(request):
 
     else:
         request.session['remaining'] = len(request.session['criteria_list'])
-        print(request.session['decision'].params)
         restaurant_info_list = request.session['decision'].pull()
 
 
@@ -259,11 +259,12 @@ def scores(request):
                 for key,value in restaurants.items():
                     restaurants[key] = (restaurants[key][0], [], restaurants[key][2])
                     for option in value[0][criteria[0]['api_variable']].split(','):
-                        if option.lstrip() in option_list:
-                            restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option.lstrip())],restaurants[key][2])
-                        else:
-                            option_list.append(option.lstrip())
-                            restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
+                        if option != "":
+                            if option.lstrip() in option_list:
+                                restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option.lstrip())],restaurants[key][2])
+                            else:
+                                option_list.append(option.lstrip())
+                                restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
             else:
                 '''
                     Option list stores all the possible values for every criteria.
