@@ -23,8 +23,8 @@ def college(request):
             return HttpResponseRedirect('/college/filter/')
     else:
         locationFilterForm = LocationFilterForm()
+
         request.session.pop('saved',None)
-        
     return render(request, 'college/college_index.html', {'locationFilterForm': locationFilterForm})
 
 '''
@@ -290,7 +290,6 @@ def college_scores(request):
                 for key, value in colleges.items():
                     for i in range(len(option_list)):
                         if value[1] == option_list[i][1]:
-                            print(option_list[0][0], " clist", request.session['criteria_list'])
                             new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
                             colleges[key] = (colleges[key][0], colleges[key][1], new_score)
 

@@ -24,10 +24,8 @@ class CarsCriteriaWeightForm(forms.Form):
         super(CarsCriteriaWeightForm,self).__init__(*args,**vargs)
         for i in range(len(criteria_list)):
                 field = forms.IntegerField(label=criteria_list[i],
-                                        widget=forms.TextInput(attrs={
-                                            'id':('weight_' + str(i)),
-                                            'placeholder':'Weight',
-                                            'onblur' : 'calculate()',
+                                        widget=forms.HiddenInput(attrs={
+                                            'id':('weight_' + str(i))
                                             }))
                 self.fields[str(i)] = field
 

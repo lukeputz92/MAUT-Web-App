@@ -1,101 +1,57 @@
-{% extends 'base/base.html' %} {% block content %} {% load template_filters %}
-<script>
-var warnMessage = "You have unsaved changes on this page!";
+<!doctype html> {% extends 'base/base.html' %} {% block content %} {% load template_filters %} {% load static%}
 
-$(document).ready(function() {
-       window.onbeforeunload = function () {
-            if (warnMessage != null) return warnMessage;
-       }
-    $('input:submit').click(function(e) {
-        warnMessage = null;
-    });
-});
-</script>
-
-<!--STYLE FORMAT: Don't change these values, yeah dipstick. It's no fun when it's all messed up! -->
+<script src="https://d3js.org/d3.v3.js"></script>
 <style>
-.bordered{
-	box-sizing: border-box;
-	margin: auto 100px;
-	float: right;
-	width: 500px;
-	height: 200px;
-	padding: 20px;
-	border-radius: 8px;
-	border: 5px solid black;
-	background-color: lightsalmon;
-	text-align: center;
-	overflow: auto;
-}
-.font_style{
-	family:Georgia;
-	size: 100%;
-	color: black;
-}
-
-	.blank_row {
-		height: 25px;
-	}
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
-<br>
-<div class="col-12">
-	<div class="userForms" style="margin: auto 2em; float: left;">
-		<h2> Recipe Criteria Weights </h2>
-		<p> For each criteria enter a weight that can range from 1-100 </p>
-		<p> A higher weight means it is more important, a lesser weight means it is less important. </p>
-		<p> All the weights <b> must </b> add up to 100. </p>
-		<form action="" method="post">
-			{% csrf_token %} {{carsCriteriaWeightForm.non_field_errors}}
-			<table class="table">
-				{% for form in carsCriteriaWeightForm %}
-				<tr>
-					<td> {{form.label}} </td>
-					<td> {{form}} {{form.errors}} </td>
-				</tr>
-				{% endfor %}
-				<tr class="blank_row">
-					<td colspan="2"> </td>
-				</tr>
-				<tr>
-					<td> Remaining Weight: </td>
-					<td> <input type="text" value="100" id="remaining" onblur="calculate()" readonly> </td>
-				</tr>
-			</table>
-			<br>
-			<button class="btn btn-lg btn-primary btn-block" onclick="warnMessage=null" type="submit">Submit</button>
-		</form>
-	</div>
+<link rel="stylesheet" type="text/css" href="{% static 'css/pieChart.css' %}" />
+<script src="{% static 'js/main.js' %}"></script>
+<div class="container">
+
+  <div class="row">
+
+    <form id="post-form" method="post">
+      <div id="main-container">
+
+        <div id="chart-controls" class="">
+          <ul id="menu">
+            <h4>Rate Importance of Each Criteria</h4>
+          </ul>
+
+          <table id="rangebox">
+
+            <tbody>
+
+
+            </tbody>
+          </table>
+          <div class="row">
+            <button id="post" type="submit" style="margin: 0 auto;" class="btn btn-primary btn-sm">Submit </button>
+          </div>
+        </div>
+        <div id="pie" class="col-6"></div>
+        <input type="hidden" id="myVar" name="variable" value={{criteriaList|safe}}> {% csrf_token %} {{weightForm}} {% csrf_token %}
+      </div>
+  </div>
+  </form>
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-white bg-dark mb-3" style="width: 30rem; margin:auto;">
+        <div class="card-header" style="margin: auto">Helpful Hints</div>
+        <div class="card-body" style="margin:auto;">
+          <p class="card-text">The color of the pie chart slices correspond to the value you set the sliders to on the left.</p>
+          <p class="card-text">The larger the pie slice the more important the criteria will be to the overall result.</p>
+          <p class="card-text">Try to determine which criteria is most important to your decision and adjust all others accordingly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<br>
-<div>
-	<div class="bordered" >
-		<header style="font-size:150%; color: black;"><strong>Add a subjective weight to your items</strong></header>
-		<img src="../../static/img/arrow.png" width="50" height="50" align="middle">
-		<text class="font_style"><b>Here you will add weight (not your personal weight) but how much of the pie will these item(s) take up.</b></text><br>
-	</div>
-</div>
-<script type="text/javascript">
-	//This function checks all the weights entered on the page.
-	//The weights are summed and subtracted from 100 to determine remaining weight available.
-	//The color of the remaining weight field changes based on the amount.
-	function calculate() {
-		var remaining = document.getElementById('remaining');
-		var el, i = 0,
-			total = 0;
-		while (el = document.getElementById(('weight_' + (i++)))) {
-			if (el.value != "") {
-				el.value = el.value.replace(/\\D/, "");
-				total = total + Number(el.value);
-			}
-		}
-		remaining.value = (100 - total);
-		if (total > 100) {
-			remaining.style.backgroundColor = "orangered";
-		} else if (total == 100) {
-			remaining.style.backgroundColor = "yellowgreen";
-		} else {
-			remaining.style.backgroundColor = "white";
-		}
-	}
-</script>
+
+
 {% endblock %}

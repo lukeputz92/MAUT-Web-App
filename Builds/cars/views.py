@@ -19,7 +19,6 @@ def cars(request):
 
     else:
         carsSearchForm = CarsSearchForm()
-        request.session.pop('saved',None)
 
     return render(request, 'recipes/index.html', {'carsSearchForm': carsSearchForm} )
 
@@ -62,8 +61,9 @@ def cars_criteria_weight(request):
             return HttpResponseRedirect('/recipes/auto_scores/')
     else:
         carsCriteriaWeightForm = CarsCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
-
-    return render(request, 'cars/cars_criteria_weight.html', {"carsCriteriaWeightForm" : carsCriteriaWeightForm})
+    criteriaList = [i['name'].replace(' ','+') for i in request.session['criteria_list']]
+    criteriaList = json.dumps(criteriaList).replace(' ','')
+    return render(request, 'cars/cars_criteria_weight.html', {"criteriaList" : criteriaList, "weightForm" : carsCriteriaWeightForm})
 
 def cars_auto_scores(request):
     if request.method=='POST':
