@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-
+<br>
 <div class= userForms>
 <h1>Contact</h1>
 <p> This website is currently a work in progress. <br>
@@ -24,7 +24,7 @@ Any and all constructive feedback is welcomed! </p>
     <label for="{{ form.content.id_for_label }}">Message:</label> <br>
     {{ form.content }}
 	</div>
-    <button type="submit">Submit</button>
+    <button class="btn btn-lg btn-primary"type="submit">Submit</button>
 </form>
 </div>
 

@@ -44,7 +44,7 @@ FOR COPY AND PASTE:
 
 APIT = [
     {
-    'name' : 'Institution Level (2 year, 4 year, etc)',
+    'name' : 'Years to Earn a Degree',
     'api_variable' : 'school.institutional_characteristics.level',
     'units' : "institution level",
     "is_num" : False,

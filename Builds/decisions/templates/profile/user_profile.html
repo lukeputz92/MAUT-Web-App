@@ -15,6 +15,13 @@ function rename(pk,decision) {
 }
 </script>
 
+<style>
+body{
+  padding-top: 60px;
+  margin: auto;
+}
+</style>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,7 +69,6 @@ function rename(pk,decision) {
            <a class="nav-link text-white" href="{% url 'contact' %}"> Contact Us </a>
           </li>
     </nav>
-    <br>
 		<div class="container-fluid">
       <div class="row">
         <div class= "col-md-3">
@@ -168,7 +174,7 @@ function rename(pk,decision) {
                     <input type="submit" value="Save" class="btn btn-primary btn-sm">
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeactivateAccount">Deactivate Account</button>
                 </div>
-     
+
             </div>
    <div id="DeactivateAccount" class="modal fade" role="dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
     <div class="modal-dialog modal-lg">

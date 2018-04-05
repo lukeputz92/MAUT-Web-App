@@ -18,7 +18,6 @@ def restaurant(request):
 
     else:
         zipFilterForm = ZipFilterForm()
-        request.session.pop('saved',None)
 
     return render(request, 'restaurant/index.html', {'zipFilterForm': zipFilterForm})
 
@@ -61,8 +60,9 @@ def criteria_weights(request):
             return HttpResponseRedirect('/restaurants/auto_scores/')
     else:
         restaurantCriteriaWeightForm = RestaurantCriteriaWeightForm(criteria_list = [i['name'] for i in request.session['criteria_list']])
-
-    return render (request, 'restaurant/criteria_weight.html', {'restaurantCriteriaWeightForm' : restaurantCriteriaWeightForm})
+    criteriaList = [i['name'].replace(' ','+') for i in request.session['criteria_list']]
+    criteriaList = json.dumps(criteriaList).replace(' ','')
+    return render(request, 'restaurant/criteria_weight.html', {"criteriaList" : criteriaList, "weightForm" : restaurantCriteriaWeightForm})
 
 def auto_scores(request):
     if request.method=='POST':

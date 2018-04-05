@@ -1,7 +1,6 @@
 {% extends 'base/base.html' %} {% block content %}
 <script>
 var warnMessage = "You have unsaved changes on this page!";
-
 $(document).ready(function() {
        window.onbeforeunload = function () {
             if (warnMessage != null) return warnMessage;
@@ -15,16 +14,13 @@ $(document).ready(function() {
   #centerer {
     text-align: center;
   }
-
   table {
     margin-left: auto;
     margin-right: auto;
   }
-
   th {
     font-size: 25px;
   }
-
   td {
     font-size: 20px;
   }
@@ -95,7 +91,7 @@ $(document).ready(function() {
       warnMessage = null;
     </script>
     <div id=centerer>
-    <b> Decision saved successfully! </b> 
+    <b> Decision saved successfully! </b>
     </div>
     {% else %}
     {% if request.user.is_authenticated %}
@@ -114,6 +110,7 @@ $(document).ready(function() {
       </div>
     {% endif %}
     {% endif %}
+
     </div>
   </div>
 
