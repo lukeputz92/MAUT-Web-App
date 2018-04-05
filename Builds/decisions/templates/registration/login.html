@@ -24,11 +24,11 @@ Error: {{form.non_field_errors}}
 {% csrf_token %}
 <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 </form>
-
+<br>
 <div class="form-signin">
   <p><strong>-- OR --</strong></p>
   <p><strong>Sign in with </strong> </p>
-  <a href="{% url 'social:begin' 'github' %}"><img src="http://i.imgur.com/IfBHeiV.png" alt="Login with GitHub" height = "50" width="50"> </a><br> 
+  <a href="{% url 'social:begin' 'github' %}"><img src="http://i.imgur.com/IfBHeiV.png" alt="Login with GitHub" height = "50" width="50"> </a><br>
   <a href="{% url 'social:begin' 'twitter' %}"><img src="https://help.twitter.com/content/dam/help-twitter/twitter-logo.png" alt="Login with Twitter" height="50" width="50"></a><br>
   <!-- <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a> -->
 </div>

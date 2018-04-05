@@ -25,7 +25,7 @@ $(document).ready(function() {
 <div class="container">
   <div class="row">
     <div class="userForms col-5" style="margin: auto 2em; float: left;">
-        <h2> Scores for {{criteria_name}} </h2>
+        <h2> Custom Decision Scoring </h2>
         <p> Below are different options for the given criteria. </p>
         <p> Select how you feel about each based on the given criteria. </p>
         <form action="" method="post">
@@ -50,7 +50,7 @@ $(document).ready(function() {
       			{% endfor %}
       		</table>
       			<button class="btn btn-lg btn-primary" type="button" onclick="window.history.back()">Back</button>
-      			<button class="btn btn-lg btn-primary" style="float: right;" onclick="warnMessage=null" type="submit">Submit</button>
+      			<button class="btn btn-lg btn-primary" style="margin-left: 10px;" onclick="warnMessage=null" type="submit">Submit</button>
       	</form>
       </div>
       <div class="col-6">
