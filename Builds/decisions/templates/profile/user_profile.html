@@ -69,6 +69,7 @@ body{
            <a class="nav-link text-white" href="{% url 'contact' %}"> Contact Us </a>
           </li>
     </nav>
+    <!--
 		<div class="container-fluid">
       <div class="row">
         <div class= "col-md-3">
@@ -80,12 +81,12 @@ body{
               <div class="profile-user-name">
                 {{user.first_name}} {{user.last_name}}
               </div>
-              <!--
+  
               <div class="profile-user-buttons">
                 <button class="btn btn-success btn-sm"> Follow </button>
                 <button class="btn btn-danger btsn sm">Message</button>
               </div>
-            -->
+
               <div class="profile-user-menu">
                 <ul class= "nav flex-column">
                   <li class="nav-item"><a class= "nav-link active" href=""><i class="fa fa-home" aria-hidden="true"></i>  Overview</a></li>
@@ -95,12 +96,11 @@ body{
           </div>
         </div>
       </div>
-      <!--
       This was nice... but it fucks up the whole other page :( -Mark May
       {% if message != "" %}
         <b style="color: green"> {{message}} </b>
       {% endif %}
-       -->
+    -->
       <div class="col-md-7">
         <ul class="nav nav-tabs">
           <li class="nav-item">

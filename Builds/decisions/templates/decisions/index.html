@@ -2,7 +2,6 @@
 {% extends 'base/base.html' %} {% block content %} {% load template_filters %}
 {% load static %}
 
-
 <style media="screen">
 .carousel-item {
 	height: 100vh;
@@ -13,6 +12,12 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 200px;
+  height: 200px;
+}
+
 </style>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
