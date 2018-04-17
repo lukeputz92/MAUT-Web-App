@@ -106,6 +106,8 @@ def scores(request):
             if request.session['criteria_list'][request.session['remaining']][0]['is_list']:
                 for key, value in restaurants.items():
                     total = len(value[1])
+                    if total==0:
+                        total = 1
                     sum_of_options = 0
                     for i in range(len(weighted_scores)):
                         if weighted_scores[i][1] in value[1]:
