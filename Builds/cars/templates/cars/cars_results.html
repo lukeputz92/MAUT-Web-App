@@ -102,7 +102,7 @@ $(document).ready(function() {
     </div>
     {% else %}
     {% if request.user.is_authenticated %}
-    <form action="{% url 'userHome' %}" method="post">
+    <form action="" method="post">
       {% csrf_token %}
       <div id=centerer>
         <button class="btn btn-lg btn-primary" onclick="warnMessage=null" type="submit">Save</button>
