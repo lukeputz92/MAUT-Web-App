@@ -159,7 +159,7 @@ def results(request):
             newDecision = Decide(user_profile = profile, decisionName = request.session['decisionName'])
             newDecision.save()
 
-            itemList = request.session['itemList']
+            itemList = request.session['sortedItemList']
             criteriaList = request.session['criteriaList']
 
             for item in itemList:
