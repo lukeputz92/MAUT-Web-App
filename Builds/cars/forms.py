@@ -18,6 +18,14 @@ class CarsCriteriaForm(forms.Form):
                 field = forms.BooleanField(label=APIT[i]['name'],required=False)
                 self.fields[str(i)] = field
 
+    def clean(self):
+        count = 0
+        for key, value in self.cleaned_data.items():
+            if value:
+                count = count + 1
+        if count < 2:
+            raise forms.ValidationError("You must select at least 2 criteria")
+
 class CarsCriteriaWeightForm(forms.Form):
     def __init__(self, *args, **vargs):
         criteria_list = vargs.pop('criteria_list')

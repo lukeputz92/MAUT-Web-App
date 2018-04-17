@@ -29,6 +29,9 @@
     <div class="userForms col-5" style="margin: auto 2em; float: left;">
       <h2> College Criteria Selection </h2>
       <p> Please select criteria you wish to use to make your decision. </p>
+      {% if collegeCriteriaForm.non_field_errors %}
+      <b> Error: {{collegeCriteriaForm.non_field_errors}} </b>
+      {% endif %}
       <form action="" method="post">
         {% csrf_token %}
         <div class="col-10">

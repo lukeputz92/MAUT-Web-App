@@ -29,6 +29,9 @@
     <div class="userForms col-5" style="margin: auto 2em; float: left;">
       <h3> Restaurant Criteria Selection </h3>
       <p> Please select criteria you wish to use to make your decision. </p>
+      {% if restaurantCriteriaForm.non_field_errors %}
+      <b> Error: {{restaurantCriteriaForm.non_field_errors}} </b>
+      {% endif %}
       <form action="" method="post">
         {% csrf_token %}
         <div class="col-10">
