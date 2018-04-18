@@ -28,3 +28,8 @@ Project Description:
                      decision maker is further assumed to have stable preferences when comparing 
                      attribute values, and A decision maker is further assumed to have an importance 
                      ranking among attributes.
+
+Bug List:
+                     -> Maut icon on home page is too small (formatting is different on other pages)
+                     -> step-by-step doesn't link to the proper portion of the front page
+                     -> Custom 404/500 page needs to be created
