@@ -25,7 +25,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = '$^@@m)=r)t=qvekpf03&@x7t%y-#a$=k1-tu@*nht-t-@(c=@$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['maut.pythonanywhere.com', '127.0.0.1', 'localhost']
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 	'tutorial',
     'cars',
     'movies',
+	'MAUT',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
