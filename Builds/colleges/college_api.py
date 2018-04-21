@@ -49,7 +49,7 @@ APIT = [
     'units' : "institution level",
     "is_num" : False,
     "needs_table" : True,
-    "table" : {1 : "4 year", 2 : "2 year", 3 : "Less than 2 year"}
+    "table" : {1 : "4 years", 2 : "2 years", 3 : "Less than 2 years"}
     },
     {
     "name" : "Out of State Tuition",
@@ -99,7 +99,7 @@ APIT = [
     "units" : "",
     "is_num" : False,
     "needs_table" : True,
-    "table" : { -3 : "Not applicable", -2 : "Not applicable", -1 : "Not Applicable", 0 : "Not classified", 1 : "Associate's Colleges: High Transfer-High Traditional",
+    "table" : { None : "Not applicable", -3 : "Not applicable", -2 : "Not applicable", -1 : "Not Applicable", 0 : "Not classified", 1 : "Associate's Colleges: High Transfer-High Traditional",
                 2 : "Associate's Colleges: High Transfer-Mixed Traditional/Nontraditional",
                 3 : "Associate's Colleges: High Transfer-High Nontraditional", 4 : "Associate's Colleges: Mixed Transfer/Vocational & Technical-High Traditional",
                 5 : "Associate's Colleges: Mixed Transfer/Vocational & Technical-Mixed Traditional/Nontraditional", 6 : "Associate's Colleges: Mixed Transfer/Vocational & Technical-High Nontraditional",
@@ -186,7 +186,7 @@ class CollegeAPI:
         self.location_filter = ""
 
     def criteriaFilter(self,criteria):
-        for item in criteria:
+        for item in APIT:
                 self.request_filter += "," + item["api_variable"]
 
 

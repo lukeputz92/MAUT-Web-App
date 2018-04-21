@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^scores/$', views.college_scores, name='college_scores'),
     url(r'^results/$', views.college_results, name='college_results'),
     url(r'^auto_scores/$', views.college_auto_scores, name='college_auto_scores'),
+    url(r'^details/$',views.college_details, name='college_details'),
 ]

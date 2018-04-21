@@ -353,4 +353,22 @@ def college_results(request):
 
         request.session['collegeList'] = collegeList
 
-    return render(request, 'college/college_results.html', {"request" : request, "collegeList" : collegeList, "length" : len(collegeList)})
+    collegeDetailForm = CollegeDetailForm()
+    return render(request, 'college/college_results.html', {"request" : request, "collegeList" : collegeList, "length" : len(collegeList), "detailForm" : collegeDetailForm})
+
+def college_details(request):
+    if request.method == 'POST':
+        collegeDetailForm = CollegeDetailForm(request.POST)
+        if collegeDetailForm.is_valid():
+            college_name = collegeDetailForm.cleaned_data['name']
+            college_info = request.session['colleges'][college_name][0]
+            college_info_dict = {}
+            for item in APIT:
+                if item['api_variable'] in college_info:
+                    if item['needs_table']:
+                        college_info_dict[item['name']] = item['table'][college_info[item['api_variable']]]
+                    else:
+                        college_info_dict[item['name']] = college_info[item['api_variable']]
+        return render(request, 'college/college_details.html', {"name" : college_name, "info" : college_info_dict})
+    else:
+        return college(request)
