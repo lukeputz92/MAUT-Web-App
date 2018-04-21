@@ -71,7 +71,8 @@
 	
     <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="{%url 'home' %}">MAUT</a>
+<a class="nav-link text-white" href="{%url 'home' %}"><font size="+2"><strong>MAUT</strong></font></a>
+  <!-- <a class="navbar-brand" href="{%url 'home' %}">MAUT</a> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -151,7 +152,9 @@
 								By applying scores to what is important it will objectively rank what you "should" consider based on what is important to you.
 								Click the button below for step by step instructions.</p>
                                 <div class="features_buttom">
-                                    <a href="#stepByStep" class="btn btn-default"><font size ="+1"><strong>Step-by-Step</strong></font></a>
+                                    <a href="#"onclick="document.getElementById('stepByStep').scrollIntoView(true);return false;" class="btn btn-default">
+										<font size ="+1"><strong>Step-by-Step</strong></font>
+									</a>
                                 </div>
                             </div>
                         </div>
@@ -364,7 +367,7 @@
         </section>
 
         <!-- Sections -->
-        <section id="stepByStep"  class="price sections">
+        <section name="stepByStep" id="stepByStep"  class="price sections">
             <div class="container">
                 <div class="head_title text-center">
                     <h1>Step by Step instructions</h1>
