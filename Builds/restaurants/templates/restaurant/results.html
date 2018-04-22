@@ -96,6 +96,12 @@ function getdetails(restaurant) {
         {% endif %} {% endfor %}
       </table>
       {% endif %}
+    <form action="{% url 'restaurant_calculate' %}" method="post">
+      {% csrf_token %}
+      <div id=centerer>
+        <button class="btn btn-lg btn-primary" type="submit" onclick="warnMessage=null" value="View Calculation">View Calculation </button>
+      </div>
+    </form>
   {% if request.session.saved %}
     <script>
       warnMessage = null;

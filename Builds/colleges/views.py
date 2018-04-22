@@ -407,11 +407,11 @@ def calculate(request):
 
         for row in range(1,rows):
             matrix[row][0] = itemList[row-1][0] #item name
-            matrix[row][-1] = itemList[row-1][3]/100 #item final score
+            matrix[row][-1] = round(itemList[row-1][3]/100,2) #item final score
             matrix[row][-2] = "="
             for column in range(1,columns-2):
                 if column%4 == 1:
-                    matrix[row][column] = "(" + str(itemList[row-1][4][int((column-1)/4)])
+                    matrix[row][column] = "(" + str(round(itemList[row-1][4][int((column-1)/4)],2))
                 elif column%4 == 2:
                     matrix[row][column] = "*"
                 elif column%4 == 3:
