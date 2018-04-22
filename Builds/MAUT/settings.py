@@ -140,7 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'MAUtilityTheory@gmail.com'
-EMAIL_HOST_PASSWORD = 'calebsucksdick'
+EMAIL_HOST_PASSWORD = 'gonzalez2000#'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
