@@ -53,7 +53,7 @@ function getdetails(college) {
           <h2>1st: {% if collegeList.0.2 %} {% with "http://"|addstr:collegeList.0.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.0.0}} </a>
            {% else %} {{collegeList.0.0}} {% endif %} </h2>
           <p>Score was {{collegeList.0.1}}</p>
-          <p> <button onclick="getdetails('{{collegeList.0.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
+          <p> <button onclick='getdetails("{{collegeList.0.0}}")' class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -62,7 +62,7 @@ function getdetails(college) {
           <h2>2nd: {% if collegeList.1.2 %} {% with "http://"|addstr:collegeList.1.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.1.0}} </a>
            {% else %} {{collegeList.1.0}} {% endif %} </h2>
           <p>Score was {{collegeList.1.1}}</p>
-          <p> <button onclick="getdetails('{{collegeList.1.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
+          <p> <button onclick='getdetails("{{collegeList.1.0}}")' class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -72,7 +72,7 @@ function getdetails(college) {
           <h2>3rd: {% if collegeList.2.2 %} {% with "http://"|addstr:collegeList.2.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{collegeList.2.0}} </a>
            {% else %} {{collegeList.2.0}} {% endif %} </h2>
           <p>Score was {{collegeList.2.1}}</p>
-          <p> <button onclick="getdetails('{{collegeList.2.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
+          <p> <button onclick='getdetails("{{collegeList.2.0}}")' class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!--
   <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
           <!--
@@ -97,7 +97,7 @@ function getdetails(college) {
           <td> {{forloop.counter}} </td>
           <td> {% if item.2 %} {% with "http://"|addstr:item.2 as collegeurl %} <a href={{collegeurl}} target="_blank"> {% endwith %} {{item.0}} </a> {% else %} {{item.0}} {% endif %} </td>
           <td> {{item.1}} </td>
-          <td> <button onclick="getdetails('{{item.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </td>
+          <td> <button onclick='getdetails("{{item.0}}")' class = "btn btn-lg btn-secondary"> View Details </button> </td>
         </tr>
         {% endif %} {% endfor %}
       </table>
