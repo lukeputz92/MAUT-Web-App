@@ -144,17 +144,19 @@ def college_scores(request):
         if collegeScoreForm.is_valid():
             #The next section of code takes the scores the user inputted and assigns them
             #to any item that fits that score.
-            weighted_scores = []
+            unweighted_scores = []
             for i in range(len(request.session['option_list'])):
-                weighted_scores.append(((collegeScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]),request.session['option_list'][i][1]))
+                unweighted_scores.append(((collegeScoreForm.cleaned_data[str(i)]),request.session['option_list'][i][1]))
 
             colleges = request.session['colleges']
+            weight = (request.session['criteria_list'][request.session['remaining']][1])
 
             for key, value in colleges.items():
-                for i in range(len(weighted_scores)):
-                    if value[1] == weighted_scores[i][1]:
-                        new_score = value[2] + weighted_scores[i][0]
-                        colleges[key] = (colleges[key][0], colleges[key][1], new_score)
+                for i in range(len(unweighted_scores)):
+                    if value[1] == unweighted_scores[i][1]:
+                        new_score = value[2] + (unweighted_scores[i][0]*weight)
+                        colleges[key][2] = new_score
+                        colleges[key][3].append(unweighted_scores[i][0])
 
             request.session['colleges'] = colleges
 
@@ -175,10 +177,10 @@ def college_scores(request):
                     '''
                     for key, value in colleges.items():
                         if value[0][criteria[0]['api_variable']] in option_list:
-                            colleges[key] = (colleges[key][0],option_list.index(value[0][criteria[0]['api_variable']]),colleges[key][2])
+                            colleges[key][1] = option_list.index(value[0][criteria[0]['api_variable']])
                         else:
                             option_list.append(value[0][criteria[0]['api_variable']])
-                            colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+                            colleges[key][1] = len(option_list) - 1
 
                     for i in range(0,len(option_list)):
                         option_list[i] = (option_list[i], i)
@@ -202,7 +204,8 @@ def college_scores(request):
                             for i in range(len(option_list)):
                                 if value[1] == option_list[i][1]:
                                     new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
-                                    colleges[key] = (colleges[key][0], colleges[key][1], new_score)
+                                    colleges[key][2] = new_score
+                                    colleges[key][3].append(option_list[i][0])
 
                         request.session['remaining'] = request.session['remaining'] - 1
                         request.session['colleges'] = colleges
@@ -237,14 +240,15 @@ def college_scores(request):
 
         '''
             colleges is a dictionary with all the college information and their scores.
-            The keys are the school names and the values are a tuple:
+            The keys are the school names and the values are a LIST:
             college[0] = the json object with all the college information
             college[1] = is the index for the college's score for the current criteria being scored in option_list
             college[2] = the college's current score with the criteria already scored
+            college[3] = their scores for each criteria
         '''
         colleges = {}
         for college in college_info_list:
-            colleges[college['school.name']] = (college, 0, 0)
+            colleges[college['school.name']] = [college, 0, 0, []]
 
         cont = True
 
@@ -264,10 +268,10 @@ def college_scores(request):
             '''
             for key, value in colleges.items():
                 if value[0][criteria[0]['api_variable']] in option_list:
-                    colleges[key] = (colleges[key][0],option_list.index(value[0][criteria[0]['api_variable']]),colleges[key][2])
+                    colleges[key][1] = option_list.index(value[0][criteria[0]['api_variable']])
                 else:
                     option_list.append(value[0][criteria[0]['api_variable']])
-                    colleges[key] = (colleges[key][0],len(option_list) - 1,colleges[key][2])
+                    colleges[key][1] = len(option_list) - 1
 
             for i in range(0,len(option_list)):
                 option_list[i] = (option_list[i], i)
@@ -291,7 +295,8 @@ def college_scores(request):
                     for i in range(len(option_list)):
                         if value[1] == option_list[i][1]:
                             new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
-                            colleges[key] = (colleges[key][0], colleges[key][1], new_score)
+                            colleges[key][2] = new_score
+                            colleges[key][3].append(option_list[i][0])
 
                 request.session['remaining'] = request.session['remaining'] - 1
                 request.session['colleges'] = colleges
@@ -370,5 +375,53 @@ def college_details(request):
                     else:
                         college_info_dict[item['name']] = college_info[item['api_variable']]
         return render(request, 'college/college_details.html', {"name" : college_name, "info" : college_info_dict})
+    else:
+        return college(request)
+
+def calculate(request):
+    if request.method == 'POST':
+        itemList = []
+
+        for key, value in request.session['colleges'].items():
+            itemList.append(([key]+value))
+
+        criteriaList = request.session['criteria_list']
+
+        rows = len(itemList) + 1
+        columns = 4 * len(criteriaList) + 3
+
+        #Access an element by matrix[row(items)][column(criteria)]
+        matrix = [[0 for x in range(columns)] for y in range(rows)]
+
+        for column in range(columns-3):
+            if column%4 == 0:
+                matrix[0][column+1] = criteriaList[int(column/4)][0]['name']
+            elif column%4 == 1:
+                matrix[0][column+1] = ("(" + str(criteriaList[int((column-1)/4)][1]) + "%)")
+            else:
+                matrix[0][column+1] = ""
+
+        matrix[0][-1] = "Final Scores"
+        matrix[0][-2] = ""
+        matrix[0][0] = "Items/Criteria"
+
+        for row in range(1,rows):
+            matrix[row][0] = itemList[row-1][0] #item name
+            matrix[row][-1] = itemList[row-1][3]/100 #item final score
+            matrix[row][-2] = "="
+            for column in range(1,columns-2):
+                if column%4 == 1:
+                    matrix[row][column] = "(" + str(itemList[row-1][4][int((column-1)/4)])
+                elif column%4 == 2:
+                    matrix[row][column] = "*"
+                elif column%4 == 3:
+                    matrix[row][column] = str((criteriaList[int((column-3)/4)][1]/100)) + ")"
+                else:
+                    if column == columns - 3:
+                        matrix[row][column] = ""
+                    else:
+                        matrix[row][column] = "   +   "
+
+        return render(request,'decisions/decision_calculation.html', {'matrix': matrix, 'request' : request, 'rows' : range(rows), 'columns' : range(columns)})
     else:
         return college(request)
