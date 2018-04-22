@@ -30,6 +30,3 @@ Project Description:
                      ranking among attributes.
 
 Bug List:
-                     -> Maut icon on home page is too small (formatting is different on other pages)
-                     -> step-by-step doesn't link to the proper portion of the front page
-                     -> Custom 404/500 page needs to be created

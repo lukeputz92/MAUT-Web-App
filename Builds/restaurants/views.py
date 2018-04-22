@@ -98,9 +98,10 @@ def scores(request):
         if restaurantScoreForm.is_valid():
             #The next section of code takes the scores the user inputted and assigns them
             #to any item that fits that score.
-            weighted_scores = []
+            unweighted_scores = []
             for i in range(len(request.session['option_list'])):
-                weighted_scores.append(((restaurantScoreForm.cleaned_data[str(i)])*(request.session['criteria_list'][request.session['remaining']][1]),request.session['option_list'][i][1]))
+                unweighted_scores.append(((restaurantScoreForm.cleaned_data[str(i)]),request.session['option_list'][i][1]))
+                weight = (request.session['criteria_list'][request.session['remaining']][1])
 
             restaurants = request.session['restaurants']
             if request.session['criteria_list'][request.session['remaining']][0]['is_list']:
@@ -109,16 +110,18 @@ def scores(request):
                     if total==0:
                         total = 1
                     sum_of_options = 0
-                    for i in range(len(weighted_scores)):
-                        if weighted_scores[i][1] in value[1]:
-                            sum_of_options = sum_of_options + weighted_scores[i][0]
-                    restaurants[key] = (restaurants[key][0],restaurants[key][1],(sum_of_options/total))
+                    for i in range(len(unweighted_scores)):
+                        if unweighted_scores[i][1] in value[1]:
+                            sum_of_options = sum_of_options + unweighted_scores[i][0]
+                    restaurants[key][2] = ((sum_of_options/total)*weight)
+                    restaurants[key][3].append(sum_of_options/total)
             else:
                 for key, value in restaurants.items():
-                    for i in range(len(weighted_scores)):
-                        if value[1] == weighted_scores[i][1]:
-                            new_score = value[2] + weighted_scores[i][0]
-                            restaurants[key] = (restaurants[key][0], restaurants[key][1], new_score)
+                    for i in range(len(unweighted_scores)):
+                        if value[1] == unweighted_scores[i][1]:
+                            new_score = value[2] + unweighted_scores[i][0]
+                            restaurants[key][2] = new_score
+                            restaurants[key][3].append(unweighted_scores[i][0])
 
             request.session['restaurants'] = restaurants
 
@@ -147,10 +150,10 @@ def scores(request):
                             for option in value[0][criteria[0]['api_variable']].split(','):
                                 if option != "":
                                     if option in option_list:
-                                        restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option)],restaurants[key][2])
+                                        restaurants[key][1] = restaurants[key][1]+[option_list.index(option)]
                                     else:
                                         option_list.append(option)
-                                        restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
+                                        restaurants[key][1] = restaurants[key][1]+[(len(option_list)-1)]
                     else:
                         '''
                             Option list stores all the possible values for every criteria.
@@ -159,16 +162,16 @@ def scores(request):
                         for key, value in restaurants.items():
                             if 'api_variable2' in criteria[0]:
                                 if value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']] in option_list:
-                                    restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']]),restaurants[key][2])
+                                    restaurants[key][1] = option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
                                 else:
                                     option_list.append(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
-                                    restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
+                                    restaurants[key][1] = len(option_list) - 1
                             else:
                                 if value[0][criteria[0]['api_variable']] in option_list:
-                                    restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']]),restaurants[key][2])
+                                    restaurants[key][1] = option_list.index(value[0][criteria[0]['api_variable']])
                                 else:
                                     option_list.append(value[0][criteria[0]['api_variable']])
-                                    restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
+                                    restaurants[key][1] = len(option_list) - 1
 
 
                     for i in range(0,len(option_list)):
@@ -193,7 +196,8 @@ def scores(request):
                             for i in range(len(option_list)):
                                 if value[1] == option_list[i][1]:
                                     new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
-                                    restaurants[key] = (restaurants[key][0], restaurants[key][1], new_score)
+                                    restaurants[key][2] = new_score
+                                    restaurants[key][3].append(option_list[i][0])
 
                         request.session['remaining'] = request.session['remaining'] - 1
                         request.session['restaurants'] = restaurants
@@ -229,14 +233,15 @@ def scores(request):
 
         '''
             restaurants is a dictionary with all the restaurant information and their scores.
-            The keys are the school names and the values are a tuple:
+            The keys are the school names and the values are a LIST:
             restaurant[0] = the json object with all the restaurant information
             restaurant[1] = is the index for the restaurant's score for the current criteria being scored in option_list
             restaurant[2] = the restaurant's current score with the criteria already scored
+            restaurant[3] = the restaurant's scores for each criteria
         '''
         restaurants = {}
         for restaurant in restaurant_info_list:
-            restaurants[restaurant['restaurant']['name']] = (restaurant['restaurant'], 0, 0)
+            restaurants[restaurant['restaurant']['name']] = [restaurant['restaurant'], 0, 0,[]]
 
         cont = True
 
@@ -259,14 +264,14 @@ def scores(request):
                     Each restaurant in restaurant stores the index of all its criteria options in the option list.
                 '''
                 for key,value in restaurants.items():
-                    restaurants[key] = (restaurants[key][0], [], restaurants[key][2])
+                    restaurants[key][1] = []
                     for option in value[0][criteria[0]['api_variable']].split(','):
                         if option != "":
                             if option.lstrip() in option_list:
-                                restaurants[key] = (restaurants[key][0],restaurants[key][1]+[option_list.index(option.lstrip())],restaurants[key][2])
+                                restaurants[key][1] = restaurants[key][1]+[option_list.index(option.lstrip())]
                             else:
                                 option_list.append(option.lstrip())
-                                restaurants[key] = (restaurants[key][0],restaurants[key][1]+[(len(option_list)-1)],restaurants[key][2])
+                                restaurants[key][1] = restaurants[key][1]+[(len(option_list)-1)]
             else:
                 '''
                     Option list stores all the possible values for every criteria.
@@ -275,16 +280,16 @@ def scores(request):
                 for key, value in restaurants.items():
                     if 'api_variable2' in criteria[0]:
                         if value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']] in option_list:
-                            restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']]),restaurants[key][2])
+                            restaurants[key][1]= option_list.index(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
                         else:
                             option_list.append(value[0][criteria[0]['api_variable']][criteria[0]['api_variable2']])
-                            restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
+                            restaurants[key][1] = len(option_list) - 1
                     else:
                         if value[0][criteria[0]['api_variable']] in option_list:
-                            restaurants[key] = (restaurants[key][0],option_list.index(value[0][criteria[0]['api_variable']]),restaurants[key][2])
+                            restaurants[key][1] = option_list.index(value[0][criteria[0]['api_variable']])
                         else:
                             option_list.append(value[0][criteria[0]['api_variable']])
-                            restaurants[key] = (restaurants[key][0],len(option_list) - 1,restaurants[key][2])
+                            restaurants[key][1] = len(option_list) - 1
 
             for i in range(0,len(option_list)):
                 option_list[i] = (option_list[i], i)
@@ -308,7 +313,9 @@ def scores(request):
                     for i in range(len(option_list)):
                         if value[1] == option_list[i][1]:
                             new_score = value[2] + (option_list[i][0]*request.session['criteria_list'][request.session['remaining']-1][1])
-                            restaurants[key] = (restaurants[key][0], restaurants[key][1], new_score)
+                            restaurants[key][2] = new_score
+                            restaurants[key][3].append(option_list[i][0])
+
 
                 request.session['remaining'] = request.session['remaining'] - 1
                 request.session['restaurants'] = restaurants
@@ -369,4 +376,73 @@ def results(request):
 
         request.session['restaurantlist'] = restaurantList
 
-    return render(request, 'restaurant/results.html', {"request" : request, "restaurantList" : restaurantList, "length" : len(restaurantList)})
+    restaurantDetailForm = RestaurantDetailForm()
+    return render(request, 'restaurant/results.html', {"detailForm" : restaurantDetailForm, "request" : request, "restaurantList" : restaurantList, "length" : len(restaurantList)})
+
+def details(request):
+    if request.method == 'POST':
+        restaurantDetailForm = RestaurantDetailForm(request.POST)
+        if restaurantDetailForm.is_valid():
+            restaurant_name = restaurantDetailForm.cleaned_data['name']
+            restaurant_info = request.session['restaurants'][restaurant_name][0]
+            restaurant_info_dict = {}
+            for item in APIT:
+                if item['api_variable'] in restaurant_info:
+                    if item['needs_table']:
+                        restaurant_info_dict[item['name']] = item['table'][restaurant_info[item['api_variable']]]
+                    elif 'api_variable2' in item:
+                        restaurant_info_dict[item['name']] = restaurant_info[item['api_variable']][item['api_variable2']]
+                    else:
+                        restaurant_info_dict[item['name']] = restaurant_info[item['api_variable']]
+                        
+        return render(request, 'college/college_details.html', {"name" : restaurant_name, "info" : restaurant_info_dict})
+    else:
+        return restaurant(request)
+
+def calculate(request):
+    if request.method == 'POST':
+        itemList = []
+
+        for key, value in request.session['restaurants'].items():
+            itemList.append(([key]+value))
+
+        criteriaList = request.session['criteria_list']
+
+        rows = len(itemList) + 1
+        columns = 4 * len(criteriaList) + 3
+
+        #Access an element by matrix[row(items)][column(criteria)]
+        matrix = [[0 for x in range(columns)] for y in range(rows)]
+
+        for column in range(columns-3):
+            if column%4 == 0:
+                matrix[0][column+1] = criteriaList[int(column/4)][0]['name']
+            elif column%4 == 1:
+                matrix[0][column+1] = ("(" + str(criteriaList[int((column-1)/4)][1]) + "%)")
+            else:
+                matrix[0][column+1] = ""
+
+        matrix[0][-1] = "Final Scores"
+        matrix[0][-2] = ""
+        matrix[0][0] = "Items/Criteria"
+
+        for row in range(1,rows):
+            matrix[row][0] = itemList[row-1][0] #item name
+            matrix[row][-1] = round(itemList[row-1][3]/100,2) #item final score
+            matrix[row][-2] = "="
+            for column in range(1,columns-2):
+                if column%4 == 1:
+                    matrix[row][column] = "(" + str(round(itemList[row-1][4][int((column-1)/4)],2))
+                elif column%4 == 2:
+                    matrix[row][column] = "*"
+                elif column%4 == 3:
+                    matrix[row][column] = str((criteriaList[int((column-3)/4)][1]/100)) + ")"
+                else:
+                    if column == columns - 3:
+                        matrix[row][column] = ""
+                    else:
+                        matrix[row][column] = "   +   "
+
+        return render(request,'decisions/decision_calculation.html', {'matrix': matrix, 'request' : request, 'rows' : range(rows), 'columns' : range(columns)})
+    else:
+        return college(request)

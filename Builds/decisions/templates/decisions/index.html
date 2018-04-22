@@ -32,42 +32,47 @@
 		<!-- Slide One - Set the background image for this slide in the line below -->
 		<div class="carousel-item active" style="background-image:url({% static 'img/South_Green.jpg' %})" href="{% url 'college' %}">
 			<div class="carousel-caption">
+				<a href="{% url 'college' %}"><font color="white">
 				<h3>Colleges</h3>
 				<p>Find colleges by filtering with categories such as tuition cost, location and retention rate.</p>
-				<a class="btn btn-link" href="{% url 'college' %}"><font color="white">Get Started</a> </font>
+				Get Started</a> </font>
 			</div>
 		</div>
 		<!-- Slide Two - Set the background image for this slide in the line below -->
 		<div class="carousel-item" style="background-image: url({% static '/img/recipes.jpg' %})">
 			<div class="carousel-caption">
+				<a href="{% url 'cars_criteria' %}"><font color="white">
 				<h3>Recipes</h3>
 				<p>Find recipes by filtering with ratings, cook time and flavors.</p>
-				<a class="btn btn-link" href="{% url 'cars_criteria' %}"><font color="white">Get Started</font> </a>
+				Get Started</font> </a>
 
 			</div>
 		</div>
 		<!-- Slide Three - Set the background image for this slide in the line below -->
 		<div class="carousel-item" style="background-image: url({% static '/img/rest.jpg' %})">
 			<div class="carousel-caption">
+				<a href="{% url 'restaurant' %}"><font color="white">
 				<h3>Restaurants</h3>
 				<p>Find restaurants near you by filtering with categories such as user ratings and price range.</p>
-				<a class="btn btn-link" href="{% url 'restaurant' %}"><font color="white">Get Started</font> </a>
+				Get Started</font> </a>
 			</div>
 		</div>
 		<!-- Slide Four - Set the background image for this slide in the line below -->
 		<div class="carousel-item" style="background-image: url({% static '/img/Movies.jpg' %})">
 			<div class="carousel-caption">
+				<a href="{% url 'movie_criteria' %}"><font color="white">
 				<h3>Movies</h3>
 				<p>Find movies you might enjoy by filtering with categories such as IMDB score</p>
-				<a class="btn btn-link" href="{% url 'movie_criteria' %}"><font color="white">Get Started</font></a>
+				Get Started</font></a>
 			</div>
 		</div>
 		<!-- Slide Five - Set the background image for this slide in the line below -->
 		<div class="carousel-item"  style="background-image: url({% static '/img/custom.jpg' %})">
 			<div class="carousel-caption">
+				<a href="{% url 'custom' %}"><font color="white">
 				<h3>Custom</h3>
 				<p>Create your own decision using information on any set of items you choose.</p>
-				<a class="btn btn-link" href="{% url 'custom' %}"><font color="white">Get Started</font></a>
+				Get Started</font></a>
 			</div>
 		</div>
 	</div>
