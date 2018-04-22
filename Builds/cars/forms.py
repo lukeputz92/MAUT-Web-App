@@ -74,3 +74,6 @@ class CarsScoreForm(forms.Form):
         for i in range(len(option_list)):
             field = forms.IntegerField(label=str(option_list[i]), widget=forms.Select(attrs={'class': 'form-control'}, choices=OPTION_CHOICES))
             self.fields[str(i)] = field
+
+class RecipeDetailForm(forms.Form):
+    name = forms.CharField(widget=forms.HiddenInput(attrs={'id' : 'recipedetails'}))

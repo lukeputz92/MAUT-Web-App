@@ -369,4 +369,25 @@ def results(request):
 
         request.session['restaurantlist'] = restaurantList
 
-    return render(request, 'restaurant/results.html', {"request" : request, "restaurantList" : restaurantList, "length" : len(restaurantList)})
+    restaurantDetailForm = RestaurantDetailForm()
+    return render(request, 'restaurant/results.html', {"detailForm" : restaurantDetailForm, "request" : request, "restaurantList" : restaurantList, "length" : len(restaurantList)})
+
+def details(request):
+    if request.method == 'POST':
+        restaurantDetailForm = RestaurantDetailForm(request.POST)
+        if restaurantDetailForm.is_valid():
+            restaurant_name = restaurantDetailForm.cleaned_data['name']
+            restaurant_info = request.session['restaurants'][restaurant_name][0]
+            restaurant_info_dict = {}
+            for item in APIT:
+                if item['api_variable'] in restaurant_info:
+                    if item['needs_table']:
+                        restaurant_info_dict[item['name']] = item['table'][restaurant_info[item['api_variable']]]
+                    elif 'api_variable2' in item:
+                        restaurant_info_dict[item['name']] = restauraunt_info[item['api_variable']][item['api_variable2']]
+                    else:
+                        restaurant_info_dict[item['name']] = restaurant_info[item['api_variable']]
+                        
+        return render(request, 'college/college_details.html', {"name" : restaurant_name, "info" : restaurant_info_dict})
+    else:
+        return restaurant(request)

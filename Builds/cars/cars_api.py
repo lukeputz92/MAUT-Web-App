@@ -49,6 +49,7 @@ APIT = [
     {
     "name" : "Sweet" ,
     "api_variable" : "sweet",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -56,6 +57,7 @@ APIT = [
     {
     "name" : "Spicy" ,
     "api_variable" : "piquant",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -63,6 +65,7 @@ APIT = [
     {
     "name" : "Bitter" ,
     "api_variable" : "bitter",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -70,6 +73,7 @@ APIT = [
     {
     "name" : "Sour" ,
     "api_variable" : "sour",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -77,6 +81,7 @@ APIT = [
     {
     "name" : "Meaty" ,
     "api_variable" : "meaty",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -84,6 +89,7 @@ APIT = [
     {
     "name" : "Salty" ,
     "api_variable" : "salty",
+    "api_variable2" : "flavors",
     "units" : "",
     "is_num" : True,
     "needs_table" : False,
@@ -115,4 +121,18 @@ class CarsAPI:
     def pull(self):
         response = requests.get(URL)
         json_obj = response.json()
-        return json_obj['matches']
+        matches = json_obj['matches']
+
+        del_list = []
+
+        for i in range(len(matches)):
+            if 'flavors' in matches[i]:
+                if matches[i]['flavors'] == None:
+                    del_list.append(matches[i])
+            else:
+                del_list.append(matches[i])
+
+        for i in del_list:
+            matches.remove(i)
+
+        return matches

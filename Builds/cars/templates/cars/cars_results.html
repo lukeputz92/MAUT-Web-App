@@ -10,6 +10,11 @@ $(document).ready(function() {
         warnMessage = null;
     });
 });
+
+function getdetails(recipe) {
+  document.getElementById('recipedetails').value = recipe;
+  document.getElementById('thedetailform').submit();
+}
 </script>
 <style>
   #centerer {
@@ -49,6 +54,7 @@ $(document).ready(function() {
           <h2>1st: {% if carsList.0.2 %} {% with "http://"|addstr:carsList.0.2 as carsurl %} <a href={{carsurl}} target="_blank"> {% endwith %} {{carsList.0.0}} </a>
            {% else %} {{carsList.0.0}} {% endif %} </h2>
           <p>Score was {{carsList.0.1}}</p>
+          <p> <button onclick="getdetails('{{carsList.0.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -57,6 +63,7 @@ $(document).ready(function() {
           <h2>2nd: {% if carsList.1.2 %} {% with "http://"|addstr:carsList.1.2 as carsurl %} <a href={{carsurl}} target="_blank"> {% endwith %} {{carsList.1.0}} </a>
            {% else %} {{carsList.1.0}} {% endif %} </h2>
           <p>Score was {{carsList.1.1}}</p>
+          <p> <button onclick="getdetails('{{carsList.1.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -66,6 +73,7 @@ $(document).ready(function() {
           <h2>3rd: {% if carsList.2.2 %} {% with "http://"|addstr:carsList.2.2 as carsurl %} <a href={{carsurl}} target="_blank"> {% endwith %} {{carsList.2.0}} </a>
            {% else %} {{carsList.2.0}} {% endif %} </h2>
           <p>Score was {{carsList.2.1}}</p>
+          <p> <button onclick="getdetails('{{carsList.2.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!--
   <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
           <!--
@@ -83,12 +91,14 @@ $(document).ready(function() {
           <th> # </th>
           <th> Recipe Name </th>
           <th> Final Score </th>
+          <th> Details </th>
         </tr>
         {% for item in carsList %} {% if forloop.counter > 3 %}
         <tr>
           <td> {{forloop.counter}} </td>
           <td> {% if item.2 %} {% with "http://"|addstr:item.2 as carsurl %} <a href={{carsurl}} target="_blank"> {% endwith %} {{item.0}} </a> {% else %} {{item.0}} {% endif %} </td>
           <td> {{item.1}} </td>
+          <td> <button onclick="getdetails('{{item.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </td>
         </tr>
         {% endif %} {% endfor %}
       </table>
@@ -121,5 +131,10 @@ $(document).ready(function() {
   </div>
 
 </div>
-
+<div>
+  <form method="post" id="thedetailform" target="_blank" action="{% url 'recipe_details' %}">
+    {% csrf_token%}
+    {{detailForm}} 
+  </form>
+</div>
 {% endblock %}

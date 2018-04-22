@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^auto_scores/$', views.auto_scores, name = 'auto_scores'),
     url(r'^scores/$', views.scores, name='scores'),
     url(r'^results/$', views.results, name='results'),
+    url(r'^restuarant/$', views.details, name='restaurant_details'),
 ]

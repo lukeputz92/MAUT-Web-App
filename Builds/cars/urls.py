@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^scores/$', views.cars_scores, name='cars_scores'),
     url(r'^results/$', views.cars_results, name='cars_results'),
     url(r'^auto_scores/$', views.cars_auto_scores, name='cars_auto_scores'),
+    url(r'^details/$', views.details, name='recipe_details'),
 ]

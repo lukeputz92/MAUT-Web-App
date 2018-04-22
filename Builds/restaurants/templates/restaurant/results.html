@@ -9,6 +9,11 @@ $(document).ready(function() {
         warnMessage = null;
     });
 });
+
+function getdetails(restaurant) {
+  document.getElementById('restaurantdetails').value = restaurant;
+  document.getElementById('thedetailform').submit();
+}
 </script>
 <style>
   #centerer {
@@ -44,6 +49,7 @@ $(document).ready(function() {
           <img class="rounded-circle" src="../../static/img/number1.png" alt="Generic placeholder image" width="140" height="140">
           <h2>1st: {{restaurantList.0.0}} </h2>
           <p>Score was {{restaurantList.0.1}}</p>
+          <p> <button onclick="getdetails('{{restaurantList.0.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -51,6 +57,7 @@ $(document).ready(function() {
           <img class="rounded-circle" src="../../static/img/number2.png" alt="Generic placeholder image" width="140" height="140">
           <h2>2nd: {{restaurantList.1.0}} </h2>
           <p>Score was {{restaurantList.1.1}}</p>
+          <p> <button onclick="getdetails('{{restaurantList.1.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!-- <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
         </div>
         <!-- /.col-lg-4 -->
@@ -59,6 +66,7 @@ $(document).ready(function() {
           <img class="rounded-circle" src="../../static/img/number3.png" alt="Generic placeholder image" width="140" height="140">
           <h2>3rd: {{restaurantList.2.0}} </h2>
           <p>Score was {{restaurantList.2.1}}</p>
+          <p> <button onclick="getdetails('{{restaurantList.2.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </p>
           <!--
   <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p> -->
           <!--
@@ -76,12 +84,14 @@ $(document).ready(function() {
           <th> # </th>
           <th> Restaurant Name </th>
           <th> Final Score </th>
+          <th> Details </th>
         </tr>
         {% for item in restaurantList %} {% if forloop.counter > 3 %}
         <tr>
           <td> {{forloop.counter}} </td>
           <td> {{item.0}}</td>
           <td> {{item.1}} </td>
+          <td> <button onclick="getdetails('{{item.0}}')" class = "btn btn-lg btn-secondary"> View Details </button> </td>
         </tr>
         {% endif %} {% endfor %}
       </table>
@@ -115,5 +125,10 @@ $(document).ready(function() {
   </div>
 
 </div>
-
+<div>
+  <form method="post" id="thedetailform" target="_blank" action="{% url 'restaurant_details' %}">
+    {% csrf_token%}
+    {{detailForm}} 
+  </form>
+</div>
 {% endblock %}
