@@ -135,4 +135,28 @@ class CarsAPI:
         for i in del_list:
             matches.remove(i)
 
+        del_list = []
+
+        for i in range(len(matches)):
+            if 'totalTimeInSeconds' in matches[i]:
+                if matches[i]['totalTimeInSeconds'] == None:
+                    del_list.append(matches[i])
+            else:
+                del_list.append(matches[i])
+
+        for i in del_list:
+            matches.remove(i)
+
+        del_list = []
+
+        for i in range(len(matches)):
+            if 'rating' in matches[i]:
+                if matches[i]['rating'] == None:
+                    del_list.append(matches[i])
+            else:
+                del_list.append(matches[i])
+
+        for i in del_list:
+            matches.remove(i)
+
         return matches
