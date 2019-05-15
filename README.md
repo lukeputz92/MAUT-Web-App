@@ -29,4 +29,4 @@ Project Description:
                      attribute values, and A decision maker is further assumed to have an importance 
                      ranking among attributes.
 
-Bug List:
+Hosted at: http://decisionapp.pythonanywhere.com/
